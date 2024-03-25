@@ -1,0 +1,46 @@
+﻿/*
+    Paleta de colores
+80BCBD
+AAD9BB
+D5F0C1
+F9F7C9
+
+*/
+
+
+body {
+    background-color: #D5F0C1;
+    font-family: 'Krub',sans-serif;
+}
+.liStyle{
+    list-style:none;
+}
+img{
+    width:250px;
+    height:auto;
+}
+.centrar{
+    display:flex;
+    justify-content:center;
+}
+.seccionForm {
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.seccionButtons{
+    height:120px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    align-content:space-around;
+
+}
+.seccionButtonReg {
+    height: 120px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    align-content: space-around;
+}
