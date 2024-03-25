@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - SIMEPCI_Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
     <!--<link rel="stylesheet" href="~/SIMEPCI_Web.styles.css" asp-append-version="true" /> -->
 </head>
 <body>
@@ -28,6 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="InicioSesion" asp-action="InicioSesion">Iniciar Sesión</a>
                         </li>
+                      
                     </ul>
                 </div>
             </div>

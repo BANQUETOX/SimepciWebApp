@@ -1,6 +1,6 @@
 namespace SIMEPCI_Web.Models
 {
-    public class ErrorViewModel
+    public class UserService
     {
         public string? RequestId { get; set; }
 
