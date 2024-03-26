@@ -57,7 +57,7 @@ public class RecuperarContrasennaController : Controller
                 using (var message = new MailMessage(smtpUsername, email))
                 {
                     message.Subject = "Código OTP para restablecer tu contraseña";
-                    message.Body = $"Tu código OTP es: {otp}";
+                    message.Body = $"Su código OTP es: {otp}";
 
                     smtpClient.Send(message);
                 }
