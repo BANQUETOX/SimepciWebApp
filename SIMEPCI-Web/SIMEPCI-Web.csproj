@@ -7,4 +7,8 @@
     <RootNamespace>SIMEPCI_Web</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imgs\Dashboard\" />
+  </ItemGroup>
+
 </Project>
