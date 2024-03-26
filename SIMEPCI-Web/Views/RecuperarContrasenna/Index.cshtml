@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Recuperar contraseña";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+
+
+@section Scripts {
+    <script src="~/js/pages/RecuperarContrasenna/RecuperarContrasenna.js"></script>
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Cambiar contraseña</h3>
+                    <p class="card-text text-center">Introduzca su dirección de correo electrónico para que le enviemos un OTP con el que pueda restablecer tu contraseña.</p>
+                    <form method="post" asp-action="EnviarOTP">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enviar OTP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

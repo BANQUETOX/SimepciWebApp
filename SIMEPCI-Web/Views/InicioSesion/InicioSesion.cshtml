@@ -1,10 +1,12 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+
 @section Scripts {
     <script src="~/js/pages/iniciosesion/iniciosesion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="~/css/pages/iniciosesion/iniciosesion.css" rel="stylesheet" />
 </head>
+
 <body>
     <div class="centrar">
         <div class="seccionForm mt-5 mb-5">
@@ -34,7 +37,7 @@
                     </div>
                 </div>
                 <li class="liStyle">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">¿Olvidó su contraseña?</a>
+                    <a asp-area="" asp-controller="RecuperarContrasenna" asp-action="Index">¿Olvidó su contraseña?</a>
                 </li>
                 <div class="seccionButtons">
                     <div>

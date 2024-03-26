@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Confirmación";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Confirmación</h3>
+                    <p class="card-text text-center">Se ha enviado un OTP a su dirección de correo electrónico. Por favor, revise su bandeja de entrada y siga las instrucciones para restablecer su contraseña.</p>
+                    <div class="text-center">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver a la página principal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
