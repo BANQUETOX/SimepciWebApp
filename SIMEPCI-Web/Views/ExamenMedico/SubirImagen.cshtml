@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Subir Imagen";
+}
+
+<link rel="stylesheet" href="~/css/Pages/ExamenesMedicos/SubirImagen.css" />
+
+<div class="container">
+    <h2>Registro de Información</h2>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form asp-action="SubirImagen" enctype="multipart/form-data">
+                <div class="form-group text-center">
+                    <label for="imagen" class="upload-label">
+                        <i class="fas fa-plus-circle fa-3x"></i>
+                        <span>Añada su formulario completado abajo</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file-upload">
+                        <input type="file" id="imagen" name="imagen" accept="image/*" />
+                        <label for="imagen" class="btn btn-primary">Seleccionar Imagen</label>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Enviar Imagen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

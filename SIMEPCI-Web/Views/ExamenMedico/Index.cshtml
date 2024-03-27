@@ -1,0 +1,69 @@
+﻿@model List<SIMEPCI_Web.Controllers.ExamenMedico>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/ExamenesMedicos.css" rel="stylesheet" />
+</head>
+
+<h2>Registro de Exámenes Médicos</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="Especialidad">Especialidad</label>
+        <input name="Especialidad" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Procedimiento">Procedimiento</label>
+        <input name="Procedimiento" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input name="Fecha" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label for="Hora">Hora</label>
+        <input name="Hora" class="form-control" type="time" />
+    </div>
+    <div class="form-group">
+        <label for="Seccion">Sección y Consultorio</label>
+        <input name="Seccion" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Observaciones">Otras observaciones</label>
+        <textarea name="Observaciones" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+
+<h2>Exámenes Médicos Registrados</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Especialidad</th>
+            <th>Procedimiento</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Sección</th>
+            <th>Observaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var examen in Model)
+        {
+            <tr>
+                <td>@examen.Especialidad</td>
+                <td>@examen.Procedimiento</td>
+                <td>@examen.Fecha.ToShortDateString()</td>
+                <td>@examen.Hora.ToString(@"hh\:mm")</td>
+                <td>@examen.Seccion</td>
+                <td>@examen.Observaciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
