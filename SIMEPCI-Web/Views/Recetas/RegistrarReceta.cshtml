@@ -1,10 +1,12 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+
 @section Scripts {
     <script src="~/js/pages/recetas/registrarreceta.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,3 +16,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="~/css/pages/recetas/registrarreceta.css" rel="stylesheet" />
 </head>
+<body>
+    <h2>Registro de Recetas</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="txtProfesionalMed">Profesional medico</label>
+            <input class="form-control" id="txtProfesionalMed" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="txtEmision">Fecha de Emisión</label>
+            <input name="txtEmision" class="form-control" type="date" />
+        </div>
+        <div class="form-group">
+            <label for="txtNombreMedicamento">Nombre del Medicamento</label>
+            <input id="txtNombreMedicamento" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="txtDosis">Dosis Recomendada</label>
+            <input id="txtDosis" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="txtDuracionTratamiento">Duracion del tratamiento en días</label>
+            <input type="number" min="1" max="12" id="txtDuracionTratamiento" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="txtRecomendacionesAdicionales">Recomendaciones adicionales</label>
+            <textarea id="txtRecomendacionesAdicionales" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <button id="btnRegistrar" type="button" class="btn btn-primary">Registrar</button>
+        </div>
+    </form>
+</body>
