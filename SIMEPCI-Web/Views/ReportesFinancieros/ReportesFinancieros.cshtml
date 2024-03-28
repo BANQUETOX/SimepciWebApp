@@ -1,0 +1,21 @@
+﻿@model List<SIMEPCI_Web.Controllers.Reporte>
+
+@{
+    ViewData["Title"] = "Reportes financieros";
+}
+
+<link rel="stylesheet" href="~/css/Pages/ReportesFinancieros/ReportesFinancieros.css" />
+
+<h2>Reportes financieros</h2>
+
+<div class="reportes-container">
+    @foreach (var reporte in Model)
+    {
+        <div class="reporte-card">
+            <span class="fecha">@reporte.Fecha.ToString("dd/MM/yyyy")</span>
+            <span class="descripcion">@reporte.Descripcion</span>
+            <span class="sede">@reporte.Sede</span>
+            <button class="editar">Editar</button>
+        </div>
+    }
+</div>
