@@ -1,40 +1,38 @@
-﻿@model List<SIMEPCI_Web.Controllers.HistorialCita>
+﻿@model List<SIMEPCI_Web.Controllers.HistorialPagos>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-    <link href="~/css/Pages/Citas/HistorialCitas.css" rel="stylesheet" />
+    <link href="~/css/Pages/Pagos/HistorialDePagos.css" rel="stylesheet" />
 </head>
 
 <div class="container">
-    <h2>Historial de citas</h2>
+    <h2>Historial de pagos</h2>
 
-    <div class="menu">
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item active">Registro de citas</a>
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item">Pagos</a>
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item">Dashboard Doctor</a>
-    </div>
 
     <div class="content">
         <table class="table">
             <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Procedimiento</th>
-                    <th>Doctor</th>
+                    <th>Tipo de procedimiento y sede</th>
+                    <th>Monto</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var cita in Model)
+                @if (Model != null)
                 {
-                    <tr>
-                        <td>@cita.Fecha.ToString("dd/MM/yyyy - hh:mm tt")</td>
-                        <td>@cita.Procedimiento</td>
-                        <td>@cita.Doctor</td>
-                    </tr>
+                    @foreach (var pago in Model)
+                    {
+                        <tr>
+                            <td>@pago.Fecha.ToString("dd/MM/yyyy - hh:mm tt")</td>
+                            <td>@pago.Procedimiento</td>
+                            <td>@pago.Monto</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
