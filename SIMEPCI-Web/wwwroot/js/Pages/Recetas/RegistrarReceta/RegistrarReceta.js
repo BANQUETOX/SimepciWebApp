@@ -26,6 +26,8 @@
                 title: 'Ha ocurrido un error',
                 text: 'Llenar la informacion para el registro de medicamentos'
             })
+        } else {
+            window.location ="/Recetas/VisualizarRecetas"
         }
         this.limpiarCampos();
     }
@@ -37,7 +39,7 @@
         $('#txtDuracionTratamiento').val("");
         $('#txtRecomendacionesAdicionales').val("");
     }
-}
+} 
 $(document).ready(function () {
     var view = new RegistarReceta();
     view.InitView();
