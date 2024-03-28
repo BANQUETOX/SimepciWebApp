@@ -1,20 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='utf-8' />
     <link href="~/css/pages/citas/citasprogramadas.css" rel="stylesheet" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
+    <script>document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth'
             });
             calendar.render();
-        });
-
-    </script>
+        });</script>
 </head>
 <body>
     <h2>Registro de citas Programadas</h2>
