@@ -1,0 +1,31 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.logo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.recetas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.receta-card {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 250px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+    .receta-card img {
+        width: 60px;
+    }
