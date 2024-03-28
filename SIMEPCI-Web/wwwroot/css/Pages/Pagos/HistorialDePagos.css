@@ -1,0 +1,11 @@
+﻿body {
+    background-color: #F9F7C9;
+    font-family: 'Krub',sans-serif;
+}
+
+#calendar {
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+}
+
