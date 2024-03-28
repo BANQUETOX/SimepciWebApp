@@ -20,8 +20,7 @@
         console.log(duracionTratamiento);
         var recomendaciones = $('#txtRecomendacionesAdicionales').val();
         console.log(recomendaciones);
-        if (profMed == "" || nombreMed == "" || dosis == "" || duracionTratamiento == "" || emision === null)
-        {
+        if (profMed == "" || nombreMed == "" || dosis == "" || duracionTratamiento == "" || emision === null) {
             Swal.fire({
                 icon: 'error',
                 title: 'Ha ocurrido un error',
@@ -38,7 +37,7 @@
         $('#txtDuracionTratamiento').val("");
         $('#txtRecomendacionesAdicionales').val("");
     }
-} 
+}
 $(document).ready(function () {
     var view = new RegistarReceta();
     view.InitView();
