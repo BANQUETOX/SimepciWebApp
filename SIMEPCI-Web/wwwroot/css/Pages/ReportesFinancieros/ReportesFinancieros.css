@@ -1,0 +1,43 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.reportes-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.reporte-card {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+    .reporte-card .fecha {
+        font-weight: bold;
+    }
+
+    .reporte-card .sede {
+        color: #888;
+    }
+
+    .reporte-card .editar {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
