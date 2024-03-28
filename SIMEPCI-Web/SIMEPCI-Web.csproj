@@ -11,10 +11,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <Content Remove="wwwroot\imgs\landing\" />
+    <Content Remove="wwwroot\js\Pages\Join\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
     <Folder Include="Views\Join\" />
+    <Folder Include="wwwroot\js\Pages\Join\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />

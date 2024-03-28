@@ -9,8 +9,7 @@ F9F7C9
 
 
 body {
-    background-color: #D5F0C1;
-    font-family: 'Krub',sans-serif;
+    font-family: 'Montserrat',sans-serif;
 }
 .liStyle{
     list-style:none;
@@ -34,7 +33,7 @@ img{
     display:flex;
     flex-direction:row;
     align-items:center;
-    align-content:space-around;
+    align-content:center;
 
 }
 .seccionButtonReg {
@@ -44,3 +43,8 @@ img{
     align-items: center;
     align-content: space-around;
 }
+
+.bgc {
+    background-color: #F9F7C9;
+}
+
