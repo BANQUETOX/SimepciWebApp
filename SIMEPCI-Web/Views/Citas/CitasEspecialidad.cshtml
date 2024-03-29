@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Citas por Especialidad";
+}
+
+<link rel="stylesheet" href="~/css/Pages/Citas/CitasEspecialidad.css" />
+
+<h2>Seleccione la especialidad y la sede</h2>
+
+<form method="post" action="@Url.Action("CitasEspecialidad", "Citas")">
+    <div>
+        <label for="especialidad">Elija la Especialidad:</label>
+        <select id="especialidad" name="especialidad">
+            @foreach (var especialidad in ViewBag.Especialidades)
+            {
+            <option value="@especialidad">@especialidad</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label for="sede">Elija la Sede:</label>
+        <select id="sede" name="sede">
+            @foreach (var sede in ViewBag.Sedes)
+            {
+            <option value="@sede">@sede</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label for="mes">Mes:</label>
+        <input type="number" id="mes" name="mes" min="1" max="12" required>
+    </div>
+
+    <div>
+        <label for="dia">Día:</label>
+        <input type="number" id="dia" name="dia" min="1" max="31" required>
+    </div>
+
+    <div>
+        <label for="hora">Hora:</label>
+        <input type="number" id="hora" name="hora" min="0" max="23" required>
+    </div>
+
+    <button type="submit">Enviar</button>
+</form>

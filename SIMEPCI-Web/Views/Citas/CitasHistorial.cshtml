@@ -11,12 +11,6 @@
 <div class="container">
     <h2>Historial de citas</h2>
 
-    <div class="menu">
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item active">Registro de citas</a>
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item">Pagos</a>
-        <a href="@Url.Action("CitasProgramadas", "Citas")" class="menu-item">Dashboard Doctor</a>
-    </div>
-
     <div class="content">
         <table class="table">
             <thead>
@@ -26,7 +20,6 @@
                     <th>Doctor</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach (var cita in Model)
                 {
@@ -43,17 +36,17 @@
     <div class="pagination">
         @if (ViewBag.PaginaActual > 1)
         {
-            <a href="@Url.Action("Index", new { pagina = ViewBag.PaginaActual - 1 })" class="pagination-item">&lt;&lt; Prev</a>
+            <a href="@Url.Action("CitasHistorial", new { pagina = ViewBag.PaginaActual - 1 })" class="pagination-item">&lt;&lt; Prev</a>
         }
 
         @for (int i = 1; i <= ViewBag.TotalPaginas; i++)
         {
-            <a href="@Url.Action("Index", new { pagina = i })" class="pagination-item @(i == ViewBag.PaginaActual ? "active" : "")">@i</a>
+            <a href="@Url.Action("CitasHistorial", new { pagina = i })" class="pagination-item @(i == ViewBag.PaginaActual ? "active" : "")">@i</a>
         }
 
         @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
         {
-            <a href="@Url.Action("Index", new { pagina = ViewBag.PaginaActual + 1 })" class="pagination-item">Next &gt;&gt;</a>
+            <a href="@Url.Action("CitasHistorial", new { pagina = ViewBag.PaginaActual + 1 })" class="pagination-item">Next &gt;&gt;</a>
         }
     </div>
 </div>

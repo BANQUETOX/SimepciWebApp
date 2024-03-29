@@ -30,19 +30,39 @@ namespace SIMEPCI_Web.Controllers
             return View(citasPaginadas);
         }
 
-        public IActionResult Pagos()
+        public IActionResult CitasEspecialidad()
         {
-            // Por el momento, solo devuelve la vista de pagos
+            var especialidades = new List<string> { "Medicina General", "Pediatría", "Cardiología", "Dermatología" };
+            ViewBag.Especialidades = especialidades;
+
+            var sedes = new List<string> { "Sede San José", "Sede Alajuela", "Sede Cartago", "Sede Heredia" };
+            ViewBag.Sedes = sedes;
+
             return View();
         }
 
-        public IActionResult DashboardDoctor()
+        [HttpPost]
+        public IActionResult CitasEspecialidad(string especialidad, string sede, int mes, int dia, int hora)
         {
-            // Por el momento, solo devuelve la vista del dashboard del doctor
-            return View();
+            return RedirectToAction("Calendario", new { especialidad, sede, mes, dia, hora });
         }
-        public IActionResult CitasProgramadas()
+
+        public IActionResult Calendario(string especialidad, string sede, int mes, int dia, int hora)
         {
+            var citasDisponibles = new List<CitaDisponible>
+            {
+                new CitaDisponible { Id = 1, Fecha = new DateTime(2023, mes, dia, hora, 0, 0), Especialidad = especialidad, Sede = sede, Doctor = "Dr. Pedro Ramírez" },
+                new CitaDisponible { Id = 2, Fecha = new DateTime(2023, mes, dia, hora + 1, 0, 0), Especialidad = especialidad, Sede = sede, Doctor = "Dra. María Gómez" },
+                new CitaDisponible { Id = 3, Fecha = new DateTime(2023, mes, dia, hora + 2, 0, 0), Especialidad = especialidad, Sede = sede, Doctor = "Dr. Luis Fernández" },
+            };
+
+            ViewBag.CitasDisponibles = citasDisponibles;
+            ViewBag.Especialidad = especialidad;
+            ViewBag.Sede = sede;
+            ViewBag.Mes = mes;
+            ViewBag.Dia = dia;
+            ViewBag.Hora = hora;
+
             return View();
         }
     }
@@ -52,6 +72,15 @@ namespace SIMEPCI_Web.Controllers
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public string Procedimiento { get; set; }
+        public string Doctor { get; set; }
+    }
+
+    public class CitaDisponible
+    {
+        public int Id { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Especialidad { get; set; }
+        public string Sede { get; set; }
         public string Doctor { get; set; }
     }
 }
