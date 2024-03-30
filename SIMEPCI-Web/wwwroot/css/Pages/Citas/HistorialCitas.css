@@ -1,19 +1,10 @@
-﻿/*
-    Paleta de colores
-80BCBD
-AAD9BB
-D5F0C1
-F9F7C9
-
-*/
-
-
-body {
-    background-color: #F9F7C9;
-    font-family: 'Krub',sans-serif;
+﻿body {
+    font-family: 'Krub', sans-serif;
+    background-color: #ffffff;
 }
+
 #calendar {
-    width: 100%; 
-    height: 500px; 
-    margin: 0 auto; 
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
 }
