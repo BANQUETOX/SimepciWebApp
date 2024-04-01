@@ -17,8 +17,10 @@
     <Folder Include="wwwroot\imgs\landing\" />
     <Folder Include="Views\Join\" />
     <Folder Include="wwwroot\js\Pages\Join\" />
+    <Folder Include="Views\Perfil\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />
+    <None Remove="Views\Perfil\" />
   </ItemGroup>
 </Project>

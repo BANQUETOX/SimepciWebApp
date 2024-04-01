@@ -42,19 +42,27 @@
                 <div class="col-lg-8">
                     <div class="mb-3">
                         <label for="identificacion" class="form-label">Identificación</label>
-                        <input type="text" class="form-control" id="identificacion">
+                        <input type="text" class="form-control" id="identificacion" required>
                     </div>
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" id="nombre">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido1" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="apellido1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido2" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="apellido2" required>
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono">
+                        <input type="tel" class="form-control" id="telefono"required>
                     </div>
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="correo">
+                        <input type="email" class="form-control" id="correo" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Sexo</label>
@@ -79,12 +87,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="fecha_nacimiento">
+                        <input type="date" class="form-control" id="fecha_nacimiento" required>
                     </div>
                     <!-- Edad (calculada) -->
                     <div class="mb-3">
                         <label for="edad" class="form-label">Edad</label>
-                        <input type="text" class="form-control" id="edad" disabled>
+                        <input type="number" class="form-control" id="edad" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" required pattern="(?=.*\d)(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos 8 caracteres, una mayúscula y un dígito.">
                     </div>
                 </div>
             </div>
@@ -94,7 +106,7 @@
                 <div id="mapa" style="height: 300px;"></div>
             </div>
             <div class="d-flex justify-content-center mb-3">
-                <button type="submit" class="btn" style="background-color: #AAD9BB;">Crear</button>
+                <button type="submit" class="btn" id="btnCrear" style="background-color: #AAD9BB;">Crear</button>
             </div>
         </form>
     </div>

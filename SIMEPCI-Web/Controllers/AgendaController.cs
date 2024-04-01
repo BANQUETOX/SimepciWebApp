@@ -34,7 +34,7 @@ namespace SIMEPCI_Web.Controllers
 
         public IActionResult DashboardDoctor()
         {
-            // Por el momento, solo devuelve la vista del dashboard del doctor
+            // Por el momento, solo devuelve la vista del Dashboard del doctor
             return View();
         }
     }
