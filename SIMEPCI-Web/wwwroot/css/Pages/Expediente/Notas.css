@@ -1,3 +1,21 @@
 ﻿body {
     font-family: 'Krub',sans-serif;
 }
+
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 0.25rem;
+    font-weight: bold;
+}
+
+.scrollspy-example {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 0.25rem;
+    font-weight: bold;
+}
