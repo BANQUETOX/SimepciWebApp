@@ -4,4 +4,4 @@
 // Write your JavaScript code.
 
 
-var API_URL_BASE = "https://simepciapi.azurewebsites.net/";
+var API_URL_BASE = "https://simepciapii.azurewebsites.net/";
