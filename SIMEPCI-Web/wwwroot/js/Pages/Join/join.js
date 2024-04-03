@@ -20,7 +20,7 @@ document.getElementById("fecha_nacimiento").addEventListener("change", function 
 function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            // coordenadas de latitud y longitud
+            
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             const latLng = new google.maps.LatLng(lat, lng);
@@ -58,24 +58,23 @@ const cloudinaryWidget = cloudinary.createUploadWidget({
     uploadPreset: 'ml_default'
 }, (error, result) => {
     if (!error && result && result.event === "success") {
-       
         const imageUrl = result.info.secure_url;
-
-        
-        document.getElementById("foto_perfil").src = imageUrl;
-
-        document.getElementById("foto_perfil_preview").src = imageUrl;
-        document.getElementById("foto_perfil_preview").style.display = "block";
-        document.getElementById("foto_icono").style.display = "none";
+        document.getElementById("url_imagen_cloudinary").value = imageUrl;
+        const imgPreview = document.getElementById("foto_perfil_preview");
+        imgPreview.src = imageUrl;
+        imgPreview.style.display = "block";
+    } else {
+        console.error("Error al cargar la imagen:", error);
+        if (error) {
+            console.log("Detalles del error:", error.message); 
+        }
     }
 });
 
-document.getElementById("foto_perfil").addEventListener("click", function () {
-    cloudinaryWidget.open();
-});
 
-document.getElementById("foto_perfil_container").addEventListener("click", function () {
-    document.getElementById("foto_perfil").click();
+document.getElementById("foto_perfil_container").addEventListener("click", function (event) {
+    event.preventDefault(); 
+    cloudinaryWidget.open(); 
 });
 
 document.getElementById("foto_perfil").addEventListener("change", function () {
@@ -84,10 +83,8 @@ document.getElementById("foto_perfil").addEventListener("change", function () {
         const reader = new FileReader();
         reader.onload = function (event) {
             const imageUrl = event.target.result;
-
             document.getElementById("foto_perfil_preview").src = imageUrl;
             document.getElementById("foto_perfil_preview").style.display = "block";
-            document.getElementById("foto_icono").style.display = "none";
         };
         reader.readAsDataURL(file);
     }
@@ -95,118 +92,7 @@ document.getElementById("foto_perfil").addEventListener("change", function () {
 
 
 
-
 //crear usuario
-
-/*function CrearUsuario() {
-    this.InitView = function () {
-        $('form').submit(function (event) {
-            event.preventDefault();
-            var view = new CrearUsuario();
-            view.SubmitCrearUsuario();
-        });
-    }
-
-    this.SubmitCrearUsuario = function () {
-
-        var usuario = {};
-        //usuario.id = 0;
-        usuario.nombre = $('#nombre').val();
-        usuario.primerApellido = $('#apellido1').val();
-        usuario.segundoApellido = $('#apellido2').val();
-        usuario.cedula = $('#identificacion').val();
-        var fechaNacimientoISO8601 = new Date($('#fecha_nacimiento').val()).toISOString();
-        usuario.fechaNacimiento = fechaNacimientoISO8601;
-        //usuario.edad = parseInt($('#edad').val());
-        usuario.telefono = $('#telefono').val();
-        usuario.correo = $('#correo').val();
-        usuario.direccion = $('#ubicacion').val();
-        usuario.fotoPerfil = $('#foto_perfil').val();
-        usuario.password = $('#password').val();
-        //usuario.activo = true;
-
-        const API_URL_BASE = "https://simepciapi.azurewebsites.net/";
-        var api_url = API_URL_BASE + "api/Usuario/CreateUsuario";
-
-        console.log(usuario);
-       
-        $.ajax({
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "application/json"
-            },
-            method: "POST",
-            url: api_url,
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(usuario),
-            hasContent: true
-        }).done(function (result) {
-            
-            var segundo_api_url = API_URL_BASE + "api/RegistroOtp/CrearRegistroOtp";
-            var correo = $('#correo').val();
-
-            console.log(correo);
-            $.ajax({
-               
-                method: "POST",
-                url: segundo_api_url,
-                data: correo, // Enviar el correo como un string
-                success: function (response) {
-                    // Manejar la respuesta del servidor si es necesario
-                    console.log("Respuesta del servidor:", response);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    // Manejar errores si la solicitud falla
-                    console.error("Error al enviar la solicitud:", errorThrown);
-                }
-
-            }).done(function (result) {
-               
-                Swal.fire({
-                    title: 'Ingrese el código de verificación',
-                    input: 'text',
-                    showCancelButton: true,
-                    confirmButtonText: 'Confirmar',
-                    showLoaderOnConfirm: true,
-                    preConfirm: (codigo) => {
-             
-                        return $.ajax({
-                            method: "GET",
-                            url: API_URL_BASE + "api/RegistroOtp/ValidarOtp",
-                            data: {
-                                codigo: codigo,
-                                correo: usuario.correo
-                            }
-                        });
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                }).then((result) => {
-                    // Mostrar mensaje de éxito o error según la respuesta del servidor
-                    if (result.value && result.value.correcto) {
-                        Swal.fire({
-                            title: 'Código verificado!',
-                            icon: 'success',
-                            text: 'Usuario creado correctamente',
-                            timer: 2000
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            icon: 'error',
-                            text: 'Código de verificación incorrecto',
-                        });
-                    }
-                });
-            });
-        });
-    }
-}
-
-$(document).ready(function () {
-    var view = new CrearUsuario();
-    view.InitView();
-});*/
 
 function CrearUsuario() {
     this.InitView = function () {
@@ -219,7 +105,7 @@ function CrearUsuario() {
     function submitCrearUsuario() {
         var usuario = obtenerDatosUsuario();
 
-        const API_URL_BASE = "https://simepciapi.azurewebsites.net/";
+        const API_URL_BASE = "https://simepciapii.azurewebsites.net/";
         var api_url = API_URL_BASE + "api/Usuario/CreateUsuario";
 
         console.log(usuario);
@@ -237,6 +123,7 @@ function CrearUsuario() {
             hasContent: true
         }).done(function (result) {
             enviarCodigoOTP(usuario.correo);
+            validarCodigoOTP(usuario.correo);
         }).fail(function (xhr, textStatus, errorThrown) {
             console.error("Error al crear usuario:", errorThrown);
         });
@@ -252,8 +139,9 @@ function CrearUsuario() {
             telefono: $('#telefono').val(),
             correo: $('#correo').val(),
             direccion: $('#ubicacion').val(),
-            fotoPerfil: $('#foto_perfil').val(),
-            password: $('#password').val()
+            fotoPerfil: $('#url_imagen_cloudinary').val(), 
+            password: $('#password').val(),
+            sexo: $("input[name='sexo']:checked").val()
         };
 
         return usuario;
@@ -262,11 +150,13 @@ function CrearUsuario() {
     function enviarCodigoOTP(correo) {
         var segundo_api_url = API_URL_BASE + "api/RegistroOtp/CrearRegistroOtp";
         
-        var correoUsuario = $('#correo').val(); 
+        segundo_api_url += "?correoUsuario=" + encodeURIComponent(correo);
+
+        console.log(correo); 
+
         $.ajax({
             method: "POST",
-            url: segundo_api_url,
-            data: correoUsuario, 
+            url: segundo_api_url, 
             success: function (response) {
                 console.log("Código OTP enviado correctamente.");
                 console.log("Respuesta del servidor:", response);
@@ -277,7 +167,48 @@ function CrearUsuario() {
             }
         });
     }
+    function validarCodigoOTP(correo) {
+        Swal.fire({
+            title: 'Ingrese el código',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const codigo = result.value;
+                const url = `${API_URL_BASE}api/RegistroOtp/ValidarOtp?correoUsuario=${encodeURIComponent(correo)}&otpInput=${encodeURIComponent(codigo)}`;
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    dataType: 'json'
+                }).then((response) => {
+                    if (response === true) {
+                        Swal.fire('Éxito', 'Cuenta registrada', 'success').then(() => {
+                            window.location.href = '../InicioSesion/InicioSesion';
+                        });
+                    } else {
+                        Swal.fire('Error', 'El código es inválido.', 'error').then(() => {
+                            validarCodigoOTP(correo);
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('Error al validar el código OTP:', error);
+                    Swal.fire('Error', 'Hubo un problema al validar el código OTP.', 'error');
+                });
+            }
+        });
+    }
 }
+
 
 var view = new CrearUsuario();
 view.InitView();
+
+
