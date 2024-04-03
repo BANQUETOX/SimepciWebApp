@@ -6,7 +6,6 @@
     <script src="~/js/pages/iniciosesion/iniciosesion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="~/css/pages/iniciosesion/iniciosesion.css" rel="stylesheet" />
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -29,7 +27,7 @@
                     <div class="col-md-6">
                         <img src="~/imgs/iniciosesion/sesion3.jpg" class="img-fluid rounded-start" alt="Imagen de inicio de sesión" style="height: 100%; width: 100%; object-fit: cover;">
                     </div>
-                    <div class="col-md-6 bgc">
+                    <div class="col-md-6 bg">
                         <div class="p-4">
                             <h5 class="mb-4">Iniciar Sesión</h5>
                             <div class="mb-3">
@@ -45,8 +43,7 @@
                             <li class="row justify-content-center liStyle mb-3">
                                 <a asp-area="" asp-controller="RecuperarContrasenna" asp-action="Index">¿Olvidó su contraseña?</a>
                             </li>
-                                <button type="submit" id="btnIniciarSesion" class="btn btn-primary bd-highlight">Iniciar Sesión</button>
-                           
+                            <button type="submit" id="btnIniciarSesion" class="btn btn-primary bd-highlight">Iniciar Sesión</button>
                         </div>
                     </div>
                 </div>
@@ -62,42 +59,3 @@
         </div>
     </div>
 </body>
-
-
-<!--<body>
-    <div class="centrar">
-        <div class="seccionForm mt-5 mb-5">
-            <div>
-                <img src="~/imgs/iniciosesion/iniciarsesion.png" />
-            </div>
-            <div>
-                <div>
-                    <h5>Bienvenido a Hospital Su Salud Primero</h5>
-                    <h5>Iniciar Sesión</h5>
-                    <div>
-                        <label>Correo</label>
-                        <input type="email" id="txtEmail" class="form-control" placeholder="correo@dominio.com" />
-                    </div>
-                    <div>
-                        <label>Contraseña</label>
-                        <input type="password" id="txtPassword" class="form-control" />
-                    </div>
-                </div>
-                <li class="liStyle">
-                    <a asp-area="" asp-controller="RecuperarContrasenna" asp-action="Index">¿Olvidó su contraseña?</a>
-                </li>
-                <div class="seccionButtons">
-                    <div>
-                        <button type="submit" id="btnIniciarSesion" class="btn btn-primary">Iniciar Sesión</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="centrar seccionButtonReg">
-        <li class="liStyle p-2 bd-highlight">
-            <a asp-area="" asp-controller="Home" asp-action="Index">¿No posee una cuenta?</a>
-        </li>
-        <button type="button" class="btn btn-primary p-2 bd-highlight">Regístrese aquí</button>
-    </div>
-</body>-->
