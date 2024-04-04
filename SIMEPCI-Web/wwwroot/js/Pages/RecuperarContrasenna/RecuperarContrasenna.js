@@ -1,29 +1,54 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('form');
-    form.addEventListener('submit', function (event) {
+﻿$(document).ready(function () {
+    $('#formRecuperarContrasenna').submit(function (event) {
         event.preventDefault();
-        var email = document.getElementById('email').value;
 
-        fetch('/RecuperarContrasenna/EnviarOTP', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email })
-        })
-            .then(function (response) {
-                if (response.ok) {
-                    alert('Se ha enviado un OTP a su correo electrónico. Por favor, revise su bandeja de entrada.');
-                    window.location.href = '/RecuperarContrasenna/Confirmacion';
-                } else {
-                    response.text().then(function (errorMessage) {
-                        alert('Ocurrió un error al enviar el OTP: ' + errorMessage);
-                    });
-                }
-            })
-            .catch(function (error) {
-                console.error('Error:', error);
-                alert('Ocurrió un error al enviar el OTP. Por favor, intente nuevamente.');
-            });
+        var email = $('#email').val().trim();
+        var url_base = 'https://simepciapii.azurewebsites.net/api/Usuario/GetUsuarioByCorreo';
+
+        $.ajax({
+            url: url_base + '?correo=' + encodeURIComponent(email),
+            method: 'GET',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json'
+        }).done(function (result) {
+            if (result.activo === true) {
+                console.log(email); // Verificar el correo electrónico capturado
+
+                var url_otp = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/CrearRecuperarPasswordOtp';
+
+                $.ajax({
+                    url: url_otp + '?correo=' + encodeURIComponent(email),
+                    method: 'POST',
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'json'
+                }).done(function (result) {
+                    window.location.href = '/RecuperarContrasenna/ValidarOTP';
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                    console.error('Response:', jqXHR.responseText);
+
+                    var errorMessage = 'Ocurrió un error al enviar el OTP. Por favor, intente nuevamente.';
+
+                    if (jqXHR.responseText) {
+                        errorMessage = jqXHR.responseText;
+                    }
+
+                    alert(errorMessage);
+                });
+            } else {
+                alert('El correo electrónico no existe en la base de datos. Por favor, verifique el correo ingresado.');
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+            console.error('Response:', jqXHR.responseText);
+
+            var errorMessage = 'Ocurrió un error al verificar el correo electrónico. Por favor, intente nuevamente.';
+
+            if (jqXHR.responseText) {
+                errorMessage = jqXHR.responseText;
+            }
+
+            alert(errorMessage);
+        });
     });
 });
