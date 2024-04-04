@@ -10,6 +10,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Content Remove="Views\RecuperarContrasenna\Confirmacion.cshtml" />
     <Content Remove="wwwroot\imgs\landing\" />
     <Content Remove="wwwroot\js\Pages\Join\" />
   </ItemGroup>

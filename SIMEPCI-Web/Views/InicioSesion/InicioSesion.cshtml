@@ -6,6 +6,7 @@
     <script src="~/js/pages/iniciosesion/iniciosesion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="~/css/pages/iniciosesion/iniciosesion.css" rel="stylesheet" />
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -41,7 +43,7 @@
                         </div>
                         <div class="mb-3 text-center">
                             <li class="row justify-content-center liStyle mb-3">
-                                <a asp-area="" asp-controller="RecuperarContrasenna" asp-action="Index">¿Olvidó su contraseña?</a>
+                                <a href="@Url.Action("EnviarOTP", "RecuperarContrasenna")">¿Olvidó su contraseña?</a>
                             </li>
                             <button type="submit" id="btnIniciarSesion" class="btn btn-primary bd-highlight">Iniciar Sesión</button>
                         </div>

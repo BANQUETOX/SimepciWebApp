@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace SIMEPCI_Web.Controllers
 {
     public class ExamenMedicoController : Controller
     {
         private static List<ExamenMedico> _examenes = new List<ExamenMedico>();
-
         private readonly IWebHostEnvironment _hostingEnvironment;
+
         public ExamenMedicoController(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
         }
+
         public IActionResult RegistroExamenes()
         {
             return View(_examenes);
@@ -31,6 +33,7 @@ namespace SIMEPCI_Web.Controllers
             }
             return View(_examenes);
         }
+
         public IActionResult SubirImagen()
         {
             return View();
@@ -42,14 +45,24 @@ namespace SIMEPCI_Web.Controllers
             if (imagen != null && imagen.Length > 0)
             {
                 var fileName = Path.GetFileName(imagen.FileName);
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                var extension = Path.GetExtension(fileName).ToLower();
+
+                if (extension == ".png")
                 {
-                    imagen.CopyTo(fileStream);
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        imagen.CopyTo(fileStream);
+                    }
+
+                    // Guardar la URL de la imagen subida en una variable de vista
+                    ViewBag.ImagenUrl = "/uploads/" + fileName;
+
+                    // Devolver la vista parcial con la imagen subida
+                    return PartialView("_ImagenSubida", ViewBag.ImagenUrl);
                 }
-                return RedirectToAction(nameof(SubirImagen));
             }
-            return View();
+            return PartialView("_ImagenSubida", "");
         }
     }
 
