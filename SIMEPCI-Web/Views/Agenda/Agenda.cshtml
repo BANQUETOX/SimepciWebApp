@@ -5,17 +5,13 @@
 
 <head>
     <link href="~/css/Pages/Agenda.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
 </head>
 
 <div class="container">
     <h2>Agendar cita</h2>
-
-    <div class="menu">
-        <a href="@Url.Action("RegistroCitas", "Agenda")" class="menu-item active">Registro de citas</a>
-        <a href="@Url.Action("Pagos", "Agenda")" class="menu-item">Pagos</a>
-        <a href="@Url.Action("DashboardDoctor", "Agenda")" class="menu-item">Dashboard Doctor</a>
-    </div>
 
     <div class="content">
         <div id="calendar"></div>
