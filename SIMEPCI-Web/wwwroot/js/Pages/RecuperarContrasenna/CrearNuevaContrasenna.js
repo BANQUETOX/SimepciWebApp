@@ -12,7 +12,7 @@
         var validacion = this.ValidarContrasenna();
         if (validacion) {
             var data = {
-            email : correo;
+                email: correo;
                 password: password
             }
             $('#espera').show();
@@ -30,7 +30,7 @@
                 hasContent: true
             }).done(function (result) {
                 if (result) {
-                    window.location = '/RecuperarContrasenna/ValidarOTP'
+                    window.location = '/InicioSesion/InicioSesion'
                 }
             }).fail(function (error) {
                 console.log(error)
