@@ -1,7 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Subir Imagen";
-}
-@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +9,12 @@
     <h2>Registro de Información</h2>
 
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6" id="imagen-subida">
+            <!-- Aquí se mostrará la imagen subida -->
+            @Html.Partial("_ImagenSubida", ViewBag.ImagenUrl as string)
+        </div>
+
+        <div class="col-md-6">
             <form asp-action="SubirImagen" enctype="multipart/form-data">
                 <div class="form-group text-center">
                     <label for="imagen" class="upload-label">
@@ -19,12 +22,14 @@
                         <span>Añada su formulario completado abajo</span>
                     </label>
                 </div>
+
                 <div class="form-group">
                     <div class="custom-file-upload">
-                        <input type="file" id="imagen" name="imagen" accept="image/*" />
+                        <input type="file" id="imagen" name="imagen" accept=".png" />
                         <label for="imagen" class="btn btn-primary">Seleccionar Imagen</label>
                     </div>
                 </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Enviar Imagen</button>
                 </div>
@@ -32,3 +37,25 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '@Url.Action("SubirImagen", "ExamenMedico")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $('#imagen-subida').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

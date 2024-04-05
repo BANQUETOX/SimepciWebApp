@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Citas por Especialidad";
 }
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
 
 <link rel="stylesheet" href="~/css/Pages/Citas/CitasEspecialidad.css" />
 
@@ -12,7 +15,7 @@
         <select id="especialidad" name="especialidad">
             @foreach (var especialidad in ViewBag.Especialidades)
             {
-            <option value="@especialidad">@especialidad</option>
+                <option value="@especialidad">@especialidad</option>
             }
         </select>
     </div>
@@ -22,7 +25,7 @@
         <select id="sede" name="sede">
             @foreach (var sede in ViewBag.Sedes)
             {
-            <option value="@sede">@sede</option>
+                <option value="@sede">@sede</option>
             }
         </select>
     </div>

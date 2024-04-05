@@ -1,29 +1,40 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('form');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var email = document.getElementById('email').value;
-
-        fetch('/RecuperarContrasenna/EnviarOTP', {
-            method: 'POST',
+﻿function RecuperarContrasenna() {
+    this.InitView = function () {
+        $('#btnOtp').click(function () {
+            var view = new RecuperarContrasenna();
+            view.EnviarOtp();
+        });
+    }
+    this.EnviarOtp = function () {
+        var correo = $('#email').val();
+        console.log(correo);
+        var emailJson = {}
+        emailJson.email = correo;
+        $('#espera').show();
+        url_base = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/CrearRecuperarPasswordOtp'
+        $.ajax({
             headers: {
-                'Content-Type': 'application/json'
+                'Accept': "application/json",
+                'Content-Type': "application/json"
             },
-            body: JSON.stringify({ email: email })
-        })
-            .then(function (response) {
-                if (response.ok) {
-                    alert('Se ha enviado un OTP a su correo electrónico. Por favor, revise su bandeja de entrada.');
-                    window.location.href = '/RecuperarContrasenna/Confirmacion';
-                } else {
-                    response.text().then(function (errorMessage) {
-                        alert('Ocurrió un error al enviar el OTP: ' + errorMessage);
-                    });
-                }
-            })
-            .catch(function (error) {
-                console.error('Error:', error);
-                alert('Ocurrió un error al enviar el OTP. Por favor, intente nuevamente.');
-            });
-    });
+            method: 'POST',
+            url: url_base + '?correo=' + correo,
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(emailJson),
+            hasContent: true
+        }).done(function (result) {
+            if (result) {
+                window.location = '/RecuperarContrasenna/ValidarOTP'
+            }
+        }).fail(function (error) {
+            console.log(error)
+        }).always(function () {
+            $('#espera').hide();
+        });
+    }
+}
+$(document).ready(function () {
+    var view = new RecuperarContrasenna();
+    view.InitView();
 });
