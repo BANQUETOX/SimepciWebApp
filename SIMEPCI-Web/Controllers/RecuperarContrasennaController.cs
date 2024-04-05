@@ -16,4 +16,8 @@ public class RecuperarContrasennaController : Controller
     {
         return View();
     }
+    public IActionResult RecuperarContrasena()
+    {
+        return View();
+    }
 }

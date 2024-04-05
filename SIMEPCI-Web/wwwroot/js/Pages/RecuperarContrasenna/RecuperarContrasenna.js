@@ -1,15 +1,17 @@
 ﻿function RecuperarContrasenna() {
     this.InitView = function () {
         $('#btnOtp').click(function () {
-            var view = RecuperarContrasenna();
+            var view = new RecuperarContrasenna();
             view.EnviarOtp();
         });
     }
-    this.EnviarOtp() = function () {
-        var correo = $('#email').val().trim();
+    this.EnviarOtp = function () {
+        var correo = $('#email').val();
+        console.log(correo);
         var emailJson = {}
         emailJson.email = correo;
-        url_base = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/CrearRecuperarPasswordOtp';
+        $('#espera').show();
+        url_base = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/CrearRecuperarPasswordOtp'
         $.ajax({
             headers: {
                 'Accept': "application/json",
@@ -20,13 +22,15 @@
             contentType: 'application/json;charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(emailJson),
-            hasContent:true     
+            hasContent: true
         }).done(function (result) {
-            console.log(result)
-        }).then(
-            window.location = '/RecuperarContrasenna/Confirmacion'
-        ).fail(function (error) {
+            if (result) {
+                window.location = '/RecuperarContrasenna/ValidarOTP'
+            }
+        }).fail(function (error) {
             console.log(error)
+        }).always(function () {
+            $('#espera').hide();
         });
     }
 }
