@@ -1,37 +1,51 @@
-﻿$(document).ready(function () {
-    $('#formCrearNuevaContrasenna').submit(function (event) {
-        event.preventDefault();
-
-        var nuevaContrasenna = $('#nuevaContrasenna').val().trim();
-        var confirmarContrasenna = $('#confirmarContrasenna').val().trim();
-
-        if (nuevaContrasenna !== confirmarContrasenna) {
-            alert('Las contraseñas no coinciden. Por favor, inténtelo nuevamente.');
-            return;
-        }
-
-        $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Usuario/ActualizarPassword',
-            method: 'POST',
-            headers: {
-                'accept': '*/*'
-            },
-            data: JSON.stringify({ password: nuevaContrasenna }),
-            contentType: 'application/json;charset=utf-8',
-            dataType: 'json'
-        }).done(function (result) {
-            window.location.href = '/InicioSesion/InicioSesion';
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-            console.error('Response:', jqXHR.responseJSON);
-
-            var errorMessage = 'Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.';
-
-            if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                errorMessage = jqXHR.responseJSON.message;
-            }
-
-            alert(errorMessage);
+﻿function CrearNuevaContrasenna() {
+    var correo = $('#email').val().trim();
+    var password = $('#nuevaContrasenna').val().trim();
+    var newPassword = $('#confirmNuevaContrasenna').val().trim();
+    this.InitView = function () {
+        $('#btnCambiarContr').click(function () {
+            var view = new CrearNuevaContrasenna();
+            view.EnviarOtp();
         });
-    });
+    }
+    this.CambiarContrasenna = function () {
+        var validacion = this.ValidarContrasenna();
+        if (validacion) {
+            var data = {
+            email : correo;
+                password: password
+            }
+            $('#espera').show();
+            url_base = 'https://simepciapii.azurewebsites.net/api/Usuario/ActualizarPassword'
+            $.ajax({
+                headers: {
+                    'Accept': "application/json",
+                    'Content-Type': "application/json"
+                },
+                method: 'PATCH',
+                url: url_base + '?correoUsuario=' + correo + '&newpassword=' + password,
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                hasContent: true
+            }).done(function (result) {
+                if (result) {
+                    window.location = '/RecuperarContrasenna/ValidarOTP'
+                }
+            }).fail(function (error) {
+                console.log(error)
+            }).always(function () {
+                $('#espera').hide();
+            });
+        } else {
+
+        }
+    }
+    this.ValidarContrasenna = function () {
+        return password === newPassword
+    }
+}
+$(document).ready(function () {
+    var view = new CrearNuevaContrasenna();
+    view.InitView();
 });
