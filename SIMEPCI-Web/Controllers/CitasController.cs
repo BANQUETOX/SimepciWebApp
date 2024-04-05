@@ -13,6 +13,11 @@ namespace SIMEPCI_Web.Controllers
             new HistorialCita { Id = 2, Fecha = new DateTime(2023, 2, 10, 11, 0, 0), Procedimiento = "Exámenes Rayos X - Sede San José", Doctor = "Dra. Ana Mora" },
         };
 
+        public IActionResult CitasProgramadas()
+        {
+             return View();
+        }
+
         public IActionResult CitasHistorial(int pagina = 1)
         {
             int cantidadRegistrosPorPagina = 10;
