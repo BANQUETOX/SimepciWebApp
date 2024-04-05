@@ -1,5 +1,4 @@
-﻿
-function calcularEdad(fechaNacimiento) {
+﻿function calcularEdad(fechaNacimiento) {
     const hoy = new Date();
     const nacimiento = new Date(fechaNacimiento);
     let edad = hoy.getFullYear() - nacimiento.getFullYear();
@@ -20,14 +19,14 @@ document.getElementById("fecha_nacimiento").addEventListener("change", function 
 function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            
+
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             const latLng = new google.maps.LatLng(lat, lng);
 
             const mapOptions = {
                 center: latLng,
-                zoom: 12  
+                zoom: 12
             };
 
             const map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
@@ -35,11 +34,11 @@ function initMap() {
                 position: latLng,
                 map: map,
                 title: "Ubicación actual",
-                draggable: true  
+                draggable: true
             });
 
             google.maps.event.addListener(marker, "dragend", function (event) {
-                
+
                 const newLat = event.latLng.lat();
                 const newLng = event.latLng.lng();
                 console.log("Nuevas coordenadas:", newLat, newLng);
@@ -66,15 +65,15 @@ const cloudinaryWidget = cloudinary.createUploadWidget({
     } else {
         console.error("Error al cargar la imagen:", error);
         if (error) {
-            console.log("Detalles del error:", error.message); 
+            console.log("Detalles del error:", error.message);
         }
     }
 });
 
 
 document.getElementById("foto_perfil_container").addEventListener("click", function (event) {
-    event.preventDefault(); 
-    cloudinaryWidget.open(); 
+    event.preventDefault();
+    cloudinaryWidget.open();
 });
 
 document.getElementById("foto_perfil").addEventListener("change", function () {
@@ -139,7 +138,7 @@ function CrearUsuario() {
             telefono: $('#telefono').val(),
             correo: $('#correo').val(),
             direccion: $('#ubicacion').val(),
-            fotoPerfil: $('#url_imagen_cloudinary').val(), 
+            fotoPerfil: $('#url_imagen_cloudinary').val(),
             password: $('#password').val(),
             sexo: $("input[name='sexo']:checked").val()
         };
@@ -149,14 +148,14 @@ function CrearUsuario() {
 
     function enviarCodigoOTP(correo) {
         var segundo_api_url = API_URL_BASE + "api/RegistroOtp/CrearRegistroOtp";
-        
+
         segundo_api_url += "?correoUsuario=" + encodeURIComponent(correo);
 
-        console.log(correo); 
+        console.log(correo);
 
         $.ajax({
             method: "POST",
-            url: segundo_api_url, 
+            url: segundo_api_url,
             success: function (response) {
                 console.log("Código OTP enviado correctamente.");
                 console.log("Respuesta del servidor:", response);
@@ -187,9 +186,10 @@ function CrearUsuario() {
                 $.ajax({
                     method: 'GET',
                     url: url,
-                    dataType: 'json'
+                    dataType: 'text'
                 }).then((response) => {
-                    if (response === true) {
+                    console.log(response); // Agrega este console.log para ver la respuesta del servidor
+                    if (response.toLowerCase() === "true") {
                         Swal.fire('Éxito', 'Cuenta registrada', 'success').then(() => {
                             window.location.href = '../InicioSesion/InicioSesion';
                         });
@@ -210,5 +210,4 @@ function CrearUsuario() {
 
 var view = new CrearUsuario();
 view.InitView();
-
 

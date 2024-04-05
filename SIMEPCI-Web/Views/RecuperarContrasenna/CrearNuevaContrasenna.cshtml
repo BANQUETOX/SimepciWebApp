@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Crear Nueva Contraseña";
-    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Crear nueva contraseña / Prueba";
+    Layout = "../Shared/_Layout_.cshtml";
 }
 
 @section Scripts {
-    <script src="~/js/pages/RecuperarContrasenna/CrearNuevaContrasenna.js"></script>
+    <script src="~/js/pages/recuperarcontrasenna/crearnuevacontrasenna.js"></script>
 }
 
 <div class="container">
@@ -12,20 +12,23 @@
         <div class="col-md-6">
             <div class="card mt-5">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Crear Nueva Contraseña</h3>
+                    <h3 class="card-title text-center">Crear nueva contraseña</h3>
                     <form id="formCrearNuevaContrasenna">
                         <div class="mb-3">
-                            <label for="nuevaContrasenna" class="form-label">Nueva Contraseña</label>
+                            <label for="nuevaContrasenna" class="form-label">Nueva contraseña</label>
                             <input type="password" class="form-control" id="nuevaContrasenna" name="nuevaContrasenna" required>
                         </div>
                         <div class="mb-3">
-                            <label for="confirmarContrasenna" class="form-label">Confirmar Contraseña</label>
+                            <label for="confirmarContrasenna" class="form-label">Confirmar contraseña</label>
                             <input type="password" class="form-control" id="confirmarContrasenna" name="confirmarContrasenna" required>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                            <button id="btnCrearNuevaContrasenna" type="button" class="btn btn-primary">Crear nueva contraseña</button>
                         </div>
                     </form>
+                    <div id="espera" style="display: none; text-align: center;">
+                        <img src="~/imgs/InicioSesion/YlWC.gif" />
+                    </div>
                 </div>
             </div>
         </div>
