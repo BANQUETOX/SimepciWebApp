@@ -13,15 +13,23 @@
     <Content Remove="Views\RecuperarContrasenna\Confirmacion.cshtml" />
     <Content Remove="wwwroot\imgs\landing\" />
     <Content Remove="wwwroot\js\Pages\Join\" />
+    <Content Remove="wwwroot\imgs\Gestion\" />
+    <Content Remove="wwwroot\js\Pages\Gestion\" />
+    <Content Remove="wwwroot\css\Pages\Gestion\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
     <Folder Include="Views\Join\" />
     <Folder Include="wwwroot\js\Pages\Join\" />
     <Folder Include="Views\Perfil\" />
+    <Folder Include="Views\GestionInformacion\" />
+    <Folder Include="wwwroot\imgs\Gestion\" />
+    <Folder Include="wwwroot\js\Pages\Gestion\" />
+    <Folder Include="wwwroot\css\Pages\Gestion\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />
     <None Remove="Views\Perfil\" />
+    <None Remove="Views\GestionInformacion\" />
   </ItemGroup>
 </Project>
