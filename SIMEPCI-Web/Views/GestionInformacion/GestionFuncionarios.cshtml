@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionarios</title>
+    <link rel="stylesheet" href="~/css/pages/Gestion/GestionFuncionarios.css"></link>
+</head>
+<body>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Gestion/banner.jpg" alt="Banner" />
+        <div class="banner-text">
+            <h1>Bienvenido a gestión de funcionarios</h1>
+        </div>
+    </div>
+
+    <h2>Funcionarios</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>ID Usuario</th>
+                <th>Rol</th>
+                <th>Sede</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan Pérez</td>
+                <td>12345</td>
+                <td>Doctor</td>
+                <td>Alajuela</td>
+                <td>Activo</td>
+                <td><button class="edit-button">Editar</button></td>
+            </tr>
+            <tr>
+                <td>Maria López</td>
+                <td>67890</td>
+                <td>Doctor</td>
+                <td>San José</td>
+                <td>Inactivo</td>
+                <td><button class="edit-button">Editar</button></td>
+            </tr>
+            <tr>
+                <td>Carlos García</td>
+                <td>54321</td>
+                <td>Enfermera</td>
+                <td>Alajuela</td>
+                <td>Activo</td>
+                <td><button class="edit-button">Editar</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="centrar">
+        <button onclick="window.location.href = '../GestionInformacion/Menu';">Regresar</button>
+    </div>
+
+</body>
+</html>
+
