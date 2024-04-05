@@ -1,37 +1,49 @@
-﻿$(document).ready(function () {
-    $('#formCrearNuevaContrasenna').submit(function (event) {
-        event.preventDefault();
+﻿function CrearNuevaContrasenna() {
+    this.InitView = function () {
+        $('#btnCrearNuevaContrasenna').click(function () {
+            var view = new CrearNuevaContrasenna();
+            view.CrearNuevaContrasenna();
+        });
+    }
 
-        var nuevaContrasenna = $('#nuevaContrasenna').val().trim();
-        var confirmarContrasenna = $('#confirmarContrasenna').val().trim();
+    this.CrearNuevaContrasenna = function () {
+        var nuevaContrasenna = $('#nuevaContrasenna').val();
+        var confirmarContrasenna = $('#confirmarContrasenna').val();
 
         if (nuevaContrasenna !== confirmarContrasenna) {
-            alert('Las contraseñas no coinciden. Por favor, inténtelo nuevamente.');
+            alert('Las contraseñas no coinciden');
             return;
         }
 
+        var contrasennaJson = {};
+        contrasennaJson.nuevaContrasenna = nuevaContrasenna;
+        $('#espera').show();
+        url_base = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/CrearNuevaContrasenna';
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Usuario/ActualizarPassword',
-            method: 'POST',
             headers: {
-                'accept': '*/*'
+                'Accept': "application/json",
+                'Content-Type': "application/json"
             },
-            data: JSON.stringify({ password: nuevaContrasenna }),
+            method: 'POST',
+            url: url_base,
             contentType: 'application/json;charset=utf-8',
-            dataType: 'json'
+            dataType: 'json',
+            data: JSON.stringify(contrasennaJson),
+            hasContent: true
         }).done(function (result) {
-            window.location.href = '/InicioSesion/InicioSesion';
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-            console.error('Response:', jqXHR.responseJSON);
-
-            var errorMessage = 'Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.';
-
-            if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                errorMessage = jqXHR.responseJSON.message;
+            if (result) {
+                alert('Contraseña actualizada exitosamente');
+                window.location = '/InicioSesion';
             }
-
-            alert(errorMessage);
+        }).fail(function (error) {
+            console.log(error);
+        }).always(function () {
+            $('#espera').hide();
         });
-    });
+    }
+}
+
+$(document).ready(function () {
+    var view = new CrearNuevaContrasenna();
+    view.InitView();
 });

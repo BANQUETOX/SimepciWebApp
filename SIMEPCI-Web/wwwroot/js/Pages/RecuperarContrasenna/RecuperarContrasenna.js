@@ -26,6 +26,7 @@
         }).done(function (result) {
             if (result) {
                 window.location = '/RecuperarContrasenna/ValidarOTP'
+                localStorage.setItem('correo', correo);
             }
         }).fail(function (error) {
             console.log(error)

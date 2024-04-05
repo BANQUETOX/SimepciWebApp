@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Validar OTP";
-    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Validar OTP / Prueba";
+    Layout = "../Shared/_Layout_.cshtml";
 }
 
 @section Scripts {
-    <script src="~/js/pages/RecuperarContrasenna/ValidarOTP.js"></script>
+    <script src="~/js/pages/recuperarcontrasenna/validarotp.js"></script>
 }
 
 <div class="container">
@@ -13,16 +13,19 @@
             <div class="card mt-5">
                 <div class="card-body">
                     <h3 class="card-title text-center">Validar OTP</h3>
-                    <p class="card-text text-center">Ingrese el OTP recibido por correo electrónico.</p>
-                    <form id="formValidarOTP">
+                    <p class="card-text text-center">Introduzca el OTP que ha recibido en su correo electrónico.</p>
+                    <form id="formValidarOtp">
                         <div class="mb-3">
                             <label for="otp" class="form-label">OTP</label>
                             <input type="text" class="form-control" id="otp" name="otp" required>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Validar OTP</button>
+                            <button id="btnValidarOtp" type="button" class="btn btn-primary">Validar OTP</button>
                         </div>
                     </form>
+                    <div id="espera" style="display: none; text-align: center;">
+                        <img src="~/imgs/InicioSesion/YlWC.gif" />
+                    </div>
                 </div>
             </div>
         </div>

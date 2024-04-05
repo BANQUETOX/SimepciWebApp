@@ -1,31 +1,41 @@
-﻿$(document).ready(function () {
-    $('#formValidarOTP').submit(function (event) {
-        event.preventDefault();
+﻿function ValidarOTP() {
+    this.InitView = function () {
+        $('#btnValidarOtp').click(function () {
+            var view = new ValidarOTP();
+            view.ValidarOtp();
+        });
+    }
 
-        var otp = $('#otp').val().trim();
-
+    this.ValidarOtp = function () {
+        var otp = $('#otp').val();
+        var correo = localStorage.getItem('correo');
+        console.log("Correo: " + correo);
+        console.log("OTP: " + otp);
+        $('#espera').show();
+        url_base = 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/ValidarPasswordOtp';
+        var url = url_base + '?correo=' + encodeURIComponent(correo) + '&otpInput=' + encodeURIComponent(otp);
+        console.log("URL antes de AJAX: " + url);
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/RecuperarPasswordOtp/ValidarPasswordOtp',
-            method: 'POST',
-            headers: {
-                'accept': 'text/plain'
-            },
-            data: JSON.stringify({ otp: otp }),
-            contentType: 'application/json;charset=utf-8',
+            method: 'GET',
+            url: url,
             dataType: 'json'
         }).done(function (result) {
-            window.location.href = '/RecuperarContrasenna/CrearNuevaContrasenna';
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-            console.error('Response:', jqXHR.responseJSON);
-
-            var errorMessage = 'El OTP ingresado no es válido. Por favor, intente nuevamente.';
-
-            if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                errorMessage = jqXHR.responseJSON.message;
+            console.log(result);
+            if (result === true) {
+                window.location = '/RecuperarContrasenna/CrearNuevaContrasenna';
+            } else {
+                alert('El OTP no es válido');
             }
-
-            alert(errorMessage);
+        }).fail(function (error) {
+            console.log(error);
+            alert('Ocurrió un error al validar el OTP');
+        }).always(function () {
+            $('#espera').hide();
         });
-    });
+    }
+}
+
+$(document).ready(function () {
+    var view = new ValidarOTP();
+    view.InitView();
 });
