@@ -14,14 +14,17 @@
 <div class="row">
     <div class="col-4">
         <div id="list-example" class="list-group">
-            <a class="list-group-item list-group-item-action" href="#list-item-1">Información del paciente</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2">Notas médicas y de enfermería</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3">Antecedentes</a>
+            <a class="list-group-item list-group-item-action" href="#paciente">Información del paciente</a>
+            <a class="list-group-item list-group-item-action" href="#NotasMedicas">Notas médicas</a>
+            <a class="list-group-item list-group-item-action" href="#Recetas">Recetas</a>
+            <a class="list-group-item list-group-item-action" href="#Examenes">Examenes</a>
+            <a class="list-group-item list-group-item-action" href="#Citas">Citas</a>
+            <a class="list-group-item list-group-item-action" href="#Antecedentes">Antecedentes</a>
         </div>
     </div>
     <div class="col-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-            <div class="nombrePaciente">
+            <div id="paciente" class="nombrePaciente">
                 <label for="formGroupExampleInput" class="form-label">Nombre completo del paciente</label>
                 <input type="text" class="form-control" id="Nombre" placeholder="Alonso Rojas Araya">
             </div>
@@ -31,7 +34,7 @@
                 <input type="text" class="form-control" id="FechaNacimiento" placeholder="1995-01-29">
             </div>
 
-            <div class="direccionPaciente">
+            <div class="direccionPaciente mb-4">
                 <label for="formGroupExampleInput" class="form-label">Dirección</label>
                 <input type="text" class="form-control" id="Direccion" placeholder="Urbanización El Roble, Casa #4, Mercedes Norte, Heredia">
             </div>
@@ -40,6 +43,51 @@
                 <label for="formGroupExampleInput2" class="form-label">Diagnóstico médico</label>
                 <input type="text" class="form-control" id="Diagnostico" placeholder="Covid 19, virus no especificado - 04/12/2022">
                 <input type="text" class="form-control" id="Diagnostico" placeholder="Dermatitis atópica - 13/01/2021">
+            </div>
+        </div>
+        <div class="col-8">
+            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelNotasMedicas" class="card-title">Notas médicas</h3>
+                        <p type="text" class="form-control" id="NotasMedicas">El paciente presenta una ligera elevación en la presión arterial, se recomienda monitoreo constante.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelNotasEnfermeria" class="card-title">Notas de enfermería</h3>
+                        <p type="text" class="form-control" id="NotasEnfermeria">El paciente requiere cambio de vendajes diarios en la zona afectada por la herida.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelRecetas" class="card-title">Recetas</h3>
+                        <p type="text" class="form-control" id="Recetas">Receta médica para el paciente: Ibuprofeno 400mg, tomar una tableta cada 8 horas por 3 días para el dolor de cabeza.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelExamenes" class="card-title">Exámenes</h3>
+                        <p type="text" class="form-control" id="Examenes">Resultado de análisis de sangre: Hemoglobina: 12.5 g/dL, Glucosa: 90 mg/dL.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelCitas" class="card-title">Citas</h3>
+                        <p type="text" class="form-control" id="Citas">La ultima cita médica fue el 15 de marzo a las 10:00 a.m. Especialidad Odontología.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="labelAntecedentes" class="card-title">Antecedentes</h3>
+                        <p type="text" class="form-control" id="Antecedentes">El paciente presenta antecedentes familiares de hipertensión arterial y diabetes tipo 2.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
