@@ -1,10 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Crear nueva contraseña / Prueba";
+    ViewData["Title"] = "Crear Nueva Contraseña";
     Layout = "../Shared/_Layout_.cshtml";
 }
 
 @section Scripts {
-    <script src="~/js/pages/recuperarcontrasenna/crearnuevacontrasenna.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/recuperarcontrasenna/nuevacontrasenna.js"></script>
 }
 
 <div class="container">
@@ -12,18 +13,22 @@
         <div class="col-md-6">
             <div class="card mt-5">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Crear nueva contraseña</h3>
+                    <h3 class="card-title text-center">Crear Nueva Contraseña</h3>
                     <form id="formCrearNuevaContrasenna">
                         <div class="mb-3">
-                            <label for="nuevaContrasenna" class="form-label">Nueva contraseña</label>
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevaContrasenna" class="form-label">Nueva Contraseña</label>
                             <input type="password" class="form-control" id="nuevaContrasenna" name="nuevaContrasenna" required>
                         </div>
                         <div class="mb-3">
-                            <label for="confirmarContrasenna" class="form-label">Confirmar contraseña</label>
+                            <label for="confirmarContrasenna" class="form-label">Confirmar Contraseña</label>
                             <input type="password" class="form-control" id="confirmarContrasenna" name="confirmarContrasenna" required>
                         </div>
                         <div class="text-center">
-                            <button id="btnCrearNuevaContrasenna" type="button" class="btn btn-primary">Crear nueva contraseña</button>
+                            <button id="btnCambiarContr" type="button" class="btn btn-primary">Cambiar Contraseña</button>
                         </div>
                     </form>
                     <div id="espera" style="display: none; text-align: center;">
