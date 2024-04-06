@@ -93,7 +93,7 @@ document.getElementById("foto_perfil").addEventListener("change", function () {
 
 //crear usuario
 
-function CrearUsuario() {
+/*function CrearUsuario() {
     this.InitView = function () {
         $('form').submit(function (event) {
             event.preventDefault();
@@ -205,8 +205,126 @@ function CrearUsuario() {
             }
         });
     }
-}
+}*/
 
+
+function CrearUsuario() {
+    this.InitView = function () {
+        $('form').submit(function (event) {
+            event.preventDefault();
+            enviarCodigoOTP(); // Llamar a enviarCodigoOTP primero
+        });
+    }
+
+    function enviarCodigoOTP() {
+        var usuario = obtenerDatosUsuario();
+        const correo = usuario.correo; // Obtener el correo del usuario
+        const API_URL_BASE = "https://simepciapii.azurewebsites.net/";
+        var segundo_api_url = API_URL_BASE + "api/RegistroOtp/CrearRegistroOtp";
+
+        segundo_api_url += "?correoUsuario=" + encodeURIComponent(correo);
+
+        console.log(correo);
+
+        $.ajax({
+            method: "POST",
+            url: segundo_api_url,
+            success: function (response) {
+                console.log("Código OTP enviado correctamente.");
+                console.log("Respuesta del servidor:", response);
+                validarCodigoOTP(correo); // Llamar a validarCodigoOTP después
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error("Error al enviar el código OTP:", errorThrown);
+                console.log("Texto de la respuesta del servidor:", xhr.responseText);
+            }
+        });
+    }
+
+    function validarCodigoOTP(correo) {
+        Swal.fire({
+            title: 'Ingrese el código',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const codigo = result.value;
+                const url = `${API_URL_BASE}api/RegistroOtp/ValidarOtp?correoUsuario=${encodeURIComponent(correo)}&otpInput=${encodeURIComponent(codigo)}`;
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    dataType: 'text'
+                }).then((response) => {
+                    console.log(response); // Agrega este console.log para ver la respuesta del servidor
+                    if (response.toLowerCase() === "true") {
+                        Swal.fire('Éxito', 'Cuenta registrada', 'success').then(() => {
+                            submitCrearUsuario(); // Llamar a submitCrearUsuario si la validación del código es exitosa
+                        });
+                    } else {
+                        Swal.fire('Error', 'El código es inválido.', 'error').then(() => {
+                            validarCodigoOTP(correo);
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('Error al validar el código OTP:', error);
+                    Swal.fire('Error', 'Hubo un problema al validar el código OTP.', 'error');
+                });
+            }
+        });
+    }
+
+    function submitCrearUsuario() {
+        var usuario = obtenerDatosUsuario();
+        const API_URL_BASE = "https://simepciapii.azurewebsites.net/";
+        var api_url = API_URL_BASE + "api/Usuario/CreateUsuario";
+
+        console.log(usuario);
+
+        $.ajax({
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json"
+            },
+            method: "POST",
+            url: api_url,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(usuario),
+            hasContent: true
+        }).done(function (result) {
+            // Aquí puedes realizar alguna acción adicional si es necesario
+            console.log("Usuario creado correctamente.");
+        }).fail(function (xhr, textStatus, errorThrown) {
+            console.error("Error al crear usuario:", errorThrown);
+        });
+    }
+
+    function obtenerDatosUsuario() {
+        var usuario = {
+            nombre: $('#nombre').val(),
+            primerApellido: $('#apellido1').val(),
+            segundoApellido: $('#apellido2').val(),
+            cedula: $('#identificacion').val(),
+            fechaNacimiento: new Date($('#fecha_nacimiento').val()).toISOString(),
+            telefono: $('#telefono').val(),
+            correo: $('#correo').val(),
+            direccion: $('#ubicacion').val(),
+            fotoPerfil: $('#url_imagen_cloudinary').val(),
+            password: $('#password').val(),
+            sexo: $("input[name='sexo']:checked").val()
+        };
+
+        return usuario;
+    }
+}
 
 var view = new CrearUsuario();
 view.InitView();
