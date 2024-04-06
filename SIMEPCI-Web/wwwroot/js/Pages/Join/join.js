@@ -187,6 +187,7 @@ function CrearUsuario() {
         }).done(function (result) {
             
             console.log("Usuario creado correctamente.");
+            window.location.href = "../InicioSesion/InicioSesion"
         }).fail(function (xhr, textStatus, errorThrown) {
             console.error("Error al crear usuario:", errorThrown);
         });
