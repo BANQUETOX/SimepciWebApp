@@ -44,10 +44,23 @@
     }
 
     this.ValidarContrasenna = function (correo, contrasenna, newPassword) {
-        correo = $('#email').val();
-        contrasenna = $('#nuevaContrasenna').val();
-        newPassword = $('#confirmarContrasenna').val();
-        if (contrasenna == newPassword) {
+        var contrasenna = $('#nuevaContrasenna').val();
+        var newPassword = $('#confirmarContrasenna').val();
+
+        
+        var req = /^(?=.*[A-Z])(?=.*[\d!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+
+        if (contrasenna === newPassword) {
+            if (!req.test(contrasenna)) {
+                Swal.fire({
+                    title: "Error",
+                    text: "La contraseña debe tener solo 8 caracteres, una mayúscula y un dígito o símbolo.",
+                    icon: "error"
+                });
+                return;
+            }
+
+            var correo = $('#email').val();
             this.CambiarContrasenna(correo, contrasenna);
         } else {
             Swal.fire({
@@ -56,10 +69,12 @@
                 icon: "error"
             });
         }
-    }
+    };
 }
 
 $(document).ready(function () {
     var view = new NuevaContrasenna();
     view.InitView();
 });
+
+
