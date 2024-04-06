@@ -4,7 +4,8 @@
 }
 
 @section Scripts {
-    <script src="~/js/pages/recuperarcontrasenna/crearnuevacontrasenna.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/recuperarcontrasenna/nuevacontrasenna.js"></script>
 }
 
 <div class="container">
@@ -27,7 +28,7 @@
                             <input type="password" class="form-control" id="confirmarContrasenna" name="confirmarContrasenna" required>
                         </div>
                         <div class="text-center">
-                            <button id="btnCambiarContr" type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                            <button id="btnCambiarContr" type="button" class="btn btn-primary">Cambiar Contraseña</button>
                         </div>
                     </form>
                     <div id="espera" style="display: none; text-align: center;">

@@ -12,7 +12,7 @@
         var validacion = this.ValidarContrasenna();
         if (validacion) {
             var data = {
-                email: correo;
+                email: correo,
                 password: password
             }
             $('#espera').show();
