@@ -1,7 +1,9 @@
 ﻿function NuevaContrasenna() {
-    var correo, contrasenna, newPassword;
-
+    var contrasenna, newPassword;
+    var correo = localStorage.getItem('correo');
+    $('#email').val(correo);
     this.InitView = function () {
+
         $('#btnCambiarContr').click(function () {
             var view = new NuevaContrasenna();
             view.ValidarContrasenna(correo, contrasenna, newPassword);
