@@ -1,5 +1,4 @@
 ﻿@model List<SIMEPCI_Web.Controllers.Reporte>
-
 @{
     ViewData["Title"] = "Reportes financieros";
 }
@@ -8,6 +7,7 @@
 }
 
 <link rel="stylesheet" href="~/css/Pages/ReportesFinancieros/ReportesFinancieros.css" />
+<script src="~/js/ReportesFinancieros.js"></script>
 
 <h2>Reportes financieros</h2>
 
@@ -15,9 +15,26 @@
     @foreach (var reporte in Model)
     {
         <div class="reporte-card">
-            <span class="fecha">@reporte.Fecha.ToString("dd/MM/yyyy")</span>
-            <span class="descripcion">@reporte.Descripcion</span>
-            <span class="sede">@reporte.Sede</span>
+            <div class="reporte-field">
+                <label>Fecha:</label>
+                <span class="fecha">@reporte.Fecha.ToString("dd/MM/yyyy")</span>
+            </div>
+            <div class="reporte-field">
+                <label>Cédula del cliente:</label>
+                <span class="cedula-cliente">@reporte.CedulaCliente</span>
+            </div>
+            <div class="reporte-field">
+                <label>Sede:</label>
+                <span class="sede">@reporte.Sede</span>
+            </div>
+            <div class="reporte-field">
+                <label>Doctor:</label>
+                <span class="doctor">@reporte.Doctor</span>
+            </div>
+            <div class="reporte-field">
+                <label>Costo de cita:</label>
+                <span class="costo-cita">@reporte.CostoCita.ToString("C")</span>
+            </div>
             <button class="editar">Editar</button>
         </div>
     }
