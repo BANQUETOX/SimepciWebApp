@@ -1,1 +1,56 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Subir Receta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Pages/Recetas/SubirReceta.css" />
+
+<div class="container">
+    <h2>Registro de Información</h2>
+    <div class="row">
+        <div class="col-md-6" id="receta-subida">
+            @Html.Partial("_RecetaSubida", ViewBag.RecetaUrl as string)
+        </div>
+        <div class="col-md-6">
+            <form asp-action="SubirReceta" enctype="multipart/form-data">
+                <div class="form-group text-center">
+                    <label for="receta" class="upload-label">
+                        <i class="fas fa-plus-circle fa-3x"></i>
+                        <span>Añada su receta completada abajo</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file-upload">
+                        <input type="file" id="receta" name="receta" accept=".png" />
+                        <label for="receta" class="btn btn-primary">Seleccionar Receta</label>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Enviar Receta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '@Url.Action("SubirReceta", "Recetas")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $('#receta-subida').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}
