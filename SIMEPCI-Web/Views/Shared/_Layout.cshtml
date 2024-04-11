@@ -34,7 +34,10 @@
                     </div>
                     <ul class="navbar-nav">
                         <li class="nav-item ms-auto">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Log out</a>
+                            <p id="user"></p>
+                        </li>
+                        <li class="nav-item ms-auto">
+                            <button id="btnLogout" class="nav-link text-dark">Log out</button>
                         </li>
                         <!--Agregar controllers y actions en las opciones del menu-->
                     </ul>
@@ -58,6 +61,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/pages/layout/layout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
