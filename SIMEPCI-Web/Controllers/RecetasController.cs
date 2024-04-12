@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace SIMEPCI_Web.Controllers
 {
@@ -42,7 +42,27 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        public IActionResult SubirReceta(IFormFile receta)
+        {
+            if (receta != null && receta.Length > 0)
+            {
+                var fileName = Path.GetFileName(receta.FileName);
+                var extension = Path.GetExtension(fileName).ToLower();
+                if (extension == ".png")
+                {
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        receta.CopyTo(fileStream);
+                    }
+                    ViewBag.RecetaUrl = "/uploads/" + fileName;
+                    return PartialView("_RecetaSubida", ViewBag.RecetaUrl);
+                }
+            }
+            return PartialView("_RecetaSubida", "");
+        }
+    }
 
     public class Receta
     {
@@ -52,4 +72,4 @@ namespace SIMEPCI_Web.Controllers
         public string Duracion { get; set; }
         public string Observaciones { get; set; }
     }
-}}
+}
