@@ -1,4 +1,4 @@
-﻿@model List<SIMEPCI_Web.Controllers.Cita>
+﻿@model List<SIMEPCI_Web.Models.Cita>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,11 +11,6 @@
 
 <div class="container">
     <h2>Agendar cita</h2>
-    <div class="menu">
-        <a href="@Url.Action("RegistroCitas", "Agenda")" class="menu-item active">Registro de citas</a>
-        <a href="@Url.Action("Pagos", "Agenda")" class="menu-item">Pagos</a>
-        <a href="@Url.Action("DashboardDoctor", "Agenda")" class="menu-item">Dashboard Doctor</a>
-    </div>
     <div class="content">
         <div id="calendar"></div>
         <div class="cita-confirmada">
@@ -27,5 +22,32 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-    <script src="~/js/Pages/Agenda.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+        @foreach (var cita in Model)
+        {
+            <text>
+                        {
+                            title: '@cita.Procedimiento',
+                            start: '@cita.Fecha.ToString("yyyy-MM-ddTHH:mm:ss")',
+                            backgroundColor: '@(cita.Confirmada ? "#007bff" : "#dc3545")',
+                            borderColor: '@(cita.Confirmada ? "#007bff" : "#dc3545")'
+                        },
+            </text>
+        }
+                        ]
+            });
+            calendar.render();
+        });
+    </script>
 }

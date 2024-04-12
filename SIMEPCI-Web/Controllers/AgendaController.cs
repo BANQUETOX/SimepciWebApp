@@ -19,28 +19,5 @@ namespace SIMEPCI_Web.Controllers
         {
             return View(_citas);
         }
-
-        public IActionResult RegistroCitas()
-        {
-            return View();
-        }
-
-        public IActionResult Pagos()
-        {
-            return View();
-        }
-
-        public IActionResult DashboardDoctor()
-        {
-            return View();
-        }
-    }
-
-    public class Cita
-    {
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Procedimiento { get; set; }
-        public bool Confirmada { get; set; }
     }
 }
