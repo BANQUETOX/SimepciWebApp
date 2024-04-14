@@ -10,6 +10,19 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
+
+        public IActionResult Paypal()
+        {
+
+            return View();
+        }
+
+        public IActionResult Encuesta()
+        {
+
+            return View();
+        }
+
         public static List<HistorialPagos> _historialPagos = new List<HistorialPagos>
         {
             new HistorialPagos { Id = 1, Fecha = new DateTime(2024, 3, 14, 9, 0, 0), Procedimiento = "Consulta medicina general - Sede San José", Monto = "₡30,000.00" },
