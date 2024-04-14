@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos</title>
+    <link rel="stylesheet" href="~/css/pages/Pagos/Encuesta.css"></link>
+</head>
+<body>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Pagos/Banner.jpg" alt="Banner" />
+    </div>
+
+    <div class="form-container">
+        <h2>Ayúdenos a mejorar</h2>
+        <h5>Su opinión nos importa</h5>
+
+        <form action="/submit_survey" method="post">
+            <p>1. En una escala del 1 al 10 ¿Qué tan satisfecho está con la facilidad para programar una cita?</p>
+            <input type="number" name="satisfaccion_cita" min="1" max="10" required>
+            <br><br>
+
+            <p>2. En una escala del 1 al 10 ¿Cómo calificaría la amabilidad y profesionalismo del personal médico y administrativo?</p>
+            <input type="number" name="amabilidad_profesionalismo" min="1" max="10" required>
+            <br><br>
+
+            <p>3. En una escala del 1 al 10 ¿Cómo calificaría la limpieza y comodidad de nuestras instalaciones?</p>
+            <input type="number" name="limpieza_comodidad" min="1" max="10" required>
+            <br><br>
+
+            <p>4. ¿Recomendaría nuestro centro médico a familiares o amigos basándose en su experiencia?</p>
+            <select name="recomendar">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+            <br><br>
+
+            <p>Comentarios:</p>
+            <textarea name="comentarios" rows="4" cols="50"></textarea>
+            <br><br>
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+</body>
+</html>

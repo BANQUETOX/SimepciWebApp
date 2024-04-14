@@ -16,6 +16,8 @@
     <Content Remove="wwwroot\imgs\Gestion\" />
     <Content Remove="wwwroot\js\Pages\Gestion\" />
     <Content Remove="wwwroot\css\Pages\Gestion\" />
+    <Content Remove="wwwroot\js\Pages\Pagos\" />
+    <Content Remove="wwwroot\imgs\Pagos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
@@ -26,6 +28,8 @@
     <Folder Include="wwwroot\imgs\Gestion\" />
     <Folder Include="wwwroot\js\Pages\Gestion\" />
     <Folder Include="wwwroot\css\Pages\Gestion\" />
+    <Folder Include="wwwroot\js\Pages\Pagos\" />
+    <Folder Include="wwwroot\imgs\Pagos\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />
