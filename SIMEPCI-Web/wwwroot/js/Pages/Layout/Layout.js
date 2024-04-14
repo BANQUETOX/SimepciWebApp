@@ -41,6 +41,8 @@
                     configuraciones.style.display = 'none';
                     registroSedes.style.display = 'none';
                     gestionInformacion.style.display = 'none';
+                    registrarReceta.style.display = 'none';
+                    misExamenes.style.display = 'none';
                     break;
                 case 'Enfermero':
 
