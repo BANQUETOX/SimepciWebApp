@@ -1,11 +1,11 @@
 ﻿function InicioSesion() {
+    var rolSeleccionado = '';
     var correo = $('#txtEmail').val().trim();
     var password = $('#txtPassword').val().trim();
     this.InitView = function () {
         $('#btnIniciarSesion').click(function () {
             var view = new InicioSesion();
             view.IniciarSesion();
-            view.GetUserByEmail();
         });
     }
     this.IniciarSesion = function () {
@@ -20,8 +20,17 @@
             contentType: 'application/json;charset=utf-8',
             dataType: "json"
         }).done(function (result) {
-            if (result.activo === true) {
-                window.location = "/Perfil/Perfil";
+            if (result.activo == true) {
+                sessionStorage.setItem('usuario', JSON.stringify(result))
+                sessionStorage.setItem('roles', result.roles);
+                if (result.roles.length > 1) {
+                    window.location = "/InicioSesion/ValidacionRol";
+                } else {
+                    rolSeleccionado = 'Paciente';
+                    sessionStorage.setItem('rol', rolSeleccionado)
+                    console.log(rolSeleccionado);
+                    window.location = "/Perfil/Perfil";
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -39,22 +48,6 @@
         });
         this.limpiarCampos();
     };
-    this.GetUserByEmail = function () {
-        var url_base = 'https://simepciapii.azurewebsites.net/api/Usuario/GetUsuarioByCorreo?correo='
-        $.ajax({
-            url: url_base + correo,
-            method: 'GET',
-            contentType: 'application/json;charset=utf-8',
-            dataType: "json"
-        }).done(function (result) {
-            console.log(result);
-            if (result) {
-                sessionStorage.setItem('usuario', JSON.stringify(result))
-            }
-        }).fail(function (error) {
-            console.log(error);
-        });
-    }
     this.limpiarCampos = function () {
         $('#txtPassword').val("");
         $('#txtEmail').val("");
