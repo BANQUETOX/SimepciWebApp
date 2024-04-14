@@ -9,8 +9,8 @@ namespace SIMEPCI_Web.Controllers
     {
         private static List<HistorialCita> _historialCitas = new List<HistorialCita>
         {
-            new HistorialCita { Id = 1, Fecha = new DateTime(2024, 3, 14, 9, 0, 0), Procedimiento = "Consulta medicina general - Sede San José", Doctor = "Dr. Juan Vargas" },
-            new HistorialCita { Id = 2, Fecha = new DateTime(2023, 2, 10, 11, 0, 0), Procedimiento = "Exámenes Rayos X - Sede San José", Doctor = "Dra. Ana Mora" },
+            new HistorialCita { Id = 1, Fecha = new DateTime(2024, 3, 14, 9, 0, 0), Procedimiento = "Consulta medicina general - Sede San José", Doctor = "Dr. Juan Vargas",Precio = 60000 },
+            new HistorialCita { Id = 2, Fecha = new DateTime(2023, 2, 10, 11, 0, 0), Procedimiento = "Exámenes Rayos X - Sede San José", Doctor = "Dra. Ana Mora", Precio = 65000 },
         };
 
         public IActionResult CitasProgramadas()
@@ -78,6 +78,7 @@ namespace SIMEPCI_Web.Controllers
         public DateTime Fecha { get; set; }
         public string Procedimiento { get; set; }
         public string Doctor { get; set; }
+        public double Precio {  get; set; }
     }
 
     public class CitaDisponible

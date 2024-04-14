@@ -23,7 +23,6 @@
             var rol = sessionStorage.getItem('rol');
             var agendarCita = document.getElementById('article-agendarCita');
             var historialCitas = document.getElementById('article-historialCitas');
-            var historialPagos = document.getElementById('article-historialPagos');
             var miExpediente = document.getElementById('article-miExpediente');
             var misRecetas = document.getElementById('article-misRecetasMedicas');
             var configuraciones = document.getElementById('article-configuraciones');
