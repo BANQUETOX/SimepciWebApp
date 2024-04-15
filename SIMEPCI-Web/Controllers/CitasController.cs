@@ -18,6 +18,11 @@ namespace SIMEPCI_Web.Controllers
              return View();
         }
 
+        public IActionResult HistorialCitas()
+        {
+            return View();
+        }
+
         public IActionResult CitasHistorial(int pagina = 1)
         {
             int cantidadRegistrosPorPagina = 10;
