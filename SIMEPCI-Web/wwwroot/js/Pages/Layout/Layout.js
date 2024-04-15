@@ -44,7 +44,9 @@
                     misExamenes.style.display = 'none';
                     break;
                 case 'Enfermero':
-
+                    configuraciones.style.display = 'none';
+                    registroSedes.style.display = 'none';
+                    gestionInformacion.style.display = 'none';
                     break;
                 case 'Administrador':
                     misCitas.style.display = 'none';
@@ -60,9 +62,14 @@
                     misRecetas.style.display = 'none';
                     break;
                 case 'Secretario':
-
+                    configuraciones.style.display = 'none';
+                    registroSedes.style.display = 'none';
+                    gestionInformacion.style.display = 'none';
                     break;
                 case 'Doctor':
+                    configuraciones.style.display = 'none';
+                    registroSedes.style.display = 'none';
+                    gestionInformacion.style.display = 'none';
                     break;
                 default:
                     break;
