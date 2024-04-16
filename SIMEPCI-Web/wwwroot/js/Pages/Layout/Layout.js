@@ -6,6 +6,7 @@
             var view = new Layout();
             view.CerrarSesion();
         });
+        this.CambiarUSuario();
         this.InfoRol();
     }
     this.CerrarSesion = function () {
@@ -16,6 +17,15 @@
     }
     this.OpcionesLayout = function () {
 
+    }
+    this.CambiarUSuario = function () {
+        var btnRoles = document.getElementById('btnCambiarRol');
+        var roles = sessionStorage.getItem('roles');
+        if (roles.length == 1) {
+            btnRoles.style.display = 'none';
+        } else {
+            btnRoles.style.display = 'block';
+        }
     }
     this.InfoRol = function () {
         var vista = window.location.href;
