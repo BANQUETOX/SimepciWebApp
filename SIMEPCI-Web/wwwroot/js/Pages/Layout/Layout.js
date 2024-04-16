@@ -6,6 +6,11 @@
             var view = new Layout();
             view.CerrarSesion();
         });
+        $('#btnCambiarRol').click(function () {
+            var view = new Layout();
+            view.CambiarRol();
+        });
+        this.CambiarUSuario();
         this.InfoRol();
     }
     this.CerrarSesion = function () {
@@ -14,8 +19,20 @@
         sessionStorage.clear();
         window.location = ('/InicioSesion/InicioSesion');
     }
-    this.OpcionesLayout = function () {
-
+    this.CambiarRol = function () {
+        window.location = "/InicioSesion/ValidacionRol";
+    }
+    this.CambiarUSuario = function () {
+        var btnRoles = document.getElementById('btnCambiarRol');
+        var roles = sessionStorage.getItem('roles');
+        console.log(btnRoles);
+        console.log(roles);
+        console.log(roles.length);
+        if (roles.length == 8) {
+            btnRoles.style.display = 'none';
+        } else {
+            btnRoles.style.display = 'inline';
+        }
     }
     this.InfoRol = function () {
         var vista = window.location.href;
