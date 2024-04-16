@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SIMEPCI_Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SIMEPCI_Web.Controllers
 {
@@ -19,31 +19,5 @@ namespace SIMEPCI_Web.Controllers
         {
             return View(_citas);
         }
-
-        public IActionResult RegistroCitas()
-        {
-            // Por el momento, solo devuelve la vista de registro de citas
-            return View();
-        }
-
-        public IActionResult Pagos()
-        {
-            // Por el momento, solo devuelve la vista de pagos
-            return View();
-        }
-
-        public IActionResult DashboardDoctor()
-        {
-            // Por el momento, solo devuelve la vista del Dashboard del doctor
-            return View();
-        }
-    }
-
-    public class Cita
-    {
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Procedimiento { get; set; }
-        public bool Confirmada { get; set; }
     }
 }
