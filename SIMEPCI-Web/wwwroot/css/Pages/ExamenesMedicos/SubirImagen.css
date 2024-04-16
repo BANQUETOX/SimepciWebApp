@@ -1,4 +1,8 @@
-﻿.upload-label {
+﻿div, script {
+    font-family: 'Montserrat',sans-serif;
+}
+
+.upload-label {
     cursor: pointer;
 }
 

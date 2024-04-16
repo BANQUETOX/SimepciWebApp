@@ -1,0 +1,45 @@
+﻿@model SIMEPCI_Web.Controllers.Expediente
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/css/Pages/Expediente/RegistrarExpediente.css" rel="stylesheet" />
+</head>
+
+<div class="container">
+    <h1>Registrar Expediente</h1>
+
+    <form asp-action="RegistrarExpediente" method="post">
+        <div class="form-group">
+            <label asp-for="Nombre">Nombre completo del paciente</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="FechaNacimiento">Fecha de nacimiento</label>
+            <input asp-for="FechaNacimiento" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Direccion">Dirección</label>
+            <input asp-for="Direccion" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Diagnostico">Diagnóstico médico</label>
+            <input asp-for="Diagnostico" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="NotasMedicas">Notas médicas</label>
+            <textarea asp-for="NotasMedicas" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="NotasEnfermeria">Notas de enfermería</label>
+            <textarea asp-for="NotasEnfermeria" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Antecedentes">Antecedentes</label>
+            <textarea asp-for="Antecedentes" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
+</div>

@@ -12,7 +12,7 @@
 <form method="post" action="@Url.Action("CitasEspecialidad", "Citas")">
     <div>
         <label for="especialidad">Elija la Especialidad:</label>
-        <select id="especialidad" name="especialidad">
+        <select id="especialidad" name="especialidad" required>
             @foreach (var especialidad in ViewBag.Especialidades)
             {
                 <option value="@especialidad">@especialidad</option>
@@ -22,7 +22,7 @@
 
     <div>
         <label for="sede">Elija la Sede:</label>
-        <select id="sede" name="sede">
+        <select id="sede" name="sede" required>
             @foreach (var sede in ViewBag.Sedes)
             {
                 <option value="@sede">@sede</option>

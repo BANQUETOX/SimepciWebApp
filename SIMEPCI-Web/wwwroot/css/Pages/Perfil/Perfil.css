@@ -1,5 +1,6 @@
 ﻿body {
     background-color: #D5F0C1;
+    font-family: 'Montserrat',sans-serif;
 }
 
 
@@ -100,15 +101,7 @@ Generic layout (demo looks)
     box-sizing: border-box;
 }
 
-/*body {
-    margin: 0;
-    padding: 48px 0;
-    font-family: "Figtree", sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.6rem;
-    background-image: linear-gradient(45deg, #7c9885, #b5b682);
-    min-height: 100vh;
-}*/
+
 
 .articles {
     display: grid;
@@ -119,15 +112,6 @@ Generic layout (demo looks)
     gap: 24px;
 }
 
-/*@media screen and (max-width: 960px) {
-    article {
-        container: card/inline-size;
-    }
-
-    .article-body p {
-        display: none;
-    }
-}*/
 
 @container card (min-width: 380px) {
     .article-wrapper {
