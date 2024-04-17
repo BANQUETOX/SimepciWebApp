@@ -1,29 +1,5 @@
-﻿@model List<SIMEPCI_Web.Models.Cita>
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<head>
-    <link href="~/css/Pages/Agenda.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css">
-</head>
-
-<div class="container">
-    <h2>Agendar cita</h2>
-    <div class="content">
-        <div id="calendar"></div>
-        <div class="cita-confirmada">
-            <h3>Su cita fue reservada con éxito!</h3>
-            <a href="#" class="btn-ok">OK</a>
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -49,5 +25,4 @@
             });
             calendar.render();
         });
-    </script>
-}
+ 
