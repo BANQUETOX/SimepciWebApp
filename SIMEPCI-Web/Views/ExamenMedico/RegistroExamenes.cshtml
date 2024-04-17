@@ -4,66 +4,48 @@
     Layout = "../Shared/_Layout.cshtml";
 }
 
+@section scripts{
+    <script src="~/js/pages/examenes/RegistrarExamen.js"></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <link href="~/css/ExamenesMedicos.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="~/css/Pages/ExamenesMedicos/ExamenesMedicos.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Formulario</title>
 </head>
+<body>
 
-<h2>Registro de Exámenes Médicos</h2>
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Examenes/banner.jpg" alt="Banner" />
+    </div>
 
-<form method="post">
-    <div class="form-group">
-        <label for="Especialidad">Especialidad</label>
-        <input name="Especialidad" class="form-control" required/>
+    <div class="form-container">
+        <form id="examenForm">
+            <div>
+                <label for="correo">Correo del paciente:</label>
+                <input type="text" id="correo" name="correo">
+            </div>
+            <div>
+                <label for="tipo">Tipo de exámen:</label>
+                <select id="tipo" name="tipo">
+                </select>
+            </div>
+            <div>
+                <label for="justificacion">Justificación:</label>
+                <textarea id="justificacion" name="justificacion" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit">Guardar</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="Procedimiento">Procedimiento</label>
-        <input name="Procedimiento" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="Fecha">Fecha</label>
-        <input name="Fecha" class="form-control" type="date" required />
-    </div>
-    <div class="form-group">
-        <label for="Hora">Hora</label>
-        <input name="Hora" class="form-control" type="time" required />
-    </div>
-    <div class="form-group">
-        <label for="Seccion">Sección y Consultorio</label>
-        <input name="Seccion" class="form-control" required/>
-    </div>
-    <div class="form-group">
-        <label for="Observaciones">Otras observaciones</label>
-        <textarea name="Observaciones" class="form-control" required></textarea>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </div>
-</form>
+</body>
+</html>
 
-<h2>Exámenes Médicos Registrados</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Especialidad</th>
-            <th>Procedimiento</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Sección</th>
-            <th>Observaciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var examen in Model)
-        {
-            <tr>
-                <td>@examen.Especialidad</td>
-                <td>@examen.Procedimiento</td>
-                <td>@examen.Fecha.ToShortDateString()</td>
-                <td>@examen.Hora.ToString(@"hh\:mm")</td>
-                <td>@examen.Seccion</td>
-                <td>@examen.Observaciones</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+
