@@ -4,7 +4,7 @@ function AppointmentList() {
         this.LoadContextInformation();
     }
     this.GetAppointments = function () {
-        url_base = "https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente"; //Cambiar
+        url_base = "https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente"; 
         $.ajax({
             url: url_base + "?IdUsuario=" + sessionStorage["IdUsuario"],
             method: "GET",
