@@ -61,3 +61,57 @@ $('#registroModal').on('shown.bs.modal', function () {
         cloudinaryWidget.open();
     });
 });
+
+
+
+
+
+
+
+//registrar sede
+
+function RegistrarSede() {
+    this.InitView = function () {
+        $('#registroModal form').submit(function (event) {
+            event.preventDefault();
+            obtenerDatos();
+        });
+    }
+    function obtenerDatos() {
+        var sede = {
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val(),
+            fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
+            provincia: $('#provincia').val(),
+            canton: $('#canton').val(),
+            distrito: $('#distrito').val(),
+            ubicacion: $('#ubicacion').val(),
+            foto: $('#url_imagen_cloudinary').val(),
+        };
+
+        $.ajax({
+            type: 'POST', 
+            url: 'URL_DEL_API', // URL del endpoint del API
+            contentType: 'application/json', 
+            data: JSON.stringify(sede), 
+            success: function (response) {
+                
+                console.log('Registro exitoso:', response);
+                
+            },
+            error: function (xhr, status, error) {
+               
+                console.error('Error al registrar la sede:', error);
+                
+            }
+        });
+    }
+}
+
+var registrarSede = new RegistrarSede();
+registrarSede.InitView();
+
+
+
+
+
