@@ -18,6 +18,9 @@
     <Content Remove="wwwroot\css\Pages\Gestion\" />
     <Content Remove="wwwroot\js\Pages\Pagos\" />
     <Content Remove="wwwroot\imgs\Pagos\" />
+    <Content Remove="wwwroot\js\Pages\Examenes\" />
+    <Content Remove="wwwroot\imgs\Examenes\" />
+    <Content Remove="wwwroot\imgs\Recetas\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
@@ -30,6 +33,9 @@
     <Folder Include="wwwroot\css\Pages\Gestion\" />
     <Folder Include="wwwroot\js\Pages\Pagos\" />
     <Folder Include="wwwroot\imgs\Pagos\" />
+    <Folder Include="wwwroot\js\Pages\Examenes\" />
+    <Folder Include="wwwroot\imgs\Examenes\" />
+    <Folder Include="wwwroot\imgs\Recetas\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />

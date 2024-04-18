@@ -7,12 +7,6 @@ namespace SIMEPCI_Web.Controllers
 {
     public class CitasController : Controller
     {
-        private static List<HistorialCita> _historialCitas = new List<HistorialCita>
-        {
-            new HistorialCita { Id = 1, Fecha = new DateTime(2024, 3, 14, 9, 0, 0), Procedimiento = "Consulta medicina general - Sede San José", Doctor = "Dr. Juan Vargas",Precio = 60000 },
-            new HistorialCita { Id = 2, Fecha = new DateTime(2023, 2, 10, 11, 0, 0), Procedimiento = "Exámenes Rayos X - Sede San José", Doctor = "Dra. Ana Mora", Precio = 65000 },
-        };
-
         public IActionResult CitasProgramadas()
         {
              return View();
@@ -21,23 +15,6 @@ namespace SIMEPCI_Web.Controllers
         public IActionResult HistorialCitas()
         {
             return View();
-        }
-
-        public IActionResult CitasHistorial(int pagina = 1)
-        {
-            int cantidadRegistrosPorPagina = 10;
-            int totalRegistros = _historialCitas.Count;
-            int totalPaginas = (int)Math.Ceiling((double)totalRegistros / cantidadRegistrosPorPagina);
-
-            List<HistorialCita> citasPaginadas = _historialCitas
-                .Skip((pagina - 1) * cantidadRegistrosPorPagina)
-                .Take(cantidadRegistrosPorPagina)
-                .ToList();
-
-            ViewBag.PaginaActual = pagina;
-            ViewBag.TotalPaginas = totalPaginas;
-
-            return View(citasPaginadas);
         }
 
         public IActionResult CitasEspecialidad()
@@ -75,15 +52,6 @@ namespace SIMEPCI_Web.Controllers
 
             return View();
         }
-    }
-
-    public class HistorialCita
-    {
-        public int Id { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Procedimiento { get; set; }
-        public string Doctor { get; set; }
-        public double Precio {  get; set; }
     }
 
     public class CitaDisponible

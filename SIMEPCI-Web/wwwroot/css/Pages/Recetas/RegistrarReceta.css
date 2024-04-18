@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'Montserrat',sans-serif;
-    background-color: #f4f4f4;
+    
 }
 
 .logo {
@@ -29,3 +29,31 @@
     .receta-card img {
         width: 60px;
     }
+
+.b {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #AAD9BB;
+    color: black;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+}
+
+.form-container {
+    border: 2px solid #ccc;
+    padding: 20px;
+}
