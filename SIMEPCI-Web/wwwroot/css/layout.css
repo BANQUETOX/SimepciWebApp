@@ -19,7 +19,14 @@ body {
 #btnLogout {
     background: none; 
     border: none; 
-    cursor: pointer; 
-    padding: 0; 
+    cursor: pointer;  
     font: inherit; 
 }
+
+#btnCambiarRol {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+

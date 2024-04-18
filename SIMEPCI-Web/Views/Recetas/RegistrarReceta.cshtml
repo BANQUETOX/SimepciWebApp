@@ -3,9 +3,9 @@
 }
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/js/pages/recetas/registrarreceta/griddefinition.js"></script>
     <script src="~/js/pages/recetas/registrarreceta/registrarreceta.js"></script>
 }
 
@@ -18,39 +18,48 @@
     <link href="~/css/pages/recetas/registrarreceta.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Registro de Recetas</h2>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Recetas/banner.jpg" alt="Banner" />
+    </div>
+
+
+    <div class="row form-container">
+        <div class="col-md-6 mx-auto">
             <form method="post">
                 <div class="form-group">
-                    <label for="txtPaciente">Paciente</label>
-                    <input class="form-control" id="txtPaciente" readonly="readonly" type="text" />
+                    <label for="correo">Correo del paciente: </label>
+                    <input class="form-control" id="correo" type="text" required />
                 </div>
                 <div class="form-group">
-                    <label for="txtNombreMedicamento">Nombre del Medicamento</label>
+                    <label for="txtNombreMedicamento">Nombre del Medicamento: </label>
                     <input id="txtNombreMedicamento" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label for="txtDosis">Dosis Recomendada</label>
+                    <label for="txtDosis">Dosis Recomendada: </label>
                     <input id="txtDosis" class="form-control" type="text" />
                 </div>
                 <div class="form-group">
-                    <label for="txtDuracionTratamiento">Duracion del tratamiento en días</label>
-                    <input type="number" min="1" max="12" id="txtDuracionTratamiento" class="form-control" />
+                    <label for="txtDuracionTratamiento">Duracion del tratamiento en días: </label>
+                    <input type="text" id="txtDuracionTratamiento" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label for="txtRecomendacionesAdicionales">Recomendaciones adicionales</label>
+                    <label for="txtRecomendacionesAdicionales">Recomendaciones adicionales: </label>
                     <textarea id="txtRecomendacionesAdicionales" class="form-control"></textarea>
                 </div>
-                <div class="form-group mt-3">
-                    <button id="btnRegistrar" type="button" class="btn btn-primary">Registrar</button>
+                <div class="form-group">
+                    <label for="recetaFisica">Receta Física: </label>
+                    <div class="d-flex justify-content-center">
+                        
+                        <button id="btnCargarImagen" type="button" class="b">Cargar Imagen</button>
+                    </div>
+                    <input id="recetaFisica" class="form-control" type="hidden" />
+                </div>
+                <div class="form-group mt-3 d-flex justify-content-center">
+                    
+                    <button id="btnRegistrar" type="button" class="b">Registrar</button>
                 </div>
             </form>
-        </div>
-        <div class="col-md-6">
-            <h2>Lista de Pacientes</h2>
-            <p>Elegir al paciente para registrar su receta</p>
-            <div id="myGrid" style="height: 300px; width:100%;" class="ag-theme-alpine"></div>
         </div>
     </div>
 </body>

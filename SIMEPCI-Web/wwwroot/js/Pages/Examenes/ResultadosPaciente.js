@@ -3,10 +3,10 @@
 $(document).ready(function () {
     var usuarioString = sessionStorage.getItem("usuario");
     var usuario = JSON.parse(usuarioString);
-    var idUsuario = 148;
+    var idUsuario = usuario.id;
 
     $.ajax({
-        url: 'https://simepciapii.azurewebsites.net/api/ExamenMedico/GetExamenMedicosPaciente?idUsuario=' + idUsuario,
+        url: 'https://simepciapii.azurewebsites.net/api/ExamenMedico/GetExamenesMedicosPaciente?idUsuario=' + idUsuario,
         method: 'GET',
         success: function (data) {
             poblarTabla(data);
