@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    
+    <script src="~/js/pages/Recetas/VistaRecetas.js"></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Recetas</title>
+    <link href="~/css/Pages/ExamenesMedicos/ResultadosPaciente.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Recetas/banner2.jpg" alt="Banner" />
+    </div>
+
+    <table id="tablaRecetas">
+        <thead>
+            <tr>
+                <th>Número de receta</th>
+                <th>Fecha de emisión</th>
+                <th>Medicamento</th>
+                <th>Dósis</th>
+                <th>Duración del tratamiento (días)</th>
+                <th>Recomendaciones</th>
+                <th>Receta física</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- js -->
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -26,50 +26,14 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
-        public IActionResult VisualizarRecetas()
-        {
-            var recetas = new List<Receta>
-            {
-                new Receta { Nombre="Clonazepam", FechaEmision=DateTime.Now, Dosis="25mg cada 4 horas", Duracion="Tres meses", Observaciones="Lorem ipsum..." },
-                new Receta { Nombre="Clonazepam", FechaEmision=DateTime.Now, Dosis="25mg cada 4 horas", Duracion="Tres meses", Observaciones="Lorem ipsum..." },
-                new Receta { Nombre="Clonazepam", FechaEmision=DateTime.Now, Dosis="25mg cada 4 horas", Duracion="Tres meses", Observaciones="Lorem ipsum..." }
-            };
-            return View(recetas);
-        }
 
-        public IActionResult SubirReceta()
+        public IActionResult VistaRecetas()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult SubirReceta(IFormFile receta)
-        {
-            if (receta != null && receta.Length > 0)
-            {
-                var fileName = Path.GetFileName(receta.FileName);
-                var extension = Path.GetExtension(fileName).ToLower();
-                if (extension == ".png")
-                {
-                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        receta.CopyTo(fileStream);
-                    }
-                    ViewBag.RecetaUrl = "/uploads/" + fileName;
-                    return PartialView("_RecetaSubida", ViewBag.RecetaUrl);
-                }
-            }
-            return PartialView("_RecetaSubida", "");
-        }
+
     }
 
-    public class Receta
-    {
-        public string Nombre { get; set; }
-        public DateTime FechaEmision { get; set; }
-        public string Dosis { get; set; }
-        public string Duracion { get; set; }
-        public string Observaciones { get; set; }
-    }
+   
 }
