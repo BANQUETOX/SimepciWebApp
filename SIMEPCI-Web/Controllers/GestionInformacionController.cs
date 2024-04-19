@@ -8,7 +8,6 @@ namespace SIMEPCI_Web.Controllers
 {
     public class GestionInformacionController : Controller
     {
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();

@@ -21,10 +21,13 @@
         $.each(datos, function (index, funcionario) {
             var fila = $('<tr>');
             fila.append('<td>' + funcionario.nombre + ' ' + funcionario.primerApellido + ' ' + funcionario.segundoApellido + '</td>');
-            fila.append('<td>' + funcionario.id + '</td>');
-            fila.append('<td>' + funcionario.roles.join(', ') + '</td>');
-            fila.append('<td>' + '' + '</td>'); // Aquí puedes agregar la información de la sede si la tienes disponible
-            fila.append('<td>' + (funcionario.activo ? 'Activo' : 'Inactivo') + '</td>');
+            fila.append('<td>' + funcionario.cedula + '</td>');
+            fila.append('<td>' + funcionario.fechaNacimiento.split('T')[0] + '</td>');
+            fila.append('<td>' + funcionario.telefono + '</td>');
+            fila.append('<td>' + funcionario.correo + '</td>');
+            fila.append('<td>' + funcionario.direccion + '</td>');
+            fila.append('<td>' + funcionario.fotoPerfil + '</td>');
+            fila.append('<td>' + funcionario.sexo + '</td>');
 
             var botonEditar = $('<button>').text('Editar').click(function () {
                 mostrarModalEditar(funcionario);
