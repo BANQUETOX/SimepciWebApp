@@ -1,0 +1,112 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiOxdTI0JZvtyoLKxCzmuaVHcU6uK5WHg&callback=initMap" async defer></script>
+    <script src="~/js/pages/Perfil/EditarPerfil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <!-- Cloudinary widget -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>Editar Perfil</h2>
+        <form>
+            <div class="row">
+
+                <div class="col-lg-4 mb-3">
+                    <label for="foto_perfil" class="form-label">Foto de perfil</label>
+
+                    <div id="foto_perfil_container" style="cursor: pointer;">
+                        <img src="~/imgs/landing/icon1.png" id="foto_perfil_preview" class="img-fluid" alt="Foto de perfil">
+                        <input type="hidden" id="url_imagen_cloudinary" name="url_imagen_cloudinary">
+                    </div>
+                    <input type="file" class="form-control" id="foto_perfil" style="display: none;">
+                    <small class="text-muted">Haz clic para cambiar la foto</small>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="mb-3">
+                        <label for="identificacion" class="form-label">Identificación</label>
+                        <input type="text" class="form-control" id="identificacion" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido1" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="apellido1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido2" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="apellido2" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="correo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sexo</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo_masculino" value="masculino">
+                            <label class="form-check-label" for="sexo_masculino">
+                                Masculino
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo_femenino" value="femenino">
+                            <label class="form-check-label" for="sexo_femenino">
+                                Femenino
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexo_otro" value="otro">
+                            <label class="form-check-label" for="sexo_otro">
+                                Otro
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" required>
+                    </div>
+                    <!-- Edad (calculada) -->
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="edad" disabled>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Ubicación</label>
+                <input type="hidden" class="form-control" id="ubicacion" name="ubicacion">
+                <div id="mapa" style="height: 300px;"></div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn" id="btnCrear" style="background-color: #AAD9BB;">Guardar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

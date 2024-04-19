@@ -20,6 +20,10 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+        public IActionResult EditarPerfil()
+        {
+            return View();
+        }
     }
 }
 

@@ -21,6 +21,7 @@
     <Content Remove="wwwroot\js\Pages\Examenes\" />
     <Content Remove="wwwroot\imgs\Examenes\" />
     <Content Remove="wwwroot\imgs\Recetas\" />
+    <Content Remove="wwwroot\js\Pages\Perfil\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
@@ -36,6 +37,7 @@
     <Folder Include="wwwroot\js\Pages\Examenes\" />
     <Folder Include="wwwroot\imgs\Examenes\" />
     <Folder Include="wwwroot\imgs\Recetas\" />
+    <Folder Include="wwwroot\js\Pages\Perfil\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />
