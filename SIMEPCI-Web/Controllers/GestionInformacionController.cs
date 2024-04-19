@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SIMEPCI_Web.Controllers
 {
     public class GestionInformacionController : Controller
@@ -18,6 +16,7 @@ namespace SIMEPCI_Web.Controllers
 
         public IActionResult GestionFuncionarios()
         {
+            ViewData["JsFile"] = "GestionFuncionarios.js";
             return View();
         }
 
@@ -32,4 +31,3 @@ namespace SIMEPCI_Web.Controllers
         }
     }
 }
-

@@ -1,21 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    Layout = "../Shared/_Layout.cshtml";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/gestion/GestionFuncionarios.js"></script>
+}
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funcionarios</title>
-    <link rel="stylesheet" href="~/css/pages/Gestion/GestionFuncionarios.css"></link>
+    <title>Gestión de Funcionarios</title>
+    <link href="~/css/Pages/Gestion/GestionFuncionarios.css" rel="stylesheet" />
 </head>
 <body>
-
     <div class="banner-container">
         <img class="banner-image" src="/imgs/Gestion/banner.jpg" alt="Banner" />
         <div class="banner-text">
@@ -23,9 +24,7 @@
         </div>
     </div>
 
-    <h2>Funcionarios</h2>
-
-    <table>
+    <table id="tablaFuncionarios">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -37,30 +36,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Juan Pérez</td>
-                <td>12345</td>
-                <td>Doctor</td>
-                <td>Alajuela</td>
-                <td>Activo</td>
-                <td><button class="edit-button">Editar</button></td>
-            </tr>
-            <tr>
-                <td>Maria López</td>
-                <td>67890</td>
-                <td>Doctor</td>
-                <td>San José</td>
-                <td>Inactivo</td>
-                <td><button class="edit-button">Editar</button></td>
-            </tr>
-            <tr>
-                <td>Carlos García</td>
-                <td>54321</td>
-                <td>Enfermera</td>
-                <td>Alajuela</td>
-                <td>Activo</td>
-                <td><button class="edit-button">Editar</button></td>
-            </tr>
         </tbody>
     </table>
 
@@ -68,6 +43,58 @@
         <button onclick="window.location.href = '../GestionInformacion/Menu';">Regresar</button>
     </div>
 
+    <div id="editarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Funcionario</h2>
+            <form id="editarForm">
+                <input type="hidden" id="idUsuario" name="idUsuario">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="primerApellido">Primer Apellido:</label>
+                    <input type="text" id="primerApellido" name="primerApellido" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="segundoApellido">Segundo Apellido:</label>
+                    <input type="text" id="segundoApellido" name="segundoApellido" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="cedula">Cédula:</label>
+                    <input type="text" id="cedula" name="cedula" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" name="correo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fotoPerfil">Foto de Perfil:</label>
+                    <input type="text" id="fotoPerfil" name="fotoPerfil" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" name="sexo" class="form-control">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-
