@@ -1,8 +1,8 @@
 ﻿const citacolumnDef = [
-    { field: "fecha", headerName: "Fecha" },
-    { field: "procedimiento", headerName: "Procedimiento" },
-    { field: "doctor", headerName: "Doctor" },
-    { field: "precio", headerName: "Precio" }
+    { field: "fecha", headerName: "Fecha y hora" },
+    { field: "procedimiento", headerName: "Servicio utilizado" },
+    { field: "doctor", headerName: "Especialista" },
+    { field: "precio", headerName: "Precio final" }
 ];
 
 const citaGridOptions = {
