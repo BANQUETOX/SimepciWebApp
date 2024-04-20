@@ -1,26 +1,19 @@
 ﻿@model SIMEPCI_Web.Controllers.Expediente
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @section Scripts {
     <script src="~/js/pages/expedientes/registrarexpediente.js"></script>
 }
-
-
 <head>
     <link href="~/css/Pages/Expediente/RegistrarExpediente.css" rel="stylesheet" />
 </head>
-
 <div class="container">
     <h1>Registrar Expediente</h1>
-
     <form id="formRegistrarExpediente">
         <div class="form-group">
-            <label for="idPaciente">ID del Paciente</label>
-            <input type="number" class="form-control" id="idPaciente" name="idPaciente" required />
+            <label for="correoPaciente">Correo del Paciente</label>
+            <input type="email" class="form-control" id="correoPaciente" name="correoPaciente" required />
         </div>
         <div class="form-group">
             <label for="notasEnfermeria">Notas de Enfermería</label>
@@ -37,4 +30,3 @@
         <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </div>
-
