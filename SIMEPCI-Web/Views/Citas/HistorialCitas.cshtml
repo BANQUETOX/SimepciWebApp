@@ -1,25 +1,17 @@
 ﻿@section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/Pages/Citas/GridDefinition.js"></script>
     <script src="~/js/Pages/Citas/HistorialCitas.js"></script>
-
-
 }
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <div>
-        <label for="txtCitaData">Historial de Citas y Pagos:</label>
-        <input id="txtCitaData" type="text" readonly="readonly" class="form-control" />
+<div class="container">
+    <div class="text-center">
+        <h4 class="display-4" style="font-size: 35px;">Historial de citas atendidas y pagos cancelados:</h4>
     </div>
-</div>
 
-<div class="text-center">
-    <h4 class="display-4">Historial de Citas y Pagos:</h4>
+    <div id="myGridCitas" style="height: 300px; width: 70%; margin: 0 auto;" class="ag-theme-alpine"></div>
 </div>
-
-<div id="myGridCitas" style="height: 300px; width:70%;" class="ag-theme-alpine"></div>

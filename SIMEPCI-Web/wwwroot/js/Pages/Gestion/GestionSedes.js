@@ -37,8 +37,6 @@ function initMap() {
 $(document).ready(function () {
     $('#sedesForm').submit(function (event) {
         event.preventDefault();
-
-
     });
 
     var cloudinaryWidget = cloudinary.createUploadWidget({
@@ -51,6 +49,7 @@ $(document).ready(function () {
         if (!error && result && result.event === "success") {
 
             $('#registroSedes').val(result.info.secure_url);
+
         } else {
             console.error("Error al cargar la imagen:", error);
             if (error) {
@@ -62,39 +61,8 @@ $(document).ready(function () {
     $('#btnCargarImagen').click(function () {
         cloudinaryWidget.open();
     });
-});
 
-//registrar sede
-$(document).ready(function () {
-    $.ajax({
-        url: 'https://simepciapii.azurewebsites.net/api/Sede/GetAllSedes',
-        method: 'GET',
-        success: function (data) {
-            var select = $('#tipo');
-            $.each(data, function (index, option) {
-                select.append('<option value="' + option.nombre + '">' + '</option>');
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error('Error al obtener opciones del API:', error);
-        }
-    });
-
-    function RegistrarSede() {
-        this.InitView = function () {
-            $('#registroModal form').submit(function (event) {
-                event.preventDefault();
-                obtenerDatos();
-            });
-        }
-    }
-
-    //submit
-    $('#sedesForm').submit(function (event) {
-        event.preventDefault();
-        guardarExamen();
-    });
-
+    //registrar sede
     function obtenerDatos() {
         var sede = {
             nombre: $('#nombre').val(),
@@ -111,19 +79,32 @@ $(document).ready(function () {
             type: 'POST',
             url: 'https://simepciapii.azurewebsites.net/api/Sede/CrearSede',
             data: JSON.stringify(sede),
+            contentType: 'application/json',
             success: function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Registro exitoso!',
+                    text: 'La sede se ha registrado correctamente.'
+                });
 
                 console.log('Registro exitoso:', response);
-
             },
             error: function (xhr, status, error) {
-
-                console.error('Error al registrar la sede:', error);
-
+                if (error) {
+                    console.error('Error al registrar la sede:', error);
+                } else {
+                    console.error('Error al registrar la sede: Error no definido');
+                }
             }
         });
     }
+
+    $('#sedesForm').submit(function (event) {
+        event.preventDefault();
+        obtenerDatos();
+    });
+
 });
 
-var registrarSede = new RegistrarSede();
-registrarSede.InitView();
+/* var registrarSede = new RegistrarSede();
+registrarSede.InitView(); */
