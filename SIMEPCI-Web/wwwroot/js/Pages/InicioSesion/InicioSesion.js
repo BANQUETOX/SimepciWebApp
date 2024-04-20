@@ -21,6 +21,7 @@
             dataType: "json"
         }).done(function (result) {
             if (result.activo == true) {
+                sessionStorage.setItem('correo', result.correo) 
                 sessionStorage.setItem('usuario', JSON.stringify(result))
                 sessionStorage.setItem('roles', result.roles);
                 if (result.roles.length > 1) {

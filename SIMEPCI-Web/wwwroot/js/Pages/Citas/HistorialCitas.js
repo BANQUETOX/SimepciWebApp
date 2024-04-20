@@ -4,9 +4,10 @@ function AppointmentList() {
         this.LoadContextInformation();
     }
     this.GetAppointments = function () {
-        url_base = "https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente"; 
+        url_base = "https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente?correoPaciente="; 
         $.ajax({
-            url: url_base + "?IdUsuario=" + sessionStorage["IdUsuario"],
+            url: url_base + sessionStorage.getItem('correo') , 
+        
             method: "GET",
             contentType: "application/json;charset=utf-8",
             dataType: "json"
@@ -39,3 +40,5 @@ $(document).ready(function () {
     var view = new AppointmentList();
     view.InitView();
 });
+
+console.log(sessionStorage.getItem('usuario'));
