@@ -1,6 +1,6 @@
 ﻿const citacolumnDef = [
     { field: "fecha", headerName: "Fecha y hora" },
-    { field: "procedimiento", headerName: "Servicio utilizado" },
+    { field: "especialidad", headerName: "Servicio utilizado" },
     { field: "doctor", headerName: "Especialista" },
     { field: "precio", headerName: "Precio final" }
 ];
