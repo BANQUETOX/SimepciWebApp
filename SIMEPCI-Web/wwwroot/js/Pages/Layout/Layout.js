@@ -27,8 +27,7 @@
         var roles = sessionStorage.getItem('roles');
         console.log(btnRoles);
         console.log(roles);
-        console.log(roles.length);
-        if (roles.length == 8) {
+        if (roles && roles.length === 8) {
             btnRoles.style.display = 'none';
         } else {
             btnRoles.style.display = 'inline';
@@ -54,45 +53,51 @@
             var subirRecetas = document.getElementById('article-subirRecetas');
             switch (rol) {
                 case 'Paciente':
-                    configuraciones.style.display = 'none';
-                    registroSedes.style.display = 'none';
-                    gestionInformacion.style.display = 'none';
-                    registrarReceta.style.display = 'none';
-                    misExamenes.style.display = 'none';
+                    mostrarElemento(configuraciones, false);
+                    mostrarElemento(registroSedes, false);
+                    mostrarElemento(gestionInformacion, false);
+                    mostrarElemento(registrarReceta, false);
+                    mostrarElemento(misExamenes, false);
                     break;
                 case 'Enfermero':
-                    configuraciones.style.display = 'none';
-                    registroSedes.style.display = 'none';
-                    gestionInformacion.style.display = 'none';
+                    mostrarElemento(configuraciones, false);
+                    mostrarElemento(registroSedes, false);
+                    mostrarElemento(gestionInformacion, false);
                     break;
                 case 'Administrador':
-                    misCitas.style.display = 'none';
-                    misExamenes.style.display = 'none';
-                    registrarReceta.style.display = 'none';
-                    subirExamenes.style.display = 'none';
-                    subirRecetas.style.display = 'none';
-                    citasYFacturas.style.display = 'none';
-                    agendarCita.style.display = 'none';
-                    historialCitas.style.display = 'none';
-                    historialPagos.style.display = 'none';
-                    miExpediente.style.display = 'none';
-                    misRecetas.style.display = 'none';
+                    mostrarElemento(misCitas, false);
+                    mostrarElemento(misExamenes, false);
+                    mostrarElemento(registrarReceta, false);
+                    mostrarElemento(subirExamenes, false);
+                    mostrarElemento(subirRecetas, false);
+                    mostrarElemento(citasYFacturas, false);
+                    mostrarElemento(agendarCita, false);
+                    mostrarElemento(historialCitas, false);
+                    mostrarElemento(historialPagos, false);
+                    mostrarElemento(miExpediente, false);
+                    mostrarElemento(misRecetas, false);
                     break;
                 case 'Secretario':
-                    configuraciones.style.display = 'none';
-                    registroSedes.style.display = 'none';
-                    gestionInformacion.style.display = 'none';
+                    mostrarElemento(configuraciones, false);
+                    mostrarElemento(registroSedes, false);
+                    mostrarElemento(gestionInformacion, false);
                     break;
                 case 'Doctor':
-                    configuraciones.style.display = 'none';
-                    registroSedes.style.display = 'none';
-                    gestionInformacion.style.display = 'none';
+                    mostrarElemento(configuraciones, false);
+                    mostrarElemento(registroSedes, false);
+                    mostrarElemento(gestionInformacion, false);
                     break;
                 default:
                     break;
             }
         }
     };
+
+    function mostrarElemento(elemento, mostrar) {
+        if (elemento) {
+            elemento.style.display = mostrar ? 'block' : 'none';
+        }
+    }
 }
 $(document).ready(function () {
     var view = new Layout();
