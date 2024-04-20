@@ -90,10 +90,10 @@ $(document).ready(function () {
     }
 
     //submit
-    $('#sedesForm').submit(function (event) {
+    /* $('#sedesForm').submit(function (event) {
         event.preventDefault();
         guardarExamen();
-    });
+    }); */  
 
     function obtenerDatos() {
         var sede = {
