@@ -12,6 +12,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/pages/gestion/gestionsedes.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiOxdTI0JZvtyoLKxCzmuaVHcU6uK5WHg&callback=initMap" async defer></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.btn-editar').click(function () {
+                $('#registroModal').modal('show');
+            });
+        });
+    </script>
 }
 
 <!DOCTYPE html>
@@ -44,57 +52,43 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="botonRegistrar">
+            <div>
+                <button type="button" class="btn btn-success b-color2" data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Sede</button> 
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-5">
         <div class="row">
-           
             <div class="col-md-6">
                 <div class="card mb-3">
-                    <img src="~/imgs/gestion/Al.jpg" class="card-img-top" alt="Foto">
                     <div class="card-body">
-                        <h5 class="card-title">Sede Alajuela 1</h5>
+                        <h5 class="card-title">Información de la Sede Registrada</h5>
                         <p class="card-text">
-                            Dirección: Costado Este de Plaza Real Alajuela Centro Alajuela, 20101<br>
-                            Descripción:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget commodo libero.  <br>
-                            Fecha de Creación: 01/02/2022
-                        </p>
-                    </div>
-                </div>
-            </div>
+                            <strong>Nombre:</strong> <span id="sedeNombre"></span><br>
+                            <strong>Descripción:</strong> <span id="sedeDescripcion"></span><br>
+                            <strong>Fecha de Creación:</strong> <span id="sedeFechaCreacion"></span><br>
+                            <strong>Provincia:</strong> <span id="sedeProvincia"></span><br>
+                            <strong>Cantón:</strong> <span id="sedeCanton"></span><br>
+                            <strong>Distrito:</strong> <span id="sedeDistrito"></span><br>
+                            <strong>Ubicación:</strong> <span id="sedeUbicacion"></span><br>
 
-            
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <img src="~/imgs/gestion/SJ.jpg" class="card-img-top" alt="Foto">
-                    <div class="card-body">
-                        <h5 class="card-title">Sede San José</h5>
-                        <p class="card-text">
-                            Dirección: Frente a los Tribunales del 2do circuito judicial San José Guadalupe, San José, Calle Blancos, 10801<br>
-                            Descripción:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget commodo libero.  <br>
-                            Fecha de Creación: 01/02/2022
+                            <button type="button" class="btn btn-primary mx-2 b-color1 btn-editar" data-id="ID_DE_LA_SEDE">Editar</button>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <button class="btn btn-primary mx-2 b-color1">Editar</button>
-                <button type="button" class="btn btn-success b-color2" data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Sede</button> <!--boton-->
-            </div>
-        </div>
-    </div>
-
 
 
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="registroModalLabel">Registrar Sede</h5>
+                    <h5 class="modal-title" id="registroModalLabel">Configuración de Sede</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -139,7 +133,7 @@
                             <input id="registroSedes" class="form-control" type="hidden" />
                         </div>
                         <div class="d-flex justify-content-center">
-                        <button id="btnRegistrar" type="submit" class="btn btn-primary">Registrar</button>
+                        <button id="btnRegistrar" type="submit" class="btn btn-primary">OK</button>
                         </div>
                     </form>
                 </div>
