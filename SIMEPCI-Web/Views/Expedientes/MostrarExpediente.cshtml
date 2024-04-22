@@ -1,28 +1,40 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Scripts {
-    <script src="~/js/Pages/Expedientes/MostrarExpediente.js"></script>
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/pages/Expediente/MostrarExpediente.js"></script>
 }
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Expediente</title>
     <link href="~/css/Pages/Expediente/MostrarExpediente.css" rel="stylesheet" />
 </head>
-<div class="container">
-    <h1>Detalles del Expediente</h1>
-    <div class="row">
+<body>
+
+    <div class="form-container">
+        <form id="examenForm">
+            <div>
+                <label for="correoPaciente">Correo del Paciente:</label>
+                <input type="text" id="correoPaciente" name="correoPaciente">
+                <button type="submit" id="buscarExpedienteBtn">Buscar Expediente</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row mt-4">
         <div class="col-md-6">
             <h4>Información del Expediente</h4>
-            <p><strong>Correo del Paciente:</strong> <span id="correoPaciente"></span></p>
             <p><strong>Notas de Enfermería:</strong> <span id="notasEnfermeria"></span></p>
             <p><strong>Notas Médicas:</strong> <span id="notasMedicas"></span></p>
             <p><strong>Historial Médico:</strong> <span id="historialMedico"></span></p>
         </div>
-        <div class="col-md-6">
-            <h4>Citas</h4>
-            <div id="citas"></div>
-        </div>
     </div>
-    <div class="mt-4">
-        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
-    </div>
-</div>
+</body>
+</html>
+
