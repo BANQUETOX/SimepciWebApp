@@ -55,135 +55,78 @@ $(document).ready(function () {
         }
     });
 
-    $('#btnCargarImagen').click(function () {
-        cloudinaryWidget.open();
-    });
+});
 
-    var sedeId = null;
+$('#btnCargarImagen').click(function () {
+    cloudinaryWidget.open();
+});
 
-    $('.container .row').on('click', '.btn-editar', function () {
-        var sedeCard = $(this).closest('.card-body');
-        var sede = {
-            nombre: sedeCard.find('.nombre').text(),
-            descripcion: sedeCard.find('.descripcion').text(),
-            fechaCreacion: sedeCard.find('.fechaCreacion').text(),
-            provincia: sedeCard.find('.provincia').text(),
-            canton: sedeCard.find('.canton').text(),
-            distrito: sedeCard.find('.distrito').text(),
-            ubicacion: sedeCard.find('.ubicacion').text(),
-        };
+$('#sedesForm').submit(function (event) {
+    event.preventDefault(); 
+    obtenerDatos(); 
+});
 
-        //var sedeId = $(this).data('id');
+$('#btnConfirmar').click(function () {
+    submitEditarSede();
+});
 
-        $('#nombre').val(sede.nombre);
-        $('#descripcion').val(sede.descripcion);
-        $('#fechaCreacion').val(sede.fechaCreacion);
-        $('#provincia').val(sede.provincia);
-        $('#canton').val(sede.canton);
-        $('#distrito').val(sede.distrito);
-        $('#ubicacion').val(sede.ubicacion);
-
+// Editar o registrar sede
+$('.container .row').on('click', '.btn-editar', function () {
+    var btnEditar = $(this);
+    if (btnEditar.hasClass('confirmar')) {
+        submitEditarSede(btnEditar);
+    } else {
+        $('#btnConfirmar').show();
         $('#registroModal').modal('show');
-    });
+    }
+});
+
+$('#registroModal').on('hidden.bs.modal', function () {
+    $('#btnConfirmar').hide();
+});
     
-    $('#sedesForm').submit(function (event) {
-        event.preventDefault(); 
+//registrar sede
+function obtenerDatos() {
+    var sede = {
+        nombre: $('#nombre').val(),
+        descripcion: $('#descripcion').val(),
+        fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
+        provincia: $('#provincia').val(),
+        canton: $('#canton').val(),
+        distrito: $('#distrito').val(),
+        ubicacion: $('#ubicacion').val(),
+        foto: $('#registroSedes').val(), 
+    };      
 
-       // var sedeId = $(this).data('id');
-
-        if (sedeId) {
-            editarSede(sedeId); 
-        } else {
-            obtenerDatos(); 
-        }
-
-        //obtenerDatos(); 
-    });
-
-    
-    //registrar sede
-    function obtenerDatos() {
-        var sede = {
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
-            provincia: $('#provincia').val(),
-            canton: $('#canton').val(),
-            distrito: $('#distrito').val(),
-            ubicacion: $('#ubicacion').val(),
-            foto: $('#registroSedes').val(),
-        };
-
-
-        $.ajax({
-            type: 'POST',
+    $.ajax({
+        type: 'POST',
             url: 'https://simepciapii.azurewebsites.net/api/Sede/CrearSede',
             data: JSON.stringify(sede),
             contentType: 'application/json',
-            success: function (response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Registro exitoso!',
-                    text: 'La sede se ha registrado correctamente.'
-                });
+         success: function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                text: 'La sede se ha registrado correctamente.'
+            });
 
-                console.log('Registro exitoso:', response);
+            console.log('Registro exitoso:', response);
 
 
-                // Agregar la nueva tarjeta de sede al DOM
-                agregarTarjetaSede(sede);
-            },
-            error: function (xhr, status, error) {
-                if (error) {
-                    console.error('Error al registrar la sede:', error);
-                } else {
-                    console.error('Error al registrar la sede: Error no definido');
-                }
+             agregarTarjetaSede(sede);
+         },
+         error: function (xhr, status, error) {
+            if (error) {
+                console.error('Error al registrar la sede:', error);
+            } else {
+                console.error('Error al registrar la sede: Error no definido');
             }
-        });
-    }
+         }
+    });
+}
 
-    // Función para editar una sede
-    function editarSede(sedeId) {
-        var sede = {
-            id: sedeId,
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            fechaCreacion: $('#fechaCreacion').val(),
-            provincia: $('#provincia').val(),
-            canton: $('#canton').val(),
-            distrito: $('#distrito').val(),
-            ubicacion: $('#ubicacion').val(),
-            foto: $('#registroSedes').val(),
-        };
-
-        $.ajax({
-            type: 'PUT',
-            url: 'https://simepciapii.azurewebsites.net/api/Sede/ActualizarSede',
-            data: JSON.stringify(sede),
-            contentType: 'application/json',
-            success: function (response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Edición exitosa!',
-                    text: 'La sede se ha actualizado correctamente.'
-                });
-
-                console.log('Edición exitosa:', response);
-
-            },
-            error: function (xhr, status, error) {
-                if (error) {
-                    console.error('Error al editar la sede:', error);
-                } else {
-                    console.error('Error al editar la sede: Error no definido');
-                }
-            }
-        });
-    }
-
-    function agregarTarjetaSede(sede) {
-        var nuevaSedeHTML = `
+function agregarTarjetaSede(sede) {
+    var nuevaSedeHTML = `
     <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-body">
@@ -201,14 +144,112 @@ $(document).ready(function () {
             </div>
         </div>
     </div>
-`;
+    `;
+    $('.container .row').append(nuevaSedeHTML);
+}
 
-        $('.container .row').append(nuevaSedeHTML);
+function submitEditarSede() { 
+    var sede = obtenerDatosSede();
+    const API_URL_BASE = "https://simepciapii.azurewebsites.net/";
+    var api_url = API_URL_BASE + "api/Sede/ActualizarSede";
+
+    console.log(sede);
+
+    $.ajax({
+        headers: {
+            'Accept': "application/json",
+            'Content-Type': "application/json"
+        },
+        method: "PATCH",
+        url: api_url,
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(sede),
+        hasContent: true
+    }).done(function (result) {
+        console.log("Sede actualizado correctamente.");
+        console.log("Respuesta del servidor:", result);
+
+        // Actualizar campos de la tarjeta de la sede
+        var sedeCard = btnEditar.closest('.card-body');
+        sedeCard.find('.nombre').text(sede.nombre);
+        sedeCard.find('.descripcion').text(sede.descripcion);
+        sedeCard.find('.fechaCreacion').text(sede.fechaCreacion);
+        sedeCard.find('.provincia').text(sede.provincia);
+        sedeCard.find('.canton').text(sede.canton);
+        sedeCard.find('.distrito').text(sede.distrito);
+        sedeCard.find('.ubicacion').text(sede.ubicacion);
+
+        // Cerrar modal y ocultar botón
+        $('#registroModal').modal('hide');
+        $('#btnConfirmar').hide();
+        btnEditar.removeClass('editar');
+    }).fail(function (xhr, textStatus, errorThrown) {
+        console.error("Error al actualizar sede:", errorThrown);
+    });
+
+    // Función para obtener los datos de la sede
+    function obtenerDatosSede() {
+        var sedeObj = {
+            id: sede.id,
+            nombre: $('#nombre').val(),
+            descripcion: $('#descripcion').val(),
+            fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
+            ubicacion: $('#ubicacion').val(),
+            provincia: $('#provincia').val(),
+            canton: $('#canton').val(),
+            distrito: $('#distrito').val()
+        };
+
+        return sedeObj;
     }
 
+    // Función para mostrar mensaje de éxito
+    function mostrarMensaje() {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'Sede actualizada correctamente.',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload();
+            }
+        });
+    }
+
+    // Función para actualizar campos de la sede
+    function actualizarCamposSede() {
+        document.getElementById("nombre").value = sede.nombre;
+        document.getElementById("descripcion").value = sede.descripcion;
+        document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
+        document.getElementById("provincia").value = sede.provincia;
+        document.getElementById("canton").value = sede.canton;
+        document.getElementById("distrito").value = sede.distrito;
+        document.getElementById("ubicacion").value = sede.ubicacion;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var sedeString = sessionStorage.getItem("id");
+    sede = JSON.parse(sedeString);
+
+    document.getElementById("nombre").value = sede.nombre;
+    document.getElementById("descripcion").value = sede.descripcion;
+    document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
+    document.getElementById("provincia").value = sede.provincia;
+    document.getElementById("canton").value = sede.canton;
+    document.getElementById("distrito").value = sede.distrito;
+    document.getElementById("ubicacion").value = sede.ubicacion;
 });
 
-
-$('.container .row').on('click', '.btn-editar', function () {
-    $('#registroModal').modal('show');
-});
+$(document).ready(function () {
+    $('.container .row').on('click', '.btn-editar', function () {
+        $('#btnConfirmar').show();
+        $('#registroModal').modal('show');
+    });
+    $('#registroModal').on('hidden.bs.modal', function () {
+        $('#btnConfirmar').hide();
+    });
+});    
+    
