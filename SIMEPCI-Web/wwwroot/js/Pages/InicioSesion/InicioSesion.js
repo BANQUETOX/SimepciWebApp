@@ -24,6 +24,7 @@
                 sessionStorage.setItem('correo', result.correo) 
                 sessionStorage.setItem('usuario', JSON.stringify(result))
                 sessionStorage.setItem('roles', result.roles);
+                sessionStorage.setItem('correo', result.correo);
                 if (result.roles.length > 1) {
                     window.location = "/InicioSesion/ValidacionRol";
                 } else {

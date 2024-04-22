@@ -4,46 +4,44 @@
 @{
     Layout = "../Shared/_Layout.cshtml";
 }
+@section Scripts {
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src="~/js/pages/citas/registrarcita.js"></script>
+    <script src="~/js/pages/citas/calendariocitas.js"></script>
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="~/css/Pages/Citas/CitasEspecialidad.css" />
+</head>
+<main class="container">
+    <h2>Seleccione la especialidad y la sede</h2>
 
-<link rel="stylesheet" href="~/css/Pages/Citas/CitasEspecialidad.css" />
-
-<h2>Seleccione la especialidad y la sede</h2>
-
-<form method="post" action="@Url.Action("CitasEspecialidad", "Citas")">
-    <div>
-        <label for="especialidad">Elija la Especialidad:</label>
-        <select id="especialidad" name="especialidad" required>
-            @foreach (var especialidad in ViewBag.Especialidades)
-            {
-                <option value="@especialidad">@especialidad</option>
-            }
-        </select>
+    <form>
+        <p id="textoCorreo" >Ingrese el correo del Paciente a registrar cita</p>
+        <div id="campoCorreo">
+            <label for="correoUsuario">Correo:</label>
+            <input type="email" id="correoUsuario">
+        </div>
+        <div>
+            <label for="nombreUsuario">Nombre Paciente:</label>
+            <input type="text" readonly="readonly" id="nombreUsuario">
+        </div>
+        <div>
+            <label for="especialidad">Elija la Especialidad:</label>
+            <div id="especialidad"></div>
+        </div>
+        <div>
+            <label for="sede">Elija la Sede:</label>
+            <div id="sede"></div>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+    <button id="btnCuposDisponiblesDoctor">ver cupos</button>
+    <button id="btnCuposDisponiblesPaciente">ver cupos</button>
+    <div id="calendarioDisponible" class="mt-4">
     </div>
-
-    <div>
-        <label for="sede">Elija la Sede:</label>
-        <select id="sede" name="sede" required>
-            @foreach (var sede in ViewBag.Sedes)
-            {
-                <option value="@sede">@sede</option>
-            }
-        </select>
-    </div>
-
-    <div>
-        <label for="mes">Mes:</label>
-        <input type="number" id="mes" name="mes" min="1" max="12" required>
-    </div>
-
-    <div>
-        <label for="dia">Día:</label>
-        <input type="number" id="dia" name="dia" min="1" max="31" required>
-    </div>
-
-    <div>
-        <label for="hora">Hora:</label>
-        <input type="number" id="hora" name="hora" min="0" max="23" required>
-    </div>
-
-    <button type="submit">Enviar</button>
-</form>
+</main>
