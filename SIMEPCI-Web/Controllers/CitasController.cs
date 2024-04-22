@@ -17,6 +17,11 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
+        public IActionResult AddServiciosCita()
+        {
+            return View();
+        }
+
         public IActionResult CitasEspecialidad()
         {
             var especialidades = new List<string> { "Medicina General", "Pediatría", "Cardiología", "Dermatología" };

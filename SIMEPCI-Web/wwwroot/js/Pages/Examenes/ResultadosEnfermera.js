@@ -23,7 +23,11 @@ $(document).ready(function () {
                 var fila = $('<tr>');
                 fila.append('<td>' + examen.nombreTipoExamenMedico + '</td>');
                 fila.append('<td>' + examen.objetivo + '</td>');
-                var resultadoEnlace = $('<a>').attr('href', examen.resultado).text(truncateText(examen.resultado, 30));
+              
+                var resultadoEnlace = $('<a>')
+                    .attr('href', '#') 
+                    .attr('name', examen.resultado) 
+                    .text('Ver resultados');
 
                 fila.append($('<td>').append(resultadoEnlace));
 

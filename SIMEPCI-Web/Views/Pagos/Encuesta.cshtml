@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+
+    <script src="~/js/pages/Pagos/Encuesta.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +23,7 @@
 <body>
 
     <div class="banner-container">
-        <img class="banner-image" src="/imgs/Pagos/Banner.jpg" alt="Banner" />
+        <img class="banner-image" src="/imgs/Pagos/banner4.jpg" alt="Banner" />
     </div>
 
     <div class="form-container">
@@ -25,19 +32,19 @@
 
         <form action="/submit_survey" method="post">
             <p>1. En una escala del 1 al 10 ¿Qué tan satisfecho está con la facilidad para programar una cita?</p>
-            <input type="number" name="satisfaccion_cita" min="1" max="10" required>
+            <input type="number" name="satisfaccion" min="1" max="10" required>
             <br><br>
 
             <p>2. En una escala del 1 al 10 ¿Cómo calificaría la amabilidad y profesionalismo del personal médico y administrativo?</p>
-            <input type="number" name="amabilidad_profesionalismo" min="1" max="10" required>
+            <input type="number" name="profecionalismo" min="1" max="10" required>
             <br><br>
 
             <p>3. En una escala del 1 al 10 ¿Cómo calificaría la limpieza y comodidad de nuestras instalaciones?</p>
-            <input type="number" name="limpieza_comodidad" min="1" max="10" required>
+            <input type="number" name="instalaciones" min="1" max="10" required>
             <br><br>
 
             <p>4. ¿Recomendaría nuestro centro médico a familiares o amigos basándose en su experiencia?</p>
-            <select name="recomendar">
+            <select name="recomendaria">
                 <option value="si">Sí</option>
                 <option value="no">No</option>
             </select>
@@ -47,7 +54,7 @@
             <textarea name="comentarios" rows="4" cols="50"></textarea>
             <br><br>
 
-            <input type="submit" value="Enviar">
+            <input type="button" value="Enviar" onclick="submitEncuesta()">
         </form>
     </div>
 
