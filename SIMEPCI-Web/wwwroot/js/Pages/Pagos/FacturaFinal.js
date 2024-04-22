@@ -8,12 +8,13 @@
 
 // Función para llenar los datos en el HTML
 function llenarDatosFactura(datosFila) {
-
-
+    
     $('#fecha').text(obtenerFechaActual());
 
+    
     $('#numeroFactura').text(datosFila.idFactura);
 
+    
     var usuarioString = sessionStorage.getItem("usuario");
     var usuario = JSON.parse(usuarioString);
     var nombre = usuario.nombre + " " + usuario.primerApellido + " " + usuario.segundoApellido;
@@ -40,11 +41,11 @@ function llenarDatosFactura(datosFila) {
         desgloseProductos.append(filaProducto2);
     }
 
-    // Calcular subtotal
+    
     var subtotal = precio1 + precio2;
     $('#subtotal').text(subtotal.toFixed(2));
 
-    //obtener los valores de impuesto y IVA
+    // Función para obtener los valores de impuesto y IVA
     function obtenerValoresImpuestos() {
         $.ajax({
             url: 'https://simepciapii.azurewebsites.net/api/Configuracion/GetAllConfiguraciones',
@@ -57,10 +58,11 @@ function llenarDatosFactura(datosFila) {
                     return element.nombre === 'IVA';
                 });
 
-                
+               
                 $('#impuestoSevicio').text(impuesto.valor + '%');
                 $('#iva').text(iva.valor + '%');
 
+                
                 var impuestoValor = parseFloat(impuesto.valor);
                 var ivaValor = parseFloat(iva.valor);
                 var total = subtotal + (subtotal * impuestoValor / 100) + (subtotal * ivaValor / 100);
@@ -72,19 +74,15 @@ function llenarDatosFactura(datosFila) {
         });
     }
 
-   
+    
     obtenerValoresImpuestos();
 }
 
 // Datos de la URL
 function obtenerDatosFilaDesdeURL() {
-    
     var urlParams = new URLSearchParams(window.location.search);
-    var datosFilaJSON = urlParams.get('datos');
-
-   
-    var datosFila = JSON.parse(decodeURIComponent(datosFilaJSON));
-
+    var facturaJSON = urlParams.get('factura');
+    var datosFila = JSON.parse(decodeURIComponent(facturaJSON));
     return datosFila;
 }
 
@@ -93,53 +91,3 @@ $(document).ready(function () {
     var datosFila = obtenerDatosFilaDesdeURL();
     llenarDatosFactura(datosFila);
 });
-
-
-
-function actualizarEstado(idFactura) {
-    $.ajax({
-        url: 'https://simepciapii.azurewebsites.net/api/Factura/PagarFactura?idFactura=' + encodeURIComponent(idFactura), 
-        method: 'PATCH',
-        
-        success: function (response) {
-            console.log('Estado actualizado correctamente');
-        },
-        error: function (error) {
-            console.error('Error al actualizar el estado:', error);
-        }
-    });
-}
-
-function calcularTotal() {
-    var subtotal = parseFloat($('#total').text());
-    var total = (subtotal) / 504; 
-    return total;
-}
-
-
-paypal.Buttons({
-    createOrder: function (data, actions) {
-       
-        var total = calcularTotal();
-
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: total.toFixed(2)
-                }
-            }]
-        });
-    },
-    onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-            alert('Transacción completada');
-            var datosFila = obtenerDatosFilaDesdeURL();
-            actualizarEstado(datosFila.idFactura);
-          
-            var datosFilaCodificado = encodeURIComponent(JSON.stringify(datosFila));
-
-            window.location.href = '../Pagos/FacturaFinal?factura=' + datosFilaCodificado;
-        });
-    }
-}).render('#paypal-button-container');
-

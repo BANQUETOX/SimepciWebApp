@@ -6,10 +6,10 @@
 }
 
 @section Scripts {
+
     
-    <script src="https://www.paypal.com/sdk/js?client-id=Aad2-aEY25oAt25LJTEcMRkBmjTly6PDkjZYn8yrUf2zHFpABjwFM3WvyhwOGTT2gUB31ck32iydme4n"></script>
-    <script src="~/js/pages/Pagos/Paypal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/Pagos/FacturaFinal.js"></script>
+   
 }
 
 <!DOCTYPE html>
@@ -20,11 +20,11 @@
 <body>
 
     <div class="banner-container">
-        <img class="banner-image" src="/imgs/Pagos/banner2.jpg" alt="Banner" />
+        <img class="banner-image" src="/imgs/Pagos/Banner.jpg" alt="Banner" />
     </div>
 
     <div class="factura">
-        
+
         <div class="encabezado">
             <h3>Factura</h3>
             <p>Fecha: <span id="fecha">[Fecha]</span></p>
@@ -32,7 +32,7 @@
             <p>Cliente: <span id="cliente">[Nombre del Cliente]</span></p>
         </div>
 
-       
+
         <div class="desglose">
             <h6>Desglose de Productos</h6>
             <table>
@@ -43,27 +43,26 @@
                     </tr>
                 </thead>
                 <tbody id="desgloseProductos">
-                    
                 </tbody>
             </table>
         </div>
 
-        
+
         <div class="desglose">
             <p>Subtotal: <span id="subtotal"></span></p>
             <p>Impuesto de servicio: <span id="impuestoSevicio"></span></p>
             <p>IVA: <span id="iva"></span></p>
         </div>
 
-       
+
         <div class="total">
             <p>Total: ₡<span id="total">[Total]</span></p>
         </div>
     </div>
-
-    <div class="paypal">
-        <div id="paypal-button-container"></div>
-    </div>
+    <div>
+        <h3> Ayúdenos a mejorar</h3>
+        <button class="boton" onclick="window.location.href = '../Pagos/Encuesta'">Llenar Encuesta</button>
+    </div> 
 
 </body>
 </html>

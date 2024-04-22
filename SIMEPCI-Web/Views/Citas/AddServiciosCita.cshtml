@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/js/pages/citas/AddServiciosCita.js"></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Adicionales</title>
+    <link href="~/css/Pages/ExamenesMedicos/ResultadosEnfermera.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Citas/banner.jpg" alt="Banner" />
+    </div>
+
+    <div class="form-container">
+
+        <form id="CitasForm">
+            <div>
+                <label for="correo">Correo del paciente:</label>
+                <input type="text" id="correo" name="correo">
+                <button type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+    <table id="tablaCitas">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Especialidad</th>
+                <th>Doctor</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- js -->
+        </tbody>
+    </table>
+
+    <div class="modal" id="modalAgregarServicio" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Añadir Servicio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="inputServicio" class="form-label">Servicio:</label>
+                        <input type="text" class="form-control" id="inputServicio">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPrecio" class="form-label">Precio:</label>
+                        <input type="number" class="form-control" id="inputPrecio">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnAgregarServicio">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
