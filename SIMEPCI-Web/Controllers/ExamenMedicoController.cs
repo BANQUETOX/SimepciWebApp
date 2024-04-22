@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SIMEPCI_Web.Controllers
 {
-    public class ExamenMedico: Controller
+    public class ExamenMedicoController: Controller
     {
         // GET: /<controller>/
         public IActionResult RegistroExamenes()
