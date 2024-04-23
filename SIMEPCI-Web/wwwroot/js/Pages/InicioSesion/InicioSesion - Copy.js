@@ -20,8 +20,17 @@
             contentType: 'application/json;charset=utf-8',
             dataType: "json"
         }).done(function (result) {
-            if (result) {
-                sessionStorage.setItem('correo', result.correo) 
+            if (result.id === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de autenticación',
+                    text: 'Correo o contraseña incorrectos, intentelo nuevamente'
+                }).then(function (result) {
+                    window.location.href = window.location.href;
+                })
+            } else {
+                sessionStorage.setItem('id', result.id)
+                sessionStorage.setItem('correo', result.correo)
                 sessionStorage.setItem('usuario', JSON.stringify(result))
                 sessionStorage.setItem('roles', result.roles);
                 sessionStorage.setItem('correo', result.correo);
@@ -33,12 +42,6 @@
                     console.log(rolSeleccionado);
                     window.location = "/Perfil/Perfil";
                 }
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error de autenticación',
-                    text: 'Correo o contraseña incorrectos, intentelo nuevamente'
-                })
             }
         }).fail(function (error) {
             console.log(error)

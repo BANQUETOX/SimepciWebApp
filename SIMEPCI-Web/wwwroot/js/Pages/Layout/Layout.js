@@ -2,6 +2,8 @@
     this.InitView = function () {
         console.log(sessionStorage.getItem('usuario'));
         console.log(sessionStorage.getItem('rol'));
+        console.log(sessionStorage.getItem('id'));
+
         $('#btnLogout').click(function () {
             var view = new Layout();
             view.CerrarSesion();
