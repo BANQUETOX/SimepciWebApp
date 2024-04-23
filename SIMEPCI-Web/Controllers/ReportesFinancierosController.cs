@@ -48,6 +48,11 @@ namespace SIMEPCI_Web.Controllers
 
             return View(reportes);
         }
+
+        public IActionResult GananciasTotales()
+        {
+            return View();
+        }
     }
 
     public class Reporte
