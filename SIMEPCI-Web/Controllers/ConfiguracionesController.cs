@@ -13,5 +13,10 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+
+        public IActionResult GestionCupos()
+        {
+            return View();
+        }
     }
 }
