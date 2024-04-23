@@ -1,0 +1,57 @@
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #AAD9BB;
+    color: black;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+}
+
+.form-container {
+    border: 2px solid #ccc;
+    padding: 20px;
+    display: flex; /* Utilizar flexbox */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar elementos horizontalmente */
+}
+
+    .form-container > div {
+        margin-bottom: 25px;
+    }
+
+    .form-container label {
+        text-align: right;
+        width: 250px;
+        display: inline-block;
+        margin-right: 30px;
+
+    }
+
+    .form-container input {
+        width: 300px;
+        padding: 8px;
+        box-sizing: border-box;
+        text-align: center;
+    }

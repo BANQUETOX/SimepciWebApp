@@ -1,5 +1,11 @@
 ﻿
 $(document).ready(function () {
+    var usuarioString = sessionStorage.getItem("usuario");
+    var usuario = JSON.parse(usuarioString);
+    var nombreCompleto = usuario.nombre + " " + usuario.primerApellido + " " + usuario.segundoApellido;
+
+   
+    $('#medico').val(nombreCompleto);
     
     $('#examenForm').submit(function (event) {
         event.preventDefault(); 
@@ -32,8 +38,10 @@ $(document).ready(function () {
 
     
     $('#btnRegistrar').click(function () {
+
         
         var correo = $('#correo').val();
+        var medico = $('#medico').val();
         var medicamento = $('#txtNombreMedicamento').val() || '';
         var dosis = $('#txtDosis').val() || '';
         var duracionTratamiento = $('#txtDuracionTratamiento').val() || '';
@@ -43,6 +51,7 @@ $(document).ready(function () {
         
         var data = {
             correoPaciente: correo,
+            nombreDoctor: medico, 
             medicamento: medicamento,
             dosis: dosis,
             diasDosis: duracionTratamiento,

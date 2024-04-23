@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    <script src="~/js/pages/Gestion/ReporteEncuesta.js"></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de evaluaciones</title>
+    <link href="~/css/Pages/Gestion/ReporteEncuesta.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+     <div class="banner-container">
+        <img class="banner-image" src="/imgs/Pagos/banner4.jpg" alt="Banner" />
+    </div>
+    
+    <table id="tablaEvaluacion">
+        <thead>
+            <tr>
+                <th>Número de encuesta</th>
+                <th>Grado general de satisfacción</th>
+                <th>Grado de satisfacción con profesionales</th>
+                <th>Grado de satisfacción con instalaciones</th>
+                <th>Recomendación del servicio</th>
+                <th>Comentarios adicionales</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- js -->
+        </tbody>
+    </table>
+
+    <div class="centrar">
+    <button class="boton" onclick="window.location.href = '../GestionInformacion/Menu'">Regresar</button>
+    </div>
+
+</body>
+</html>

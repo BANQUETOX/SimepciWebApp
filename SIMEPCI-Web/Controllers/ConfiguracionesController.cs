@@ -8,5 +8,10 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+
+        public IActionResult GestionEspecialidades()
+        {
+            return View();
+        }
     }
 }

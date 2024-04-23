@@ -3,7 +3,7 @@ var usuario = JSON.parse(usuarioString);
 var correo = usuario.correo;
 
 $(document).ready(function () {
-    //var correo = 'carorodriguez5@hotmail.com';
+    
     obtenerIdCitas(correo);
     
 });
@@ -123,7 +123,11 @@ function popularTabla(correo) {
                         
                         var newRow = $('<tr>');
                         newRow.append('<td>' + cita.id + '</td>');
-                        newRow.append('<td>' + cita.fecha + '</td>');
+
+                        var fecha = new Date(cita.fecha);
+                        var fechaFormateada = fecha.toLocaleDateString();
+                        newRow.append('<td>' + fechaFormateada + '</td>');
+
                         newRow.append('<td>' + cita.especialidad + '</td>');
                         newRow.append('<td>' + cita.precio + '</td>');
 
