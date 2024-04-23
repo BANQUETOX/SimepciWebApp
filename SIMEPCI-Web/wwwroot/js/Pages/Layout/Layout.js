@@ -63,9 +63,9 @@
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
+                    mostrarElemento(reportes, false);
                     break;
                 case 'Administrador':
-                    mostrarElemento(misCitas, false);
                     mostrarElemento(misExamenes, false);
                     mostrarElemento(registrarReceta, false);
                     mostrarElemento(subirExamenes, false);
@@ -81,6 +81,8 @@
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
+                    mostrarElemento(misCitas, false);
+                    mostrarElemento(reportes, false);
                     break;
                 case 'Doctor':
                     mostrarElemento(configuraciones, false);

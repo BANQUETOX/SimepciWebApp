@@ -4,7 +4,7 @@
         this.CalendarioRol();
     }
     this.CuposDisponiblesPaciente = function () {
-        var self = this;
+        var _this = this;
         var correo = sessionStorage.getItem('correo');
         var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente?correoPaciente=';
         $.ajax({
@@ -62,7 +62,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                self.EliminarCita(evento.id);
+                                _this.EliminarCita(evento.id);
                             }
                         });
                     } else {
@@ -92,7 +92,7 @@
             if (result !== 'Cita eliminada') {
                 console.log(result);
                 Swal.fire({
-                    icon: 'warning',                    
+                    icon: 'warning',
                     title: 'La cita no pudo ser cancelada',
                     text: result,
                     showConfirmButton: true
@@ -111,7 +111,7 @@
         });
     }
     this.CuposDisponiblesDoctor = function () {
-        var self = this;
+        var _this = this;
         var correo = sessionStorage.getItem('correo');
         console.log(correo)
         var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetCitasDoctor?correoDoctor=';
@@ -120,9 +120,9 @@
             method: 'GET',
             contentType: 'application/json;charset=utf-8',
             dataType: 'json'
-        }).done(function (response) {
-            console.log(response);
-            var eventosFiltrados = response.map(function (cita) {
+        }).done(function (result) {
+            console.log(result);
+            var eventosFiltrados = result.map(function (cita) {
                 return {
                     id: cita.id,
                     title: cita.nombrePaciente,
@@ -170,7 +170,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                self.EliminarCita(evento.id);
+                                _this.EliminarCita(evento.id);
                             }
                         });
                     } else {
@@ -189,16 +189,80 @@
             console.error('Error al obtener citas reservadas:', error);
         });
     }
+    this.GetAllCitasAdministrador = function () {
+        var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetAllCitas';
+        $.ajax({
+            url: url_base,
+            method: 'GET',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json'
+        }).done(function (result) {
+            console.log('Result desde getAllcitas ');
+            console.log( result);
+            var eventosFiltrados = result.map(function (cita) {
+                return {
+                    id: cita.id,
+                    title: 'Paciente id: '+cita.idPaciente+', Doctor id: '+cita.idDoctor+', Sede id: '+cita.idSede,
+                    start: cita.horaInicio,
+                    end: cita.horaFinal
+                };
+            });
+
+            var calendarEl = document.getElementById('calendarAdministrador');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'Week,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                customButtons: {
+                    Week: {
+                        text: 'Week',
+                        click: function () {
+                            calendar.changeView('timeGridWeek');
+                        }
+                    }
+                },
+                initialView: 'timeGridWeek',
+                slotDuration: '00:30:00',
+                events: eventosFiltrados,
+                eventClick: function (info) {
+                    var evento = info.event;
+                    var fechaCita = evento.start;
+                    var fechaCitaFormateada = fechaCita.toLocaleDateString();
+                    var horaCita = fechaCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    Swal.fire({
+                        icon: 'info',
+                        html: evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCitaFormateada + ' ' + horaCita,
+                        title: 'Cita Medica',
+                        showCancelButton: false
+                    });
+                  }
+            });
+            calendar.render();
+        }).fail(function (error) {
+            console.error('Error al obtener citas reservadas:', error);
+        });
+    }
+
     this.CalendarioRol = function () {
         var rol = sessionStorage.getItem('rol');
         switch (rol) {
             case 'Paciente':
                 this.CuposDisponiblesPaciente();
                 calendarDoctor.style.display = 'none';
+                calendarAdministrador.style.display = 'none';
                 break;
             case 'Doctor':
                 this.CuposDisponiblesDoctor();
                 calendarPaciente.style.display = 'none';
+                calendarAdministrador.style.display = 'none';
+                break;
+            case 'Administrador':
+                this.GetAllCitasAdministrador();
+                calendarPaciente.style.display = 'none';
+                calendarDoctor.style.display = 'none';
+                textoEliminar.style.display = 'none';
                 break;
             default:
                 break;
