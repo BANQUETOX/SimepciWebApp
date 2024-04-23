@@ -2,8 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
-    <script src="~/js/pages/citas/citasprogramadas.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/citas/citasprogramadas.js"></script>
+
 }
 <!DOCTYPE html>
 <html lang='en'>
@@ -13,7 +15,7 @@
 </head>
 <body>
     <h2>Registro de citas Programadas</h2>
-    <div id='calendar'></div>
+    <div id='calendarPaciente'></div>
     <div id='calendarDoctor'></div>
 </body>
 </html>
