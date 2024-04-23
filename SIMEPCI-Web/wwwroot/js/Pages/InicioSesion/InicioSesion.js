@@ -20,7 +20,7 @@
             contentType: 'application/json;charset=utf-8',
             dataType: "json"
         }).done(function (result) {
-            if (result.activo == true) {
+            if (result) {
                 sessionStorage.setItem('correo', result.correo) 
                 sessionStorage.setItem('usuario', JSON.stringify(result))
                 sessionStorage.setItem('roles', result.roles);

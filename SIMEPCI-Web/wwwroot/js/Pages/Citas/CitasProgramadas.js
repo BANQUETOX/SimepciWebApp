@@ -1,8 +1,11 @@
-﻿function CitasProgramadas() {
+﻿
+function CitasProgramadas() {
+    var calendar = "";
     this.InitView = function () {
         this.CalendarioRol();
     }
     this.CuposDisponiblesPaciente = function () {
+        var self = this;
         var correo = sessionStorage.getItem('correo');
         var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetCitasPaciente?correoPaciente=';
         $.ajax({
@@ -15,14 +18,14 @@
             var eventosFiltrados = response.map(function (cita) {
                 return {
                     id: cita.id,
-                    title: 'Cita '+cita.especialidad,
+                    title: cita.especialidad,
                     start: cita.fecha,
-                    end: cita.fecha 
+                    end: cita.fecha
                 };
             });
 
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            var calendarEl = document.getElementById('calendarPaciente');
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
@@ -38,11 +41,64 @@
                 },
                 initialView: 'timeGridWeek',
                 slotDuration: '00:30:00',
-                events: eventosFiltrados
+                events: eventosFiltrados,
+                eventClick: function (info) {
+                    var evento = info.event;
+                    var fechaCita = evento.start;
+                    var fechaActual = new Date();
+                    if (fechaCita > fechaActual) {
+                        var fechaCitaFormateada = fechaCita.toLocaleDateString();
+                        var horaCita = fechaCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                        Swal.fire({
+                            icon: 'info',
+                            html: 'Cita de : ' + evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCitaFormateada + ' ' + horaCita,
+                            title: '¿Eliminar Cita?',
+                            text: '¿Quieres eliminar este registro?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                self.EliminarCita(evento.id);
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Esta cita ya ha pasado',
+                            text: 'No es posible eliminar citas pasadas',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
+                }
             });
             calendar.render();
         }).fail(function (error) {
             console.error('Error al obtener citas reservadas:', error);
+        });
+    }
+    this.EliminarCita = function (id) {
+        var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/CancelarCita?idCita=';
+        $.ajax({
+            method: 'DELETE',
+            url: url_base + id,
+            contentType: 'application/json;charset=utf-8',
+        }).done(function (result) {
+            console.log(result);
+            Swal.fire({
+                icon: 'success',
+                title: 'La cita fue eliminada exitosamente',
+                showConfirmButton: true
+            }).then((result) => {
+                window.location.href = window.location.href
+            });
+        }).fail(function (error) {
+            console.error('Error al eliminar la cita:', error);
         });
     }
     this.CuposDisponiblesDoctor = function () {
@@ -60,14 +116,14 @@
             var eventosFiltrados = response.map(function (cita) {
                 return {
                     id: cita.id,
-                    title: 'Cita ' + cita.nombrePaciente,
+                    title: cita.nombrePaciente,
                     start: cita.horaInicio,
                     end: cita.horaFinal
                 };
             });
 
             var calendarEl = document.getElementById('calendarDoctor');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
@@ -83,7 +139,16 @@
                 },
                 initialView: 'timeGridWeek',
                 slotDuration: '00:30:00',
-                events: eventosFiltrados
+                events: eventosFiltrados,
+                eventClick: function (info) {
+                    var evento = info.event;
+                    var fechaCita = evento.start.toLocaleDateString();
+                    var horaCita = evento.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    Swal.fire({
+                        icon: 'info',
+                        html: 'Paciente: ' + evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCita + ' ' + horaCita
+                    });
+                }
             });
             calendar.render();
         }).fail(function (error) {
@@ -99,7 +164,7 @@
                 break;
             case 'Doctor':
                 this.CuposDisponiblesDoctor();
-                calendar.style.display = 'none';
+                calendarPaciente.style.display = 'none';
                 break;
             default:
                 break;

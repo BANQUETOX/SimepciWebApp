@@ -270,7 +270,13 @@ function crearCita(cita) {
             window.location = "/Citas/CitasProgramadas";
         });
     }).fail(function (error) {
-        console.log(error)
+        console.log(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al crear la cita',
+            text: 'Ha ocurrido un error al crear la cita '+error,
+            confirmButtonText: 'Aceptar'
+        });
     });
 }
 $(document).ready(function () {
