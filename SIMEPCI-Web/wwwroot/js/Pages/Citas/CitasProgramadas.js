@@ -1,5 +1,4 @@
-﻿
-function CitasProgramadas() {
+﻿function CitasProgramadas() {
     var calendar = "";
     this.InitView = function () {
         this.CalendarioRol();
@@ -55,7 +54,7 @@ function CitasProgramadas() {
                             html: 'Cita de : ' + evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCitaFormateada + ' ' + horaCita,
                             title: '¿Eliminar Cita?',
                             text: '¿Quieres eliminar este registro?',
-                            icon: 'warning',
+                            icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#d33',
                             cancelButtonColor: '#3085d6',
@@ -90,19 +89,29 @@ function CitasProgramadas() {
             contentType: 'application/json;charset=utf-8',
         }).done(function (result) {
             console.log(result);
-            Swal.fire({
-                icon: 'success',
-                title: 'La cita fue eliminada exitosamente',
-                showConfirmButton: true
-            }).then((result) => {
-                window.location.href = window.location.href
-            });
+            if (result !== 'Cita eliminada') {
+                console.log(result);
+                Swal.fire({
+                    icon: 'warning',                    
+                    title: 'La cita no pudo ser cancelada',
+                    text: result,
+                    showConfirmButton: true
+                })
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'La cita fue eliminada exitosamente',
+                    showConfirmButton: true
+                }).then((result) => {
+                    window.location.href = window.location.href
+                });
+            }
         }).fail(function (error) {
             console.error('Error al eliminar la cita:', error);
         });
     }
     this.CuposDisponiblesDoctor = function () {
-
+        var self = this;
         var correo = sessionStorage.getItem('correo');
         console.log(correo)
         var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetCitasDoctor?correoDoctor=';
@@ -142,12 +151,37 @@ function CitasProgramadas() {
                 events: eventosFiltrados,
                 eventClick: function (info) {
                     var evento = info.event;
-                    var fechaCita = evento.start.toLocaleDateString();
-                    var horaCita = evento.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                    Swal.fire({
-                        icon: 'info',
-                        html: 'Paciente: ' + evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCita + ' ' + horaCita
-                    });
+                    var fechaCita = evento.start;
+                    var fechaMaxCancelacion = new Date();
+                    fechaMaxCancelacion.setHours(fechaMaxCancelacion.getHours() + 24);
+                    if (fechaCita > fechaMaxCancelacion) {
+                        var fechaCitaFormateada = fechaCita.toLocaleDateString();
+                        var horaCita = fechaCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        Swal.fire({
+                            icon: 'info',
+                            html: 'Cita de : ' + evento.title + '<br></br>' + 'Fecha de la cita: ' + fechaCitaFormateada + ' ' + horaCita,
+                            title: '¿Eliminar Cita?',
+                            text: '¿Quieres eliminar este registro?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                self.EliminarCita(evento.id);
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'No es posible cancelar esta cita',
+                            text: 'No es posible eliminar citas pasadas o con menos de 24 horas antes de su hora de inicio',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
                 }
             });
             calendar.render();

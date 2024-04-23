@@ -1,5 +1,6 @@
 ﻿var nombreCompleto = "";
 var IdEspecialidadSeleccionada = "";
+var NombreEspecialidadSeleccionada = "";
 var IdSedeSeleccionada = "";
 var rol = sessionStorage.getItem('rol');
 var calendar;
@@ -49,6 +50,7 @@ function RegistrarCita() {
             $('<option>').text('Seleccione una especialidad').attr('disabled', 'disabled').attr('selected', 'selected').appendTo(select);
             $.each(result, function (index, especialidad) {
                 $('<option>').text(especialidad.nombre).attr('id', especialidad.id).val(especialidad.id).appendTo(select);
+                NombreEspecialidadSeleccionada = especialidad.nombre;
             });
             listaEspecialidades.append(select);
         }).fail(function (error) {
@@ -184,11 +186,12 @@ function RegistrarCita() {
     }
     function verificarDisponibilidad(cita) {
         //Pendiente editar mensajes para mostrar la info antes de confirmar o cancelar
+        console.log('Nombre especialidad '+NombreEspecialidadSeleccionada)
         var horaInicioFormateada = moment(cita.horaInicio).format('YYYY-MM-DD HH:mm');
         Swal.fire({
-            title: '¿Estás seguro de registrar la cita?',
-            text: 'Una vez registrada, no se podrá deshacer esta acción' + horaInicioFormateada,
-            icon: 'warning',
+            title: 'Registar Cita',
+            text: 'Desea registrar una cita en: ' + NombreEspecialidadSeleccionada+' para el día '+ horaInicioFormateada,
+            icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Sí, registrar',
             cancelButtonText: 'No, cancelar'
