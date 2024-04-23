@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    <script src="~/js/pages/Configuraciones/GestionEspecialidades.js"></script>
+
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especialidades</title>
+    <link href="~/css/Pages/Configuraciones/Especialidades.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+    <div class="banner-container">
+        <img class="banner-image" src="/imgs/Configuraciones/14.png" alt="Banner" />
+    </div>
+
+    <table id="tablaEspecialidades">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- js -->
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <button id="registrarEspecialidadBtn">Registrar Nueva Especialidad</button>
+        
+    </div>
+    <div class="button-container">
+        
+        <button class="boton" onclick="window.location.href = '../GestionInformacion/Menu'">Regresar</button>
+    </div>
+
+</body>
+</html>

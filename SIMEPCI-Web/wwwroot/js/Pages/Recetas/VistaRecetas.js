@@ -22,14 +22,18 @@
         data.forEach(function (receta) {
             var fila = $('<tr>');
 
-            fila.append($('<td>').text(receta.id));
+            fila.append($('<td>').text(receta.nombreMedico));
+            fila.append($('<td>').text(receta.clinica));
             fila.append($('<td>').text(formatDate(receta.fechaEmision))); 
             fila.append($('<td>').text(receta.medicamento));
             fila.append($('<td>').text(receta.dosis));
             fila.append($('<td>').text(receta.diasDosis));
             fila.append($('<td>').text(receta.recomendaciones));
 
-            var recetaEnlace = $('<a>').attr('href', receta.imagen).text(truncateText(receta.imagen, 30));
+            var recetaEnlace = $('<a>')
+                .attr('href', '#')
+                .attr('name', receta.imagen)
+                .text('Ver receta');
             fila.append($('<td>').append(recetaEnlace));
 
             tbody.append(fila);
@@ -43,6 +47,3 @@
     }
 });
 
-function truncateText(text, maxLength) {
-    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-}

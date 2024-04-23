@@ -22,6 +22,9 @@
     <Content Remove="wwwroot\imgs\Examenes\" />
     <Content Remove="wwwroot\imgs\Recetas\" />
     <Content Remove="wwwroot\js\Pages\Perfil\" />
+    <Content Remove="wwwroot\js\Pages\Configuraciones\" />
+    <Content Remove="wwwroot\css\Pages\Configuraciones\" />
+    <Content Remove="wwwroot\imgs\Configuraciones\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />
@@ -36,6 +39,9 @@
     <Folder Include="wwwroot\imgs\Examenes\" />
     <Folder Include="wwwroot\imgs\Recetas\" />
     <Folder Include="wwwroot\js\Pages\Perfil\" />
+    <Folder Include="wwwroot\js\Pages\Configuraciones\" />
+    <Folder Include="wwwroot\css\Pages\Configuraciones\" />
+    <Folder Include="wwwroot\imgs\Configuraciones\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Join\" />

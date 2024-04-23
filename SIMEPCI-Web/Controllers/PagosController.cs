@@ -35,7 +35,18 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
-    
+        public IActionResult PagosSecretaria()
+        {
+
+            return View();
+        }
+
+        public IActionResult FacturaSecretaria()
+        {
+
+            return View();
+        }
+
     }
 
     
