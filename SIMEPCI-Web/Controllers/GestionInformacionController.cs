@@ -29,6 +29,11 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
+        public IActionResult Sedes()
+        {
+            return View();
+        }
+
         public IActionResult Menu()
         {
             return View();
