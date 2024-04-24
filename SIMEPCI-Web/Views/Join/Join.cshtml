@@ -106,6 +106,21 @@
                 <input type="hidden" class="form-control" id="ubicacion" name="ubicacion">
                 <div id="mapa" style="height: 300px;"></div>
             </div>
+            <div class="mb-3">
+                <label class="form-label">¿Solicitar registrar como funcionario?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="funcionario" id="funcionario_si" value="true">
+                    <label class="form-check-label" for="funcionario_si">
+                        Sí
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="funcionario" id="funcionario_no" value="false">
+                    <label class="form-check-label" for="funcionario_no">
+                        No
+                    </label>
+                </div>
+            </div>
             <div class="d-flex justify-content-center mb-3">
                 <button type="submit" class="btn" id="btnCrear" style="background-color: #AAD9BB;">Crear</button>
             </div>
