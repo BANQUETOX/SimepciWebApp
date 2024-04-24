@@ -185,7 +185,6 @@ function RegistrarCita() {
         });
     }
     function verificarDisponibilidad(cita) {
-        //Pendiente editar mensajes para mostrar la info antes de confirmar o cancelar
         console.log('Nombre especialidad '+NombreEspecialidadSeleccionada)
         var horaInicioFormateada = moment(cita.horaInicio).format('YYYY-MM-DD HH:mm');
         Swal.fire({
