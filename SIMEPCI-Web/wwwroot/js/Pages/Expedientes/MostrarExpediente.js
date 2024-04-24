@@ -1,81 +1,95 @@
-﻿function MostrarExpediente() {
+﻿$(document).ready(function () {
+    $('#examenForm').submit(function (event) {
+        event.preventDefault();
+        var correo = $('#correoPaciente').val();
+        obtenerExpedienteCompleto(correo);
+    });
 
-    var idExpediente = 0;
+    $('#buscarExpedienteBtn').click(function () {
+        var correo = $('#correoPaciente').val();
+        obtenerExpedienteCompleto(correo);
+    });
 
-    this.InitView = function () {
+    // Lógica para habilitar la edición al hacer clic en el botón "Editar"
+    $('.edit-btn').click(function () {
+        var field = $(this).data('field');
+        var textarea = $('#' + field);
+        var isReadOnly = textarea.prop('readonly');
 
-        idExpediente = obtenerIdExpedienteDesdeURL();
+        if (isReadOnly) {
+            textarea.prop('readonly', false);
+            $(this).text('Guardar');
+        } else {
+            var nuevoValor = textarea.val();
+            actualizarExpediente(field, nuevoValor);
+        }
+    });
 
-        var view = new MostrarExpediente();
+    function actualizarExpediente(campo, valor) {
+        var idExpediente = obtenerIdExpediente(); // Implementa esta función para obtener el ID del expediente
 
-        view.ObtenerExpediente();
-
-    };
-
-    this.ObtenerExpediente = function () {
-
-        var url_base = 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente';
+        var datos = {
+            idExpediente: idExpediente
+        };
+        datos[campo] = valor;
 
         $.ajax({
-
-            method: 'GET',
-
-            url: url_base + '?idExpediente=' + idExpediente,
-
-            dataType: 'json'
-
-        }).done(function (result) {
-
-            $('#idPaciente').text(result.infoExpediente.idPaciente);
-
-            $('#notasEnfermeria').text(result.infoExpediente.notasEnfermeria);
-
-            $('#notasMedicas').text(result.infoExpediente.notasMedicas);
-
-            $('#historialMedico').text(result.infoExpediente.historialMedico);
-
-            var citasHtml = '';
-
-            result.citas.forEach(function (cita) {
-
-                citasHtml += '<p><strong>Fecha:</strong> ' + cita.fecha + '</p>';
-
-                citasHtml += '<p><strong>Especialidad:</strong> ' + cita.especialidad + '</p>';
-
-                citasHtml += '<p><strong>Doctor:</strong> ' + cita.doctor + '</p>';
-
-                citasHtml += '<p><strong>Precio:</strong> ' + cita.precio + '</p>';
-
-                citasHtml += '<hr />';
-
-            });
-
-            $('#citas').html(citasHtml);
-
-        }).fail(function (error) {
-
-            console.log(error);
-
-            alert('Ocurrió un error al obtener el expediente');
-
+            url: 'https://simepciapii.azurewebsites.net/api/Expediente/UpdateExpediente',
+            method: 'PATCH',
+            contentType: 'application/json',
+            data: JSON.stringify(datos),
+            success: function (response) {
+                console.log('Expediente actualizado con éxito:', response);
+                mostrarMensajeExito('El expediente se actualizó correctamente.');
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al actualizar el expediente:', error);
+                mostrarMensajeError('Ocurrió un error al actualizar el expediente.');
+            }
         });
-
-    };
-
-    function obtenerIdExpedienteDesdeURL() {
-
-        var urlParams = new URLSearchParams(window.location.search);
-
-        return urlParams.get('id');
-
     }
 
-}
+    function obtenerExpedienteCompleto(correo) {
+        $.ajax({
+            url: 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente',
+            method: 'GET',
+            data: { correoPaciente: correo },
+            headers: {
+                'Cache-Control': 'no-cache'
+            },
+            dataType: 'json'
+        }).done(function (data) {
+            mostrarDetallesExpediente(data);
+        }).fail(function (xhr, status, error) {
+            console.error('Error al obtener datos del API:', error);
+        });
+    }
 
-$(document).ready(function () {
+    function mostrarDetallesExpediente(expediente) {
+        if (expediente && expediente.infoExpediente) {
+            $('#notasEnfermeria').text(expediente.infoExpediente.notasEnfermeria || 'No hay notas de enfermería');
+            $('#notasMedicas').text(expediente.infoExpediente.notasMedicas || 'No hay notas médicas');
+            $('#historialMedico').text(expediente.infoExpediente.historialMedico || 'No hay historial médico');
+        } else {
+            console.error('La respuesta del API no contiene la información esperada.');
+        }
+    }
 
-    var view = new MostrarExpediente();
+    function mostrarMensajeExito(mensaje) {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: mensaje,
+            confirmButtonText: 'OK'
+        });
+    }
 
-    view.InitView();
-
+    function mostrarMensajeError(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje,
+            confirmButtonText: 'OK'
+        });
+    }
 });

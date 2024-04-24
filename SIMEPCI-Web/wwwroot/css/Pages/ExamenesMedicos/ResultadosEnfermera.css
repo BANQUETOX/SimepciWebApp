@@ -63,12 +63,12 @@ button {
 
     .form-container label {
         width: auto;
-        margin-right: 10px
+        margin-right: 10px;
     }
 
     .form-container input {
         flex: 1;
-        margin-right: 10px; 
+        margin-right: 10px;
     }
 
     .form-container button {
