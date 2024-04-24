@@ -1,95 +1,67 @@
-﻿$(document).ready(function () {
-    $('#examenForm').submit(function (event) {
-        event.preventDefault();
-        var correo = $('#correoPaciente').val();
-        obtenerExpedienteCompleto(correo);
-    });
+﻿function MostrarExpediente() {
+    var _this = this;
+    this.InitView = function () {
+        this.validacionRol();
+        this.GetExpedientePaciente();
+    }
 
-    $('#buscarExpedienteBtn').click(function () {
-        var correo = $('#correoPaciente').val();
-        obtenerExpedienteCompleto(correo);
-    });
-
-    // Lógica para habilitar la edición al hacer clic en el botón "Editar"
-    $('.edit-btn').click(function () {
-        var field = $(this).data('field');
-        var textarea = $('#' + field);
-        var isReadOnly = textarea.prop('readonly');
-
-        if (isReadOnly) {
-            textarea.prop('readonly', false);
-            $(this).text('Guardar');
-        } else {
-            var nuevoValor = textarea.val();
-            actualizarExpediente(field, nuevoValor);
-        }
-    });
-
-    function actualizarExpediente(campo, valor) {
-        var idExpediente = obtenerIdExpediente(); // Implementa esta función para obtener el ID del expediente
-
-        var datos = {
-            idExpediente: idExpediente
-        };
-        datos[campo] = valor;
-
+    this.GetExpedientePaciente = function () {
+        var correo = sessionStorage.getItem('correo');
+        var url_base = 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente?correoPaciente=';
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Expediente/UpdateExpediente',
-            method: 'PATCH',
-            contentType: 'application/json',
-            data: JSON.stringify(datos),
-            success: function (response) {
-                console.log('Expediente actualizado con éxito:', response);
-                mostrarMensajeExito('El expediente se actualizó correctamente.');
-            },
-            error: function (xhr, status, error) {
-                console.error('Error al actualizar el expediente:', error);
-                mostrarMensajeError('Ocurrió un error al actualizar el expediente.');
+            url: url_base + correo,
+            method: 'GET',
+            contentType: 'application/json,charset=utf-8',
+            dataType: 'json'
+        }).done(function (result) {
+            console.log(result);
+            _this.CrearCuadro(result.notasEnfermeria, 'notasEnfermeria');
+            _this.CrearCuadro(result.notasMedicas, 'notasMedicas');
+            _this.CrearCuadro(result.historialMedico, 'historialMedico');
+            _this.CrearCuadro(result.citas, 'citasContainer');
+            _this.CrearCuadro(result.examenesMedicos, 'examenesMedicosContainer');
+            _this.CrearCuadro(result.recetas, 'recetasContainer');
+            _this.CrearCuadro(result.facturas, 'facturasContainer');
+            _this.CrearCuadro(result.diagnosticos, 'diagnosticosContainer');
+        }).fail(function (error) {
+            console.log(error);
+        });
+    }
+
+    this.CrearCuadro = function (result, id) {
+        var divContenedor = document.getElementById(id);
+        if (result.length === 0) {
+            var mensaje = document.createElement('p');
+            mensaje.textContent = 'No hay datos que mostrar.';
+            divContenedor.appendChild(mensaje);
+            return;
+        }
+        result.forEach(function (elemento, index) {
+            var item = document.createElement('div');
+            for (var key in elemento) {
+                var parrafoP = document.createElement('p');
+                parrafoP.textContent = key + ": " + elemento[key];
+                item.appendChild(parrafoP);
+            }
+            divContenedor.appendChild(item);
+            if (index < result.length - 1) {
+                var divider = document.createElement('hr');
+                divider.classList.add('division');
+                divContenedor.appendChild(divider);
             }
         });
+        
     }
-
-    function obtenerExpedienteCompleto(correo) {
-        $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente',
-            method: 'GET',
-            data: { correoPaciente: correo },
-            headers: {
-                'Cache-Control': 'no-cache'
-            },
-            dataType: 'json'
-        }).done(function (data) {
-            mostrarDetallesExpediente(data);
-        }).fail(function (xhr, status, error) {
-            console.error('Error al obtener datos del API:', error);
-        });
-    }
-
-    function mostrarDetallesExpediente(expediente) {
-        if (expediente && expediente.infoExpediente) {
-            $('#notasEnfermeria').text(expediente.infoExpediente.notasEnfermeria || 'No hay notas de enfermería');
-            $('#notasMedicas').text(expediente.infoExpediente.notasMedicas || 'No hay notas médicas');
-            $('#historialMedico').text(expediente.infoExpediente.historialMedico || 'No hay historial médico');
-        } else {
-            console.error('La respuesta del API no contiene la información esperada.');
+    this.validacionRol = function () {
+        var rol = sessionStorage.getItem('rol');
+        if (rol === 'Paciente') {
+            document.getElementById('cuadroFormulario').style.display = 'none';
         }
     }
+}
 
-    function mostrarMensajeExito(mensaje) {
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: mensaje,
-            confirmButtonText: 'OK'
-        });
-    }
 
-    function mostrarMensajeError(mensaje) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: mensaje,
-            confirmButtonText: 'OK'
-        });
-    }
+$(document).ready(function () {
+    var view = new MostrarExpediente();
+    view.InitView();
 });

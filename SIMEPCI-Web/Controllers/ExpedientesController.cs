@@ -18,6 +18,10 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+        public IActionResult InfoPacientes()
+        {
+            return View();
+        }
 
         public IActionResult MostrarExpediente(int id)
         {

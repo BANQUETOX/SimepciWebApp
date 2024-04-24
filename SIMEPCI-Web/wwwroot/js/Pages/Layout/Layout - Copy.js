@@ -44,7 +44,6 @@
             var registrarExpediente = document.getElementById('article-registrarExpediente');
             var mostrarExpediente = document.getElementById('article-mostrarExpediente');
             var editarPerfil = document.getElementById('article-EditarPerfil');
-            var miExpediente = document.getElementById('article-miExpediente');
             var misRecetas = document.getElementById('article-misRecetasMedicas');
             var configuraciones = document.getElementById('article-configuraciones');
             var registroSedes = document.getElementById('articulo-registroSedes');
@@ -61,9 +60,11 @@
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
+                    mostrarElemento(registrarExpediente, false);
+                    mostrarElemento(subirExamenes, false);
+                    break;
                 case 'Enfermero':
                     mostrarElemento(editarPerfil, false);
-                    mostrarElemento(miExpediente, false);
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
@@ -83,20 +84,17 @@
                     mostrarElemento(mostrarExpediente, false);
                     mostrarElemento(agendarCita, false);
                     mostrarElemento(historialCitas, false);
-                    mostrarElemento(miExpediente, false);
                     mostrarElemento(misRecetas, false);
                     mostrarElemento(citasYFacturas, false);
                     mostrarElemento(misExamenes, false);
                     mostrarElemento(registrarReceta, false);
                     mostrarElemento(subirExamenes, false);
                     mostrarElemento(subirRecetas, false);
-
                     break;
                 case 'Secretario':  
                     mostrarElemento(editarPerfil, false);
                     mostrarElemento(registrarExpediente, false);
                     mostrarElemento(historialCitas, false);
-                    mostrarElemento(miExpediente, false);
                     mostrarElemento(misRecetas, false);
                     mostrarElemento(citasYFacturas, false);
                     mostrarElemento(misExamenes, false);
@@ -107,6 +105,7 @@
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(reportes, false);
+                    break;
                 case 'Doctor':
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
