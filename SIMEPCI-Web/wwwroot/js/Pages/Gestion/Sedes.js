@@ -110,10 +110,10 @@ $(document).ready(function () {
                 descripcion: fila.find('td:eq(2)').text(),
                 fechaCreacion: fila.find('td:eq(3)').text(),
                 ubicacion: fila.find('td:eq(4)').text(),
+                foto: $('#url_imagen_cloudinary').val() || usuario.foto,
                 provincia: fila.find('td:eq(5)').text(),
                 canton: fila.find('td:eq(6)').text(),
                 distrito: fila.find('td:eq(7)').text(),
-                //foto: $('#url_imagen_cloudinary').val() || usuario.foto,
             };
 
             var datosFilaJSON = JSON.stringify(datosFila); 
@@ -172,15 +172,15 @@ function EditarSede() {
     }
     function obtenerDatosSede() {
         var sedeObj = {
-            //id: sede.id,
+            id: sede.id,
             nombre: $('#nombre').val(),
             descripcion: $('#descripcion').val(),
             fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
             ubicacion: $('#ubicacion').val() || sede.ubicacion,
+            foto: $('#url_imagen_cloudinary').val() || sede.foto,
             provincia: $('#provincia').val(),
             canton: $('#canton').val(),
             distrito: $('#distrito').val(),
-            //foto: $('#url_imagen_cloudinary').val() || sede.foto
 
         };
 
@@ -207,8 +207,11 @@ function actualizarCamposSede() {
     document.getElementById("nombre").value = sede.nombre;
     document.getElementById("descripcion").value = sede.descripcion;
     document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
+    document.getElementById("ubicacion").value = sede.ubicacion;
+    document.getElementById("foto_perfil_preview").src = usuario.foto;
     document.getElementById("provincia").value = sede.provincia;
     document.getElementById("canton").value = sede.canton;
     document.getElementById("distrito").value = sede.distrito;
-    document.getElementById("ubicacion").value = sede.ubicacion;
+
+
 } 
