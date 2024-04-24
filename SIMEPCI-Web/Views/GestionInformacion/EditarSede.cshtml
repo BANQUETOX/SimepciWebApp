@@ -7,7 +7,7 @@
 
 @section Scripts {
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiOxdTI0JZvtyoLKxCzmuaVHcU6uK5WHg&callback=initMap" async defer></script>
-    <script src="~/js/Pages/Gestion/Sedes.js"></script>
+    <script src="~/js/Pages/Gestion/EditarSede.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
 
@@ -30,7 +30,7 @@
             <div class="row">
 
                 <div class="col-lg-4 mb-3">
-                    <label for="foto_perfil" class="form-label">Foto de perfil</label>
+                    <label for="foto_perfil" class="form-label"></label>
 
                     <div id="foto_perfil_container" style="cursor: pointer;">
                         <img src="~/imgs/landing/icon1.png" id="foto_perfil_preview" class="img-fluid" alt="Foto de perfil">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="fechaCreacion" class="form-label">Fecha de creacion</label>
-                        <input type="date" class="form-control" id="fechaCreacion" required>
+                        <input type="text" class="form-control" id="fechaCreacion" required>
                     </div>
                 </div>
             </div>
@@ -74,6 +74,9 @@
             </div>
             <div class="d-flex justify-content-center mb-3">
                 <button type="submit" class="btn" id="btnCrear" style="background-color: #AAD9BB;">Confirmar cambios</button> <!--OJO-->
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button class="boton" onclick="window.location.href = '../GestionInformacion/Sedes'">Regresar</button>
             </div>
         </form>
     </div>
