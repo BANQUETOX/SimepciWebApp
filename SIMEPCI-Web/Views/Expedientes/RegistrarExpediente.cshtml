@@ -1,34 +1,46 @@
 ﻿@model SIMEPCI_Web.Controllers.Expediente
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Scripts {
-    <script src="~/js/pages/Expediente/RegistrarExpediente.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@section Scripts {
+    <script src="~/js/pages/Expedientes/RegistrarExpediente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
+
 <head>
-    <link href="~/css/Pages/Expediente/RegistrarExpediente.css" rel="stylesheet" />
+    <link href="~/css/Pages/ExamenesMedicos/ResultadosEnfermera.css" rel="stylesheet" />
 </head>
+
+<div class="banner-container">
+    <h1 class="banner-title">Registrar Expediente</h1>
+    <img class="banner-image" src="/imgs/Expediente/registrarexpediente.jpg" alt="Banner" />
+</div>
+
 <div class="container">
-    <h1>Registrar Expediente</h1>
-    <form id="formRegistrarExpediente">
+    <form id="formRegistrarExpediente" class="form">
         <div class="form-group">
             <label for="correoPaciente">Correo del Paciente</label>
             <input type="email" class="form-control" id="correoPaciente" name="correoPaciente" required />
         </div>
+
         <div class="form-group">
             <label for="notasEnfermeria">Notas de Enfermería</label>
             <textarea class="form-control" id="notasEnfermeria" name="notasEnfermeria" required></textarea>
         </div>
+
         <div class="form-group">
             <label for="notasMedicas">Notas Médicas</label>
             <textarea class="form-control" id="notasMedicas" name="notasMedicas" required></textarea>
         </div>
+
         <div class="form-group">
             <label for="historialMedico">Historial Médico</label>
             <textarea class="form-control" id="historialMedico" name="historialMedico" required></textarea>
         </div>
+        
+        <div class="text-center">
         <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </div>
