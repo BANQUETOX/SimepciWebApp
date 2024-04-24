@@ -48,5 +48,10 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+
+        public IActionResult RegistrarSede()
+        {
+            return View();
+        }
     }
 }

@@ -1,62 +1,12 @@
-var sede;
-document.addEventListener("DOMContentLoaded", function () {
+ï»¿$(document).ready(function () {
 
-    var sedeString = sessionStorage.getItem("sede");
-    sede = JSON.parse(sedeString);
-
-    document.getElementById("nombre").value = sede.nombre;
-    document.getElementById("descripcion").value = sede.descripcion;
-    document.getElementById("provincia").value = sede.provincia;
-    document.getElementById("canton").value = sede.canton;
-    document.getElementById("distrito").value = sede.distrito;
-    document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
-
-    document.getElementById("foto_perfil_preview").src = sede.foto;
-    document.getElementById("foto_perfil_preview").style.display = "block";
-});
-
-// Mapa de Google Maps
-function initMap() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            const latLng = new google.maps.LatLng(lat, lng);
-
-            const mapOptions = {
-                center: latLng,
-                zoom: 12
-            };
-
-            const map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
-            const marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: "Ubicación actual",
-                draggable: true
-            });
-
-            google.maps.event.addListener(marker, "dragend", function (event) {
-
-                const newLat = event.latLng.lat();
-                const newLng = event.latLng.lng();
-                console.log("Nuevas coordenadas:", newLat, newLng);
-                document.getElementById("ubicacion").value = newLat + "," + newLng;
-            });
-        });
-    } else {
-        alert("Tu navegador no admite la geolocalización");
-    }
-} 
-
-$(document).ready(function () {
+    var sedesData; 
 
     $.ajax({
         url: 'https://simepciapii.azurewebsites.net/api/Sede/GetAllSedes',
         method: 'GET',
         success: function (data) {
-
+            sedesData = data; 
             poblarTabla(data);
         },
         error: function (xhr, status, error) {
@@ -78,7 +28,7 @@ $(document).ready(function () {
             var ubicacion = $('<a>')
                 .attr('href', 'https://www.google.com/maps?q=' + sede.ubicacion)
                 .attr('target', '_blank')
-                .text('Ver Ubicación');
+                .text('Ver UbicaciÃ³n');
 
             fila.append($('<td>').append(ubicacion));
 
@@ -87,11 +37,10 @@ $(document).ready(function () {
             fila.append($('<td>').text(sede.distrito));
 
             var imagen = $('<a>')
-                .attr('href', '#')
-                .attr('name', sede.foto)
-                .text('Ver imágen');
+                .attr('href', sede.foto) 
+                .attr('target', '_blank') 
+                .text('Ver imagen');
             fila.append($('<td>').append(imagen));
-
 
             var botonEditar = $('<button>').text('Editar').addClass('editar-btn');
             fila.append($('<td>').append(botonEditar));
@@ -99,129 +48,29 @@ $(document).ready(function () {
             tbody.append(fila);
         });
 
-        // Evento click para el botón de editar
+        
         $('#tablaSedes').on('click', '.editar-btn', function () {
+            var fila = $(this).closest('tr'); 
+            var index = fila.index(); 
 
-            var fila = $(this).closest('tr');
+            var sede = sedesData[index]; 
 
-            var datosFila = {
-                id: data.id,
+            
+            var json = {
                 nombre: fila.find('td:eq(0)').text(),
                 descripcion: fila.find('td:eq(1)').text(),
                 fechaCreacion: fila.find('td:eq(2)').text(),
-                ubicacion: fila.find('td:eq(3)').text(),
-                foto: $('#url_imagen_cloudinary').val() || sede.foto,
+                ubicacion: sede.ubicacion, 
                 provincia: fila.find('td:eq(4)').text(),
                 canton: fila.find('td:eq(5)').text(),
                 distrito: fila.find('td:eq(6)').text(),
+                id: sede.id, 
+                foto: sede.foto 
+                
             };
 
-            console.log('Datos de la fila:', datosFila);
-
-            var datosFilaJSON = JSON.stringify(datosFila); 
-
-            window.location.href = '../GestionInformacion/EditarSede?datos=' + encodeURIComponent(datosFilaJSON);
-        }); 
+            
+            window.location.href = '../GestionInformacion/EditarSede?data=' + JSON.stringify(json);
+        });
     }
-
-    function obtenerDatosFilaDesdeURL() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var sedeJSON = urlParams.get('sede');
-
-        var datosFila = JSON.parse(decodeURIComponent(sedeJSON));
-
-        return datosFila;
-    }
-
-    $(document).ready(function () {
-        var datosFila = obtenerDatosFilaDesdeURL();
-        poblarTabla(datosFila);
-    });
-
 });
-
-
-function EditarSede() {
-    this.InitView = function () {
-        $('form').submit(function (event) {
-            event.preventDefault();
-            submitEditarSede();
-        });
-    }
-    function submitEditarSede() {
-        var sede = obtenerDatosSede();
-        const API_URL_BASE = "https://simepciapii.azurewebsites.net/";
-        var api_url = API_URL_BASE + "api/Sede/ActualizarSede";
-
-        console.log(sede);
-
-        $.ajax({
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "application/json"
-            },
-            method: "PATCH",
-            url: api_url,
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(sede),
-            hasContent: true
-        }).done(function (result) {
-            console.log("Sede actualizado correctamente.");
-            console.log("Respuesta del servidor:", result);
-            sede = { ...sede, ...sede };
-
-            sessionStorage.setItem("sede", JSON.stringify(sede));
-
-            actualizarCamposSede();
-            mostrarMensaje();
-
-        }).fail(function (xhr, textStatus, errorThrown) {
-            console.error("Error al actualizar sede:", errorThrown);
-        });
-    }
-    function obtenerDatosSede() {
-        var sedeObj = {
-            id: sede.id,
-            nombre: $('#nombre').val(),
-            descripcion: $('#descripcion').val(),
-            fechaCreacion: new Date($('#fechaCreacion').val()).toISOString(),
-            ubicacion: $('#ubicacion').val() || sede.ubicacion,
-            foto: $('#url_imagen_cloudinary').val() || sede.foto,
-            provincia: $('#provincia').val(),
-            canton: $('#canton').val(),
-            distrito: $('#distrito').val(),
-
-        };
-
-        return sedeObj;
-    }
-}
-
-var view = new EditarSede();
-view.InitView();
-
-function mostrarMensaje() {
-    Swal.fire({
-        icon: 'success',
-        title: '¡Éxito!',
-        text: 'Sede actualizada correctamente.',
-        confirmButtonText: 'OK'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.reload();
-        }
-    });
-}
-function actualizarCamposSede() {
-    document.getElementById("nombre").value = sede.nombre;
-    document.getElementById("descripcion").value = sede.descripcion;
-    document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
-    document.getElementById("ubicacion").value = sede.ubicacion;
-    document.getElementById("foto_perfil_preview").src = sede.foto;
-    document.getElementById("provincia").value = sede.provincia;
-    document.getElementById("canton").value = sede.canton;
-    document.getElementById("distrito").value = sede.distrito;
-
-
-} 
