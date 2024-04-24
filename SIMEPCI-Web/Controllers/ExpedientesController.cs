@@ -18,6 +18,7 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+
         public IActionResult InfoPacientes()
         {
             return View();
@@ -26,6 +27,21 @@ namespace SIMEPCI_Web.Controllers
         public IActionResult MostrarExpediente(int id)
         {
             ViewBag.IdExpediente = id;
+            return View();
+        }
+
+        public IActionResult RegistrarNotaMedica()
+        {
+            return View();
+        }
+
+        public IActionResult RegistrarNotaEnfermeria()
+        {
+            return View();
+        }
+
+        public IActionResult RegistrarHistorialMedico()
+        {
             return View();
         }
     }
