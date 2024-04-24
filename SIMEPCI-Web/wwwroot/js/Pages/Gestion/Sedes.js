@@ -105,7 +105,7 @@ $(document).ready(function () {
             var fila = $(this).closest('tr');
 
             var datosFila = {
-                id: fila.find('td:eq(0)').text(),
+                id: data.id,
                 nombre: fila.find('td:eq(1)').text(),
                 descripcion: fila.find('td:eq(2)').text(),
                 fechaCreacion: fila.find('td:eq(3)').text(),
