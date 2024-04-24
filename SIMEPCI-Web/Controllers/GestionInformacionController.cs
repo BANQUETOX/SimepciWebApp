@@ -34,6 +34,11 @@ namespace SIMEPCI_Web.Controllers
             return View();
         }
 
+        public IActionResult EditarSede()
+        {
+            return View();
+        }
+
         public IActionResult Menu()
         {
             return View();
