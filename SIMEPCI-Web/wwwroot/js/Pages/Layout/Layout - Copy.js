@@ -41,6 +41,9 @@
             var rol = sessionStorage.getItem('rol');
             var agendarCita = document.getElementById('article-agendarCita');
             var historialCitas = document.getElementById('article-historialCitas');
+            var registrarExpediente = document.getElementById('article-registrarExpediente');
+            var mostrarExpediente = document.getElementById('article-mostrarExpediente');
+            var editarPerfil = document.getElementById('article-EditarPerfil');
             var miExpediente = document.getElementById('article-miExpediente');
             var misRecetas = document.getElementById('article-misRecetasMedicas');
             var configuraciones = document.getElementById('article-configuraciones');
@@ -58,34 +61,52 @@
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
-                    mostrarElemento(registrarReceta, false);
-                    mostrarElemento(misExamenes, false);
-                    break;
                 case 'Enfermero':
+                    mostrarElemento(editarPerfil, false);
+                    mostrarElemento(miExpediente, false);
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(reportes, false);
+                    mostrarElemento(agendarCita, false);
+                    mostrarElemento(historialCitas, false);
+                    mostrarElemento(misRecetas, false);
+                    mostrarElemento(citasYFacturas, false);
+                    mostrarElemento(misExamenes, false);
+                    mostrarElemento(registrarReceta, false);
+                    mostrarElemento(misCitas, false);
+                    mostrarElemento(subirRecetas, false);
                     break;
                 case 'Administrador':
+                    mostrarElemento(editarPerfil, false);
+                    mostrarElemento(registrarExpediente, false);
+                    mostrarElemento(mostrarExpediente, false);
+                    mostrarElemento(agendarCita, false);
+                    mostrarElemento(historialCitas, false);
+                    mostrarElemento(miExpediente, false);
+                    mostrarElemento(misRecetas, false);
+                    mostrarElemento(citasYFacturas, false);
                     mostrarElemento(misExamenes, false);
                     mostrarElemento(registrarReceta, false);
                     mostrarElemento(subirExamenes, false);
                     mostrarElemento(subirRecetas, false);
-                    mostrarElemento(citasYFacturas, false);
-                    mostrarElemento(agendarCita, false);
+
+                    break;
+                case 'Secretario':  
+                    mostrarElemento(editarPerfil, false);
+                    mostrarElemento(registrarExpediente, false);
                     mostrarElemento(historialCitas, false);
-                    mostrarElemento(historialPagos, false);
                     mostrarElemento(miExpediente, false);
                     mostrarElemento(misRecetas, false);
-                    break;
-                case 'Secretario':
+                    mostrarElemento(citasYFacturas, false);
+                    mostrarElemento(misExamenes, false);
+                    mostrarElemento(registrarReceta, false);
+                    mostrarElemento(subirExamenes, false);
+                    mostrarElemento(subirRecetas, false);
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
-                    mostrarElemento(misCitas, false);
                     mostrarElemento(reportes, false);
-                    break;
                 case 'Doctor':
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
