@@ -205,7 +205,8 @@ function CrearUsuario() {
             direccion: $('#ubicacion').val(),
             fotoPerfil: $('#url_imagen_cloudinary').val(),
             password: $('#password').val(),
-            sexo: $("input[name='sexo']:checked").val()
+            sexo: $("input[name='sexo']:checked").val(),
+            funcionario: $("#funcionario_si").is(":checked") ? true : false
         };
 
         return usuario;
