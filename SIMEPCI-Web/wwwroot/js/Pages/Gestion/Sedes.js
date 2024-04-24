@@ -106,30 +106,40 @@ $(document).ready(function () {
 
             var datosFila = {
                 id: data.id,
-                nombre: fila.find('td:eq(1)').text(),
-                descripcion: fila.find('td:eq(2)').text(),
-                fechaCreacion: fila.find('td:eq(3)').text(),
-                ubicacion: fila.find('td:eq(4)').text(),
-                foto: $('#url_imagen_cloudinary').val() || usuario.foto,
-                provincia: fila.find('td:eq(5)').text(),
-                canton: fila.find('td:eq(6)').text(),
-                distrito: fila.find('td:eq(7)').text(),
+                nombre: fila.find('td:eq(0)').text(),
+                descripcion: fila.find('td:eq(1)').text(),
+                fechaCreacion: fila.find('td:eq(2)').text(),
+                ubicacion: fila.find('td:eq(3)').text(),
+                foto: $('#url_imagen_cloudinary').val() || sede.foto,
+                provincia: fila.find('td:eq(4)').text(),
+                canton: fila.find('td:eq(5)').text(),
+                distrito: fila.find('td:eq(6)').text(),
             };
 
-            var datosFilaJSON = JSON.stringify(datosFila); 
-
             console.log('Datos de la fila:', datosFila);
+
+            var datosFilaJSON = JSON.stringify(datosFila); 
 
             window.location.href = '../GestionInformacion/EditarSede?datos=' + encodeURIComponent(datosFilaJSON);
         }); 
     }
+
+    function obtenerDatosFilaDesdeURL() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var sedeJSON = urlParams.get('sede');
+
+        var datosFila = JSON.parse(decodeURIComponent(sedeJSON));
+
+        return datosFila;
+    }
+
+    $(document).ready(function () {
+        var datosFila = obtenerDatosFilaDesdeURL();
+        poblarTabla(datosFila);
+    });
+
 });
-function obtenerDatosFilaDesdeURL() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var sedeJSON = urlParams.get('sede');
-    var datosFila = JSON.parse(decodeURIComponent(sedeJSON));
-    return datosFila;
-}
+
 
 function EditarSede() {
     this.InitView = function () {
@@ -208,7 +218,7 @@ function actualizarCamposSede() {
     document.getElementById("descripcion").value = sede.descripcion;
     document.getElementById("fechaCreacion").value = sede.fechaCreacion.split("T")[0];
     document.getElementById("ubicacion").value = sede.ubicacion;
-    document.getElementById("foto_perfil_preview").src = usuario.foto;
+    document.getElementById("foto_perfil_preview").src = sede.foto;
     document.getElementById("provincia").value = sede.provincia;
     document.getElementById("canton").value = sede.canton;
     document.getElementById("distrito").value = sede.distrito;
