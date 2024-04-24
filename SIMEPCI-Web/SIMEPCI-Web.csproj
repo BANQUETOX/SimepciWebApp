@@ -12,6 +12,7 @@
   <ItemGroup>
     <Content Remove="Views\RecuperarContrasenna\Confirmacion.cshtml" />
     <Content Remove="wwwroot\imgs\landing\" />
+    <Content Remove="wwwroot\js\pages\gestion\Sedes.js" />
     <Content Remove="wwwroot\js\Pages\Join\" />
     <Content Remove="wwwroot\imgs\Gestion\" />
     <Content Remove="wwwroot\js\Pages\Gestion\" />
@@ -47,5 +48,11 @@
     <None Remove="Views\Join\" />
     <None Remove="Views\Perfil\" />
     <None Remove="Views\GestionInformacion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\pages\gestion\Sedes.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\pages\gestion\Sedes.js" />
   </ItemGroup>
 </Project>
