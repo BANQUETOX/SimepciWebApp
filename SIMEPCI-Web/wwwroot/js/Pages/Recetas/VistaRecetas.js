@@ -30,11 +30,17 @@
             fila.append($('<td>').text(receta.diasDosis));
             fila.append($('<td>').text(receta.recomendaciones));
 
-            var recetaEnlace = $('<a>')
-                .attr('href', '#')
-                .attr('name', receta.imagen)
-                .text('Ver receta');
-            fila.append($('<td>').append(recetaEnlace));
+            var recetaEnlace = $('<td>');
+            if (receta.imagen !== "") {
+                var resultadoEnlace = $('<a>')
+                    .attr('href', receta.imagen)
+                    .attr('target', '_blank')
+                    .text('Ver imagen');
+                recetaEnlace.append(resultadoEnlace);
+            } else {
+                recetaEnlace.text('Receta física no registrada');
+            }
+            fila.append(recetaEnlace);
 
             tbody.append(fila);
         });
