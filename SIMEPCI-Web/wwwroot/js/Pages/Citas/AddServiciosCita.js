@@ -74,7 +74,7 @@
                 data: JSON.stringify(postData),
                 success: function (result) {
                     console.log("Servicio añadido correctamente.");
-                   
+                    Swal.fire('Servicio registrado', 'El servicio ha sido añadido correctamente.', 'success');
                     $('#modalAgregarServicio').modal('hide');
                 },
                 error: function (xhr, textStatus, errorThrown) {
