@@ -50,7 +50,6 @@ function RegistrarCita() {
             $('<option>').text('Seleccione una especialidad').attr('disabled', 'disabled').attr('selected', 'selected').appendTo(select);
             $.each(result, function (index, especialidad) {
                 $('<option>').text(especialidad.nombre).attr('id', especialidad.id).val(especialidad.id).appendTo(select);
-                NombreEspecialidadSeleccionada = especialidad.nombre;
             });
             listaEspecialidades.append(select);
         }).fail(function (error) {
@@ -97,7 +96,7 @@ function RegistrarCita() {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'Week,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 customButtons: {
                     Week: {
@@ -115,6 +114,7 @@ function RegistrarCita() {
                     var horaInicio = info.startStr;
                     var horaFinal = moment(info.start).add(30, 'minutes').format();
                     var correoPaciente = $('#correoUsuario').val();
+                    var especialidad = $('#especialidad option:selected').text();
                     var cita = {
                         correoPaciente: correoPaciente,
                         horaInicio: horaInicio,
@@ -122,7 +122,7 @@ function RegistrarCita() {
                         idSede: IdSedeSeleccionada,
                         idEspecialidad: IdEspecialidadSeleccionada
                     };
-                    verificarDisponibilidad(cita);
+                    verificarDisponibilidad(cita, especialidad);
                 }
             });
             calendar.render();
@@ -151,7 +151,7 @@ function RegistrarCita() {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'Week,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 customButtons: {
                     Week: {
@@ -169,6 +169,7 @@ function RegistrarCita() {
                     var horaInicio = info.startStr;
                     var horaFinal = moment(info.start).add(30, 'minutes').format();
                     var correoPaciente = sessionStorage.getItem('correo');
+                    var especialidad = $('#especialidad option:selected').text();
                     var cita = {
                         correoPaciente: correoPaciente,
                         horaInicio: horaInicio,
@@ -176,7 +177,7 @@ function RegistrarCita() {
                         idSede: IdSedeSeleccionada,
                         idEspecialidad: IdEspecialidadSeleccionada
                     };
-                    verificarDisponibilidad(cita);
+                    verificarDisponibilidad(cita, especialidad);
                 }
             });
             calendar.render();
@@ -184,12 +185,12 @@ function RegistrarCita() {
             console.error('Error al obtener citas reservadas:', error);
         });
     }
-    function verificarDisponibilidad(cita) {
+    function verificarDisponibilidad(cita, especialidad) {
         console.log('Nombre especialidad '+NombreEspecialidadSeleccionada)
         var horaInicioFormateada = moment(cita.horaInicio).format('YYYY-MM-DD HH:mm');
         Swal.fire({
             title: 'Registar Cita',
-            text: 'Desea registrar una cita en: ' + NombreEspecialidadSeleccionada+' para el día '+ horaInicioFormateada,
+            text: 'Desea registrar una cita en: ' + especialidad +' para el día '+ horaInicioFormateada,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Sí, registrar',
