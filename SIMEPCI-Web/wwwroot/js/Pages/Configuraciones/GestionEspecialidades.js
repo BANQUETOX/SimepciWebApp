@@ -37,7 +37,7 @@
             // Mostrar modal para editar el precio
             Swal.fire({
                 title: 'Editar Precio',
-                html: '<input type="number" id="nuevoPrecio" placeholder="Nuevo precio">',
+                html: '<input type="number" id="nuevoPrecio" placeholder="Nuevo precio" min="0">',
                 showCancelButton: true,
                 confirmButtonText: 'OK',
                 cancelButtonText: 'Cancelar',

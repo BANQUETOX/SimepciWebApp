@@ -41,7 +41,9 @@
                         <p>3: 10pm-6am</p>`,
                 input: 'text',
                 inputAttributes: {
-                    autocapitalize: 'off'
+                    autocapitalize: 'off',
+                    pattern: '[1-3]*', 
+                    inputmode: 'numeric'
                 },
                 showCancelButton: true,
                 confirmButtonText: 'Guardar',
