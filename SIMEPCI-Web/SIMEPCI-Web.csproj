@@ -36,7 +36,6 @@
     <Folder Include="wwwroot\imgs\landing\" />
     <Folder Include="Views\Join\" />
     <Folder Include="wwwroot\js\Pages\Join\" />
-    <Folder Include="Views\Perfil\" />
     <Folder Include="wwwroot\css\Pages\Gestion\" />
     <Folder Include="wwwroot\js\Pages\Pagos\" />
     <Folder Include="wwwroot\imgs\Pagos\" />
