@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WEB_UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/pages/Perfil/Perfil.css"></link>
+
+    <style>
+        .articles {
+            display: flex;
+            justify-content: center;
+        }
+
+            .articles .article-wrapper {
+                margin: 20px; 
+                max-width: 400px; 
+                text-align: center;
+            }
+
+
+    </style>
+</head>
+
+<div id="PerfilHeader">
+</div>
+
+<section class="articles">
+
+    <article id="article-agendarCita">
+        <div class="article-wrapper">
+            <figure>
+                <img src="/imgs/Perfil/agendarcita.jpg" alt="" />
+            </figure>
+            <div class="article-body">
+                <h2>Agendar cita</h2>
+                <p>
+                    Agende su cita seleccionando la especialidad que requiere, y el horario que mas le convenga
+                </p>
+                <a href="../Citas/CitasEspecialidad" class="read-more">
+                    Ver más <span class="sr-only">about this is some title</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <article id="article-historialCitas">
+        <div class="article-wrapper">
+            <figure>
+                <img src="/imgs/Perfil/historialcitas.jpg" alt="" />
+            </figure>
+            <div class="article-body">
+                <h2>Historial de citas y pagos</h2>
+                <p>
+                    Consulte sus citas y pagos realizados
+                </p>
+                <a href="../Pagos/VistaPagos" class="read-more">
+                    Ver más <span class="sr-only">about this is some title</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </article>
+
+</section>
