@@ -42,7 +42,11 @@
                 confirmButtonText: 'OK',
                 cancelButtonText: 'Cancelar',
                 preConfirm: () => {
-                    return $('#nuevoPrecio').val();
+                    const nuevoPrecio = $('#nuevoPrecio').val();
+                    if (nuevoPrecio < 0) {
+                        Swal.showValidationMessage('El precio no puede ser negativo');
+                    }
+                    return nuevoPrecio;
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
