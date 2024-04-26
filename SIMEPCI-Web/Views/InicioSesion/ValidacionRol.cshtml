@@ -6,10 +6,40 @@
 @section Scripts {
     <script src="~/js/pages/iniciosesion/validacionroles.js"></script>
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+    <style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /*height: 100vh;*/
+        }
+
+    .container > div {
+                border: 2px solid #AAD9BB; 
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+    }
+
+    #btnRol {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 10px;
+        }
+</style>
+</head>
+
 <div class="container" >
     <div>
         <h3>Validación de Roles</h3>
-        <p>El usuario posee mas de un rol por favor elija uno para continuar</p>
+        <p>El usuario posee más de un rol, por favor elija uno para continuar.</p>
         <div id="ValidacionRoles" >
 
         </div>
