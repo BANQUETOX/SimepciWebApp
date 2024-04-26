@@ -23,20 +23,20 @@
     </div>
     <div class="form-container">
         <div>
-            <h4>1. Notificación de cita</h4>
-            <input type="text" id="Recordatorios" placeholder="Ingrese el texto de notificación">
+            <h4>1. Notificación de cita (días)</h4>
+            <input type="text" id="Recordatorios" placeholder="Ingrese el texto de notificación" min="0">
             <button id="updateRecordatorio">Actualizar</button>
         </div>
 
         <div>
             <h4>2. Impuesto de servicio (%)</h4>
-            <input type="number" id="Impuesto" placeholder="Ingrese el impuesto de servicio">
+            <input type="number" id="Impuesto" placeholder="Ingrese el impuesto de servicio" min="0">
             <button id="updateImpuesto">Actualizar</button>
         </div>
 
         <div>
             <h4>3. IVA (%)</h4>
-            <input type="number" id="IVA" placeholder="Ingrese el valor del IVA">
+            <input type="number" id="IVA" placeholder="Ingrese el valor del IVA" min="0">
             <button id="updateIva">Actualizar</button>
         </div>
         <button class="boton" onclick="window.location.href = '../GestionInformacion/Menu'">Regresar</button>

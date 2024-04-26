@@ -22,101 +22,254 @@
             var fila = $('<tr>');
             fila.append('<td>' + funcionario.nombre + ' ' + funcionario.primerApellido + ' ' + funcionario.segundoApellido + '</td>');
             fila.append('<td>' + funcionario.cedula + '</td>');
-            fila.append('<td>' + funcionario.fechaNacimiento.split('T')[0] + '</td>');
-            fila.append('<td>' + funcionario.telefono + '</td>');
             fila.append('<td>' + funcionario.correo + '</td>');
-            fila.append('<td>' + funcionario.direccion + '</td>');
-            fila.append('<td>' + funcionario.fotoPerfil + '</td>');
-            fila.append('<td>' + funcionario.sexo + '</td>');
+            fila.append('<td>' + (funcionario.activo ? 'Activo' : 'Inactivo') + '</td>');
 
-            var botonEditar = $('<button>').text('Editar').click(function () {
-                mostrarModalEditar(funcionario);
+            var roles = funcionario.roles.join(', ');
+            fila.append('<td>' + roles + '</td>');
+
+            var botonText = funcionario.activo ? 'Desactivar usuario' : 'Activar usuario';
+            var botonEditar = $('<button>').text(botonText).click(function () {
+                Swal.fire({
+                    title: '¿Estás seguro de querer cambiar el estado del usuario?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí',
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var urlActivar = 'https://simepciapii.azurewebsites.net/api/Usuario/ActivarUsuario';
+                        var urlDesactivar = 'https://simepciapii.azurewebsites.net/api/Usuario/DesactivarUsuario';
+                        cambiarEstadoUsuario(funcionario.correo, !funcionario.activo, urlActivar, urlDesactivar);
+                    }
+                });
             });
             var accionesCell = $('<td>').append(botonEditar);
             fila.append(accionesCell);
+
+            var botonRoles = $('<button>').text('Gestionar Roles').click(function () {
+                Swal.fire({
+                    title: '¿Qué acción deseas realizar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Asignar',
+                    cancelButtonText: 'Eliminar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Si el usuario elige asignar
+                        Swal.fire({
+                            title: '¿Qué rol deseas asignar?',
+                            input: 'select',
+                            inputOptions: {
+                                '1': 'Admin',
+                                '2': 'Doctor',
+                                '3': 'Secretario',
+                                '4': 'Enfermero'
+                            },
+                            inputPlaceholder: 'Selecciona un rol',
+                            showCancelButton: true,
+                            confirmButtonText: 'Confirmar',
+                            cancelButtonText: 'Cancelar',
+                            inputValidator: (value) => {
+                                return new Promise((resolve) => {
+                                    if (value !== '') {
+                                        resolve();
+                                    } else {
+                                        resolve('Debes seleccionar un rol');
+                                    }
+                                });
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Si el usuario selecciona un rol
+                                var idRol = result.value;
+                                var correoUsuario = funcionario.correo;
+
+                                if (idRol === '2') {
+                                    // Si el usuario selecciona "Doctor"
+                                    Swal.fire({
+                                        title: 'Ingresa los siguientes datos para el rol Doctor',
+                                        html:
+                                            '<input id="especialidad" class="swal2-input" placeholder="ID Especialidad" min="0">' +
+                                            '<input id="sede" class="swal2-input" placeholder="ID Sede" min="0">' +
+                                            '<input id="horario" class="swal2-input" placeholder="Horario" min="0">',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Confirmar',
+                                        cancelButtonText: 'Cancelar',
+                                        preConfirm: () => {
+                                            return {
+                                                especialidad: $('#especialidad').val(),
+                                                sede: $('#sede').val(),
+                                                horario: $('#horario').val()
+                                            };
+                                        },
+                                        didOpen: () => {
+                                            $('#especialidad').focus();
+                                        },
+                                        inputValidator: (value) => {
+                                            if (!value.especialidad || !value.sede || !value.horario) {
+                                                return 'Debes ingresar todos los datos';
+                                            }
+                                        }
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Si el usuario ingresa los datos requeridos
+                                            var datosDoctor = result.value;
+                                            asignarRolDoctor(correoUsuario, datosDoctor);
+                                        }
+                                    });
+                                } else {
+                                    // Si el usuario selecciona otro rol
+                                    gestionarRoles(correoUsuario, idRol, 'asignar');
+                                }
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        // Si el usuario elige eliminar
+                        Swal.fire({
+                            title: '¿Qué rol deseas eliminar?',
+                            html:
+                                '<p>1: Admin</p>' +
+                                '<p>2: Doctor</p>' +
+                                '<p>3: Secretario</p>' +
+                                '<p>4: Enfermero</p>',
+                            input: 'text',
+                            inputPlaceholder: 'Ingresa el ID del rol',
+                            showCancelButton: true,
+                            confirmButtonText: 'Confirmar',
+                            cancelButtonText: 'Cancelar',
+                            inputValidator: (value) => {
+                                return new Promise((resolve) => {
+                                    if (value !== '') {
+                                        resolve();
+                                    } else {
+                                        resolve('Debes ingresar el ID del rol');
+                                    }
+                                });
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                               
+                                var idRol = result.value;
+                                var id = funcionario.id; 
+                                eliminarRol(id, idRol);
+                            }
+                        });;
+                    }
+                });
+            });
+            var cellBotonRoles = $('<td>').append(botonRoles);
+            fila.append(cellBotonRoles);
 
             tabla.append(fila);
         });
     }
 
-    function mostrarModalEditar(funcionario) {
-        $('#idUsuario').val(funcionario.id);
-        $('#nombre').val(funcionario.nombre);
-        $('#primerApellido').val(funcionario.primerApellido);
-        $('#segundoApellido').val(funcionario.segundoApellido);
-        $('#cedula').val(funcionario.cedula);
-        $('#fechaNacimiento').val(funcionario.fechaNacimiento.split('T')[0]); // Formato YYYY-MM-DD
-        $('#telefono').val(funcionario.telefono);
-        $('#correo').val(funcionario.correo);
-        $('#direccion').val(funcionario.direccion);
-        $('#fotoPerfil').val(funcionario.fotoPerfil);
-        $('#sexo').val(funcionario.sexo);
-        $('#editarModal').css('display', 'block');
+    function cambiarEstadoUsuario(correoUsuario, nuevoEstado, urlActivar, urlDesactivar) {
+        var url = nuevoEstado ? urlActivar : urlDesactivar;
+
+        $.ajax({
+            url: url + '?correoUsuario=' + encodeURIComponent(correoUsuario),
+            method: 'PATCH',
+            success: function () {
+                obtenerFuncionarios();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al cambiar el estado del usuario:', error);
+            }
+        });
     }
 
-    function cerrarModalEditar() {
-        $('#editarModal').css('display', 'none');
-    }
-
-    $('.close').click(function () {
-        cerrarModalEditar();
-    });
-
-    $(window).click(function (event) {
-        if (event.target == $('#editarModal')[0]) {
-            cerrarModalEditar();
-        }
-    });
-
-    $('#editarForm').submit(function (event) {
-        event.preventDefault();
-        var datos = {
-            idUsuario: parseInt($('#idUsuario').val()),
-            nombre: $('#nombre').val(),
-            primerApellido: $('#primerApellido').val(),
-            segundoApellido: $('#segundoApellido').val(),
-            cedula: $('#cedula').val(),
-            fechaNacimiento: $('#fechaNacimiento').val(),
-            telefono: $('#telefono').val(),
-            correo: $('#correo').val(),
-            direccion: $('#direccion').val(),
-            fotoPerfil: $('#fotoPerfil').val(),
-            sexo: $('#sexo').val()
+    function asignarRolDoctor(correoUsuario, datosDoctor) {
+        var info = {
+            correoUsuario: correoUsuario,
+            idEspecialidad: datosDoctor.especialidad,
+            idSede: datosDoctor.sede,
+            horario: datosDoctor.horario
         };
 
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Usuario/UpdateUsuario',
-            method: 'PATCH',
-            contentType: 'application/json',
-            data: JSON.stringify(datos),
+            url: 'https://simepciapii.azurewebsites.net/api/Rol/AsignarRolDoctor',
+            method: 'POST',
+            headers: {
+                'accept': 'text/plain',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(info),
             success: function (response) {
-                console.log('Funcionario actualizado con éxito:', response);
-                cerrarModalEditar();
-                obtenerFuncionarios();
-                mostrarMensajeExito();
+                
+                console.log('Rol de Doctor asignado correctamente:', response);
+                Swal.fire('¡Rol de Doctor asignado correctamente!', '', 'success');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
             },
             error: function (xhr, status, error) {
-                console.error('Error al actualizar el funcionario:', error);
-                mostrarMensajeError(xhr.responseText);
+                
+                console.error('Error al asignar el rol de Doctor:', error);
+                Swal.fire('Error', 'Hubo un problema al asignar el rol de Doctor', 'error');
             }
-        });
-    });
-
-    function mostrarMensajeExito() {
-        Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: 'El funcionario se actualizó correctamente.',
-            confirmButtonText: 'OK'
         });
     }
 
-    function mostrarMensajeError(mensaje) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: mensaje || 'Ocurrió un error al actualizar el funcionario.',
-            confirmButtonText: 'OK'
+    function gestionarRoles(correoUsuario, idRol) {
+        var url = 'https://simepciapii.azurewebsites.net/api/Rol/AsignarRolUsuario?correoUsuario=' + encodeURIComponent(correoUsuario) + '&idRol=' + idRol;
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            success: function (response) {
+                
+                console.log('Rol asignado correctamente:', response);
+                Swal.fire('¡Rol asignado correctamente!', '', 'success');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            },
+            error: function (xhr, status, error) {
+               
+                console.error('Error al asignar el rol:', error);
+                Swal.fire('Error', 'Hubo un problema al asignar el rol', 'error');
+            }
+        });
+    }
+
+    function eliminarRol(idUsuario, idRol) {
+        $.ajax({
+            url: 'https://simepciapii.azurewebsites.net/api/Rol/RemoverRolUsuario?idUsuario=' + idUsuario + '&idRol=' + idRol,
+            method: 'POST',
+            success: function (response) {
+                
+                console.log('Rol eliminado correctamente:', response);
+                Swal.fire('¡Rol eliminado correctamente!', '', 'success');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            },
+            error: function (xhr, status, error) {
+                
+                console.error('Error al eliminar el rol:', error);
+                Swal.fire('Error', 'Hubo un problema al eliminar el rol', 'error');
+            }
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,41 +23,48 @@ $(document).ready(function () {
                 var fila = $('<tr>');
                 fila.append('<td>' + examen.nombreTipoExamenMedico + '</td>');
                 fila.append('<td>' + examen.objetivo + '</td>');
-              
-                var resultadoEnlace = $('<a>')
-                    .attr('href', '#') 
-                    .attr('name', examen.resultado) 
-                    .text('Ver resultados');
 
-                fila.append($('<td>').append(resultadoEnlace));
+                var resultadoCell = $('<td>');
+                var accionesCell = $('<td>');
 
-                var boton = $('<button>').text('Añadir resultado');
-                boton.click(function () {
-                    var id = parseInt(examen.id);
-                    const cloudinaryWidget = cloudinary.createUploadWidget({
-                        cloudName: 'dddka6gqc',
-                        uploadPreset: 'ml_default',
-                        sources: ['local', 'url', 'camera', 'facebook', 'instagram'],
-                        multiple: false,
-                        cropping: false,
-                    }, (error, result) => {
-                        if (!error && result && result.event === "success") {
-                            console.log('Archivo cargado a Cloudinary:', result.info.secure_url);
+                if (examen.resultado === "") {
+                    resultadoCell.text('Resultado pendiente');
+                    var boton = $('<button>').text('Añadir resultado');
+                    boton.click(function () {
+                        var id = parseInt(examen.id);
+                        const cloudinaryWidget = cloudinary.createUploadWidget({
+                            cloudName: 'dddka6gqc',
+                            uploadPreset: 'ml_default',
+                            sources: ['local', 'url', 'camera', 'facebook', 'instagram'],
+                            multiple: false,
+                            cropping: false,
+                        }, (error, result) => {
+                            if (!error && result && result.event === "success") {
+                                console.log('Archivo cargado a Cloudinary:', result.info.secure_url);
 
-                            subirResultado(result.info.secure_url, id);
+                                subirResultado(result.info.secure_url, id);
 
-                        } else {
-                            console.error("Error al cargar la imagen:", error);
-                            if (error) {
-                                console.log("Detalles del error:", error.message);
+                            } else {
+                                console.error("Error al cargar la imagen:", error);
+                                if (error) {
+                                    console.log("Detalles del error:", error.message);
+                                }
                             }
-                        }
+                        });
+
+                        cloudinaryWidget.open();
                     });
+                    accionesCell.append(boton);
+                } else {
+                    var resultadoEnlace = $('<a>')
+                        .attr('href', examen.resultado)
+                        .attr('target', '_blank')
+                        .text("Ver Resultados");
+                    resultadoCell.append(resultadoEnlace);
+                    accionesCell.text('Examen completado');
+                }
 
-                    cloudinaryWidget.open();
-                });
-
-                var accionesCell = $('<td>').append(boton);
+                fila.append(resultadoCell);
                 fila.append(accionesCell);
                 tabla.append(fila);
             });

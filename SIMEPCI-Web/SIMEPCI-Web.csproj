@@ -26,6 +26,11 @@
     <Content Remove="wwwroot\js\Pages\Configuraciones\" />
     <Content Remove="wwwroot\css\Pages\Configuraciones\" />
     <Content Remove="wwwroot\imgs\Configuraciones\" />
+    <Content Remove="wwwroot\imgs\Gestion\icon.jpg" />
+    <Content Remove="wwwroot\imgs\Gestion\sedes.jpg" />
+    <Content Remove="wwwroot\js\Pages\Gestion\EditarSede.js" />
+    <Content Remove="Views\GestionInformacion\RegistrarSede.cshtml" />
+    <Content Remove="wwwroot\imgs\Gestion\gestionusuarios.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\imgs\landing\" />

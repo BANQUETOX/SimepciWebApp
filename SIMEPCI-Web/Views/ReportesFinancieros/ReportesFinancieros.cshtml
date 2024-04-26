@@ -1,74 +1,39 @@
-﻿@model List<SIMEPCI_Web.Controllers.Reporte>
-@{
+﻿@{
     ViewData["Title"] = "Reportes financieros";
 }
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/js/pages/ReportesFinancieros/ReportesFinancieros.js"></script>
+}
 
 <link rel="stylesheet" href="~/css/Pages/ReportesFinancieros/ReportesFinancieros.css" />
-<script src="~/js/ReportesFinancieros.js"></script>
 
 <h2>Reportes financieros</h2>
 
-<div class="reportes-container">
-    @foreach (var reporte in Model)
-    {
-        <div class="reporte-card">
-            <div class="reporte-field">
-                <label>Fecha:</label>
-                <span class="fecha">@reporte.Fecha.ToString("dd/MM/yyyy")</span>
-            </div>
-            <div class="reporte-field">
-                <label>Cédula del cliente:</label>
-                <span class="cedula-cliente">@reporte.CedulaCliente</span>
-            </div>
-            <div class="reporte-field">
-                <label>Sede:</label>
-                <span class="sede">@reporte.Sede</span>
-            </div>
-            <div class="reporte-field">
-                <label>Doctor:</label>
-                <span class="doctor">@reporte.Doctor</span>
-            </div>
-            <div class="reporte-field">
-                <label>Costo de cita:</label>
-                <span class="costo-cita">@reporte.CostoCita.ToString("C")</span>
-            </div>
-            <button class="editar">Editar</button>
-        </div>
-    }
+<h2>Reportes Mensuales</h2>
+<table id="tablaGanancias">
+    <thead>
+        <tr>
+            <th>Mes correspondiente</th>
+            <th>Ganancias por citas</th>
+            <th>Ganancias por servicios</th>
+            <th>Ganancias totales</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- js -->
+    </tbody>
+</table>
+
+<div class="button-container">
+    <button class="btn btn-primary" onclick="window.history.back()">Regresar</button>
+    <button class="btn btn-success" onclick="descargarPDF()">Descargar como PDF</button>
 </div>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganancias Mensuales</title>
-    <link href="~/css/Pages/ExamenesMedicos/ResultadosPaciente.css" rel="stylesheet" /> <!--//ojo-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
-<body>
-    <h2>Reportes Mensuales</h2>
-    <table id="tablaGanancias">
-        <thead>
-            <tr>
-                <th>Mes correspondiente</th>
-                <th>Ganancias por citas</th>
-                <th>Ganancias por servicios</th>
-                <th>Ganancias totales</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- js -->
-        </tbody>
-    </table>
-
-</body>
-</html>
-

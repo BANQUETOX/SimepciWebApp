@@ -37,12 +37,16 @@
             // Mostrar modal para editar el precio
             Swal.fire({
                 title: 'Editar Precio',
-                html: '<input type="number" id="nuevoPrecio" placeholder="Nuevo precio">',
+                html: '<input type="number" id="nuevoPrecio" placeholder="Nuevo precio" min="0">',
                 showCancelButton: true,
                 confirmButtonText: 'OK',
                 cancelButtonText: 'Cancelar',
                 preConfirm: () => {
-                    return $('#nuevoPrecio').val();
+                    const nuevoPrecio = $('#nuevoPrecio').val();
+                    if (nuevoPrecio < 0) {
+                        Swal.showValidationMessage('El precio no puede ser negativo');
+                    }
+                    return nuevoPrecio;
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
