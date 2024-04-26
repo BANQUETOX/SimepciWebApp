@@ -30,7 +30,16 @@
      $('#updateRecordatorio').click(function () {
          
          var recordatorios = $('#Recordatorios').val();
- 
+         if (recordatorios < 0) {
+             // Mostrar mensaje de error con SweetAlert
+             Swal.fire({
+                 icon: 'error',
+                 title: 'Error',
+                 text: 'El valor ingresado no puede ser negativo',
+                 confirmButtonText: 'OK'
+             });
+             return;
+         }
          
          $.ajax({
              url: 'https://simepciapii.azurewebsites.net/api/Configuracion/ActualizarRecordatorio?valorRecordatorio=' + recordatorios,
