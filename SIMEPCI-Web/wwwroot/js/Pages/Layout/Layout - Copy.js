@@ -40,6 +40,7 @@
         if (vista.includes('/Perfil/Perfil')) {
             var rol = sessionStorage.getItem('rol');
             var agendarCita = document.getElementById('article-agendarCita');
+            var addServiciosCita = document.getElementById('article-addServiciosCita'); //
             var historialCitas = document.getElementById('article-historialCitas');
             var registrarExpediente = document.getElementById('article-registrarExpediente');
             var mostrarExpediente = document.getElementById('article-mostrarExpediente');
@@ -58,6 +59,8 @@
             var registrarNotaMedica = document.getElementById('article-registrarNotaMedica');
             var registrarNotaEnfermeria = document.getElementById('article-registrarNotaEnfermeria');
             var registrarHistorialMedico = document.getElementById('article-registrarHistorialMedico');
+            var resultadoEnfermera = document.getElementById('article-resultadoEnfermera');
+
             switch (rol) {
                 case 'Paciente':
                     mostrarElemento(configuraciones, false);
@@ -68,6 +71,10 @@
                     mostrarElemento(registrarNotaMedica, false);
                     mostrarElemento(registrarNotaEnfermeria, false);
                     mostrarElemento(registrarHistorialMedico, false);
+                    mostrarElemento(registrarReceta, false);
+                    mostrarElemento(reportes, false);
+                    mostrarElemento(addServiciosCita, false);
+                    mostrarElemento(resultadoEnfermera, false);
                     break;
                 case 'Enfermero':
                     mostrarElemento(editarPerfil, false);
@@ -85,6 +92,9 @@
                     mostrarElemento(subirRecetas, false);
                     mostrarElemento(registrarNotaMedica, false);
                     mostrarElemento(registrarHistorialMedico, false);
+                    mostrarElemento(subirExamenes, false);
+                    mostrarElemento(registrarExpediente, false);
+                    mostrarElemento(addServiciosCita, false);
                     break;
                 case 'Administrador':
                     mostrarElemento(editarPerfil, false);
@@ -101,6 +111,8 @@
                     mostrarElemento(registrarNotaMedica, false);
                     mostrarElemento(registrarNotaEnfermeria, false);
                     mostrarElemento(registrarHistorialMedico, false);
+                    mostrarElemento(addServiciosCita, false);
+                    mostrarElemento(resultadoEnfermera, false);
                     break;
                 case 'Secretario':
                     mostrarElemento(editarPerfil, false);
@@ -119,12 +131,18 @@
                     mostrarElemento(registrarNotaMedica, false);
                     mostrarElemento(registrarNotaEnfermeria, false);
                     mostrarElemento(registrarHistorialMedico, false);
+                    mostrarElemento(addServiciosCita, false);
+                    mostrarElemento(resultadoEnfermera, false);
                     break;
                 case 'Doctor':
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(registrarNotaEnfermeria, false);
+                    mostrarElemento(misExamenes, false);
+                    mostrarElemento(misRecetas, false);
+                    mostrarElemento(registrarExpediente, false);
+                    mostrarElemento(resultadoEnfermera, false);
                     break;
                 default:
                     break;
