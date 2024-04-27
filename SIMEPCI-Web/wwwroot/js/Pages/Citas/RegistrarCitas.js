@@ -13,13 +13,16 @@ function RegistrarCita() {
         this.SeleccionarEspecialidad();
         $('#btnCuposDisponiblesDoctor').click(() => {
             this.CuposDisponibles();
+            this.GetHorario();
         });
         $('#btnCuposDisponiblesPaciente').click(() => {
             this.CuposDisponiblesPaciente();
+            this.GetHorario();
         });
         $('#btnBuscar').click(() => {
             this.GetPacienteCorreo();
         });
+
         console.log(rol);
     }
     this.SeleccionarEspecialidad = function () {
@@ -75,6 +78,53 @@ function RegistrarCita() {
             console.log(error);
         });
     }
+    this.GetHorario = function () {
+        var url_base = 'https://simepciapii.azurewebsites.net/api/Doctor/getDoctoresBySedeAndEspecialidad?idSede=';
+        $.ajax({
+            url: url_base + IdSedeSeleccionada + '&idEspecialidad=' + IdEspecialidadSeleccionada,
+            method: 'GET',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json'
+        }).done(function (response) {
+            var horaInicial = response[0].horario;
+            var parametro = "";
+            console.log(horaInicial);
+            switch (horaInicial) {
+                case 1:
+                    parametro = 14;
+                    break;
+                case 2:
+                    parametro = 22;
+                    break;
+                case 3:
+                    parametro = 6;
+                    break;
+                default:
+                    break;
+            }
+
+
+            var eventosNoDisponibles = [];
+            var fechaActual = new Date();
+
+            fechaActual.setHours(parametro, 0, 0, 0);
+
+            for (var i = 0; i < 32; i++) { // Generar eventos para las próximas 16 horas
+                var fechaNoDisponible = new Date(fechaActual);
+                fechaNoDisponible.setMinutes(fechaNoDisponible.getMinutes() + (i * 30)); // Aumentar 30 minutos en cada iteración
+                var eventoNoDisponible = {
+                    title: 'No disponible',
+                    start: fechaNoDisponible,
+                    end: new Date(fechaNoDisponible.getTime() + (30 * 60 * 1000))
+                };
+                eventosNoDisponibles.push(eventoNoDisponible);
+            }
+            console.log(eventosNoDisponibles);
+            return eventosNoDisponibles;
+        }).fail(function (error) {
+            console.error('Error :', error);
+        });
+    }
     this.CuposDisponibles = function () {
         var url_base = 'https://simepciapii.azurewebsites.net/api/Cita/GetCitasReservadas?idEspecialidad=';
         $.ajax({
@@ -83,6 +133,7 @@ function RegistrarCita() {
             contentType: 'application/json;charset=utf-8',
             dataType: 'json'
         }).done(function (response) {
+            console.log(response.horario);
             var eventosFiltrados = response.map(function (cita) {
                 return {
                     id: cita.id,
@@ -186,11 +237,11 @@ function RegistrarCita() {
         });
     }
     function verificarDisponibilidad(cita, especialidad) {
-        console.log('Nombre especialidad '+NombreEspecialidadSeleccionada)
+        console.log('Nombre especialidad ' + NombreEspecialidadSeleccionada)
         var horaInicioFormateada = moment(cita.horaInicio).format('YYYY-MM-DD HH:mm');
         Swal.fire({
             title: 'Registar Cita',
-            text: 'Desea registrar una cita en: ' + especialidad +' para el día '+ horaInicioFormateada,
+            text: 'Desea registrar una cita en: ' + especialidad + ' para el día ' + horaInicioFormateada,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Sí, registrar',
@@ -277,7 +328,7 @@ function crearCita(cita) {
         Swal.fire({
             icon: 'error',
             title: 'Error al crear la cita',
-            text: 'Ha ocurrido un error al crear la cita '+error,
+            text: 'Ha ocurrido un error al crear la cita ' + error,
             confirmButtonText: 'Aceptar'
         });
     });
