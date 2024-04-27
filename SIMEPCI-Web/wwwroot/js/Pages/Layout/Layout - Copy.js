@@ -40,12 +40,16 @@
         if (vista.includes('/Perfil/Perfil')) {
             var rol = sessionStorage.getItem('rol');
             var agendarCita = document.getElementById('article-agendarCita');
-            var addServiciosCita = document.getElementById('article-addServiciosCita'); //
             var historialCitas = document.getElementById('article-historialCitas');
-            var registrarExpediente = document.getElementById('article-registrarExpediente');
-            var mostrarExpediente = document.getElementById('article-mostrarExpediente');
             var editarPerfil = document.getElementById('article-EditarPerfil');
             var misRecetas = document.getElementById('article-misRecetasMedicas');
+            var pagoSecretaria = document.getElementById('article-pagosSecretaria');
+
+            var addServiciosCita = document.getElementById('article-addServiciosCita'); //
+            var registrarExpediente = document.getElementById('article-registrarExpediente');
+            var mostrarExpediente = document.getElementById('article-mostrarExpediente');
+            
+            
             var configuraciones = document.getElementById('article-configuraciones');
             var registroSedes = document.getElementById('articulo-registroSedes');
             var gestionInformacion = document.getElementById('article-gestionInformacion');
@@ -64,6 +68,7 @@
             switch (rol) {
                 case 'Paciente':
                     mostrarElemento(configuraciones, false);
+                    mostrarElemento(pagoSecretaria, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(registrarExpediente, false);
@@ -77,6 +82,7 @@
                     mostrarElemento(resultadoEnfermera, false);
                     break;
                 case 'Enfermero':
+                    mostrarElemento(pagoSecretaria, false);
                     mostrarElemento(editarPerfil, false);
                     mostrarElemento(configuraciones, false);
                     mostrarElemento(registroSedes, false);
@@ -97,6 +103,7 @@
                     mostrarElemento(addServiciosCita, false);
                     break;
                 case 'Administrador':
+                    mostrarElemento(pagoSecretaria, false);
                     mostrarElemento(editarPerfil, false);
                     mostrarElemento(registrarExpediente, false);
                     mostrarElemento(mostrarExpediente, false);
@@ -135,7 +142,11 @@
                     mostrarElemento(resultadoEnfermera, false);
                     break;
                 case 'Doctor':
+                    mostrarElemento(pagoSecretaria, false);
                     mostrarElemento(configuraciones, false);
+                    mostrarElemento(historialCitas, false);
+                    mostrarElemento(editarPerfil, false);
+                    mostrarElemento(reportes, false);
                     mostrarElemento(registroSedes, false);
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(registrarNotaEnfermeria, false);
