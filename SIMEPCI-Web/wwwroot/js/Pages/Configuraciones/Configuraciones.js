@@ -108,6 +108,36 @@
             }
         });
     }
+
+    $('#llamarAPI').click(function () {
+        $.ajax({
+            url: 'https://simepciapii.azurewebsites.net/api/Cita/EnviarRecordatoriosCita', 
+            method: 'POST',
+            success: function (response) {
+                console.log('Llamada al API exitosa.');
+                mostrarMensaje2();
+            },
+            error: function (error) {
+                console.error('Error al llamar al API:', error);
+                // Puedes mostrar un mensaje de error o realizar otras acciones aquí
+            }
+        });
+    });
+
+
+    function mostrarMensaje2() {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'Notificaciones enviadas',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                window.location.reload();
+            }
+        });
+    }
    
  });
 
