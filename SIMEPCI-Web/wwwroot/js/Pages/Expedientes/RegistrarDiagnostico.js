@@ -4,50 +4,50 @@
         window.location.href = '/Home/Index';
     }
 
-    $('#historialMedicoForm').submit(function (event) {
+    $('#diagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
         buscarPaciente(correo);
     });
 
-    $('#registrarHistorialMedicoForm').submit(function (event) {
+    $('#registrarDiagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
-        var contenido = $('#contenido').val();
-
-        var historialMedico = {
+        var descripcion = $('#descripcion').val();
+        var fechaEmision = new Date().toISOString();
+        var diagnostico = {
             correoPaciente: correo,
-            contenido: contenido
+            descripcion: descripcion,
+            fechaEmision: fechaEmision
         };
-
-        registrarHistorialMedico(historialMedico);
+        registrarDiagnostico(diagnostico);
     });
 
     function buscarPaciente(correo) {
-
-        $('#historialMedicoContainer').show();
+        $('#diagnosticoContainer').show();
     }
 
-    function registrarHistorialMedico(historialMedico) {
+    function registrarDiagnostico(diagnostico) {
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Expediente/adjuntarHistorialMedico',
+            url: 'https://simepciapii.azurewebsites.net/api/Diagnostico/CrearDiagnostico',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(historialMedico),
+            data: JSON.stringify(diagnostico),
             success: function (response) {
-                console.log('Antecedente médico registrado con éxito:', response);
-                mostrarMensajeExito('El Antecedente médico se registró correctamente.');
+                console.log('Diagnóstico registrado con éxito:', response);
+                mostrarMensajeExito('El diagnóstico se registró correctamente.');
                 limpiarFormulario();
             },
             error: function (xhr, status, error) {
-                console.error('Error al registrar el antecedente médico:', error);
-                mostrarMensajeError('Ocurrió un error al registrar el antecedente médico.');
+                console.error('Error al registrar el diagnóstico:', error);
+                mostrarMensajeError('Ocurrió un error al registrar el diagnóstico.');
             }
         });
     }
 
     function limpiarFormulario() {
-        $('#contenido').val('');
+        $('#nombre').val('');
+        $('#descripcion').val('');
     }
 
     function mostrarMensajeExito(mensaje) {

@@ -44,6 +44,11 @@ namespace SIMEPCI_Web.Controllers
         {
             return View();
         }
+
+        public IActionResult RegistrarDiagnostico()
+        {
+            return View();
+        }
     }
 
     public class Expediente
@@ -51,6 +56,7 @@ namespace SIMEPCI_Web.Controllers
         public int IdPaciente { get; set; }
         public string NotasEnfermeria { get; set; }
         public string NotasMedicas { get; set; }
-        public string HistorialMedico { get; set; }
+        public string AntecedentesMedicos { get; set; }
+        public string Diagnostico { get; set; }
     }
 }
