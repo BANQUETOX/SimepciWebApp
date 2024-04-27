@@ -35,13 +35,13 @@
             contentType: 'application/json',
             data: JSON.stringify(historialMedico),
             success: function (response) {
-                console.log('Historial médico registrado con éxito:', response);
-                mostrarMensajeExito('El historial médico se registró correctamente.');
+                console.log('Antecedente médico registrado con éxito:', response);
+                mostrarMensajeExito('El Antecedente médico se registró correctamente.');
                 limpiarFormulario();
             },
             error: function (xhr, status, error) {
-                console.error('Error al registrar el historial médico:', error);
-                mostrarMensajeError('Ocurrió un error al registrar el historial médico.');
+                console.error('Error al registrar el antecedente médico:', error);
+                mostrarMensajeError('Ocurrió un error al registrar el antecedente médico.');
             }
         });
     }

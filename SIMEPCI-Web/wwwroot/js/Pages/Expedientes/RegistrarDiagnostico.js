@@ -1,47 +1,50 @@
 ﻿$(document).ready(function () {
-    $('#notaEnfermeriaForm').submit(function (event) {
+    $('#diagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
         buscarPaciente(correo);
     });
 
-    $('#registrarNotaEnfermeriaForm').submit(function (event) {
+    $('#registrarDiagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
-        var contenido = $('#contenido').val();
+        var nombre = $('#nombre').val();
+        var descripcion = $('#descripcion').val();
         var fechaEmision = new Date().toISOString();
-        var notaEnfermeria = {
+        var diagnostico = {
             correoPaciente: correo,
-            contenido: contenido,
+            nombre: nombre,
+            descripcion: descripcion,
             fechaEmision: fechaEmision
         };
-        registrarNotaEnfermeria(notaEnfermeria);
+        registrarDiagnostico(diagnostico);
     });
 
     function buscarPaciente(correo) {
-        $('#notaEnfermeriaContainer').show();
+        $('#diagnosticoContainer').show();
     }
 
-    function registrarNotaEnfermeria(notaEnfermeria) {
+    function registrarDiagnostico(diagnostico) {
         $.ajax({
-            url: 'https://simepciapii.azurewebsites.net/api/Expediente/adjuntarNotaEnfermeria',
+            url: 'https://simepciapii.azurewebsites.net/api/Diagnostico/CrearDiagnostico',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(notaEnfermeria),
+            data: JSON.stringify(diagnostico),
             success: function (response) {
-                console.log('Nota de enfermería registrada con éxito:', response);
-                mostrarMensajeExito('La nota de enfermería se registró correctamente.');
+                console.log('Diagnóstico registrado con éxito:', response);
+                mostrarMensajeExito('El diagnóstico se registró correctamente.');
                 limpiarFormulario();
             },
             error: function (xhr, status, error) {
-                console.error('Error al registrar la nota de enfermería:', error);
-                mostrarMensajeError('Ocurrió un error al registrar la nota de enfermería.');
+                console.error('Error al registrar el diagnóstico:', error);
+                mostrarMensajeError('Ocurrió un error al registrar el diagnóstico.');
             }
         });
     }
 
     function limpiarFormulario() {
-        $('#contenido').val('');
+        $('#nombre').val('');
+        $('#descripcion').val('');
     }
 
     function mostrarMensajeExito(mensaje) {

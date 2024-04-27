@@ -63,6 +63,8 @@
             var registrarNotaMedica = document.getElementById('article-registrarNotaMedica');
             var registrarNotaEnfermeria = document.getElementById('article-registrarNotaEnfermeria');
             var registrarHistorialMedico = document.getElementById('article-registrarHistorialMedico');
+            var registrarDiagnostico = document.getElementById('article-registrarDiagnostico');
+
             var resultadoEnfermera = document.getElementById('article-resultadoEnfermera');
 
             switch (rol) {
@@ -80,6 +82,8 @@
                     mostrarElemento(reportes, false);
                     mostrarElemento(addServiciosCita, false);
                     mostrarElemento(resultadoEnfermera, false);
+                    mostrarElemento(registrarDiagnostico, false);
+
                     break;
                 case 'Enfermero':
                     mostrarElemento(pagoSecretaria, false);
@@ -120,6 +124,8 @@
                     mostrarElemento(registrarHistorialMedico, false);
                     mostrarElemento(addServiciosCita, false);
                     mostrarElemento(resultadoEnfermera, false);
+                    mostrarElemento(registrarDiagnostico, false);
+
                     break;
                 case 'Secretario':
                     mostrarElemento(editarPerfil, false);
@@ -136,10 +142,11 @@
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(reportes, false);
                     mostrarElemento(registrarNotaMedica, false);
-                    mostrarElemento(registrarNotaEnfermeria, false);
                     mostrarElemento(registrarHistorialMedico, false);
                     mostrarElemento(addServiciosCita, false);
                     mostrarElemento(resultadoEnfermera, false);
+                    mostrarElemento(registrarDiagnostico, false);
+
                     break;
                 case 'Doctor':
                     mostrarElemento(pagoSecretaria, false);
