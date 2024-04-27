@@ -12,6 +12,7 @@
     this.GetExpedientePaciente = function () {
         var correo = sessionStorage.getItem('correo');
         var url_base = 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente?correoPaciente=';
+
         $.ajax({
             url: url_base + correo,
             method: 'GET',
@@ -28,6 +29,7 @@
     this.GetExpedienteFuncionario = function () {
         var correo = $('#correoPaciente').val();
         var url_base = 'https://simepciapii.azurewebsites.net/api/Expediente/ExpedienteCompletoPaciente?correoPaciente=';
+
         $.ajax({
             url: url_base + correo,
             method: 'GET',
@@ -44,19 +46,18 @@
     this.MostrarExpediente = function (result) {
         _this.CrearCuadro(result.notasEnfermeria, 'notasEnfermeria');
         _this.CrearCuadro(result.notasMedicas, 'notasMedicas');
-        _this.CrearCuadro(result.historialMedico, 'historialMedico');
+        _this.CrearCuadro(result.antecedentesMedicos, 'antecedentesMedicosContainer');
         _this.CrearCuadro(result.citas, 'citasContainer');
         _this.CrearCuadro(result.examenesMedicos, 'examenesMedicosContainer');
         _this.CrearCuadro(result.recetas, 'recetasContainer');
         _this.CrearCuadro(result.facturas, 'facturasContainer');
         _this.CrearCuadro(result.diagnosticos, 'diagnosticosContainer');
-
         document.getElementById('expedienteContainer').style.display = 'block';
     }
 
     this.CrearCuadro = function (result, id) {
         var divContenedor = document.getElementById(id);
-        divContenedor.innerHTML = ''; 
+        divContenedor.innerHTML = '';
 
         if (!result || result.length === 0) {
             var mensaje = document.createElement('p');
