@@ -1,9 +1,4 @@
 ﻿$(document).ready(function () {
-    var rol = sessionStorage.getItem('rol');
-    if (rol !== 'Doctor') {
-        window.location.href = '/Home/Index';
-    }
-
     $('#diagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
@@ -13,10 +8,12 @@
     $('#registrarDiagnosticoForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
+        var nombre = $('#nombre').val();
         var descripcion = $('#descripcion').val();
         var fechaEmision = new Date().toISOString();
         var diagnostico = {
             correoPaciente: correo,
+            nombre: nombre,
             descripcion: descripcion,
             fechaEmision: fechaEmision
         };

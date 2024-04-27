@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     var rol = sessionStorage.getItem('rol');
-    if (rol !== 'Doctor') {
+
+    if (rol !== 'Doctor' && rol !== 'Enfermero') {
         window.location.href = '/Home/Index';
     }
 
@@ -10,20 +11,25 @@
         buscarPaciente(correo);
     });
 
-    $('#registrarNotaMedicaForm').submit(function (event) {
+    $('#notaEnfermeriaForm').submit(function (event) {
+        event.preventDefault();
+        var correo = $('#correoPaciente').val();
+        buscarPaciente(correo);
+    });
+
+    $('#registrarNotaEnfermeriaForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
         var contenido = $('#contenido').val();
         var fechaEmision = new Date().toISOString();
-
-        var notaMedica = {
+        var notaEnfermeria = {
             correoPaciente: correo,
             contenido: contenido,
             fechaEmision: fechaEmision
         };
-
-        registrarNotaMedica(notaMedica);
+        registrarNotaEnfermeria(notaEnfermeria);
     });
+
 
     function buscarPaciente(correo) {
       

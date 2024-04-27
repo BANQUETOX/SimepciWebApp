@@ -1,9 +1,4 @@
 ﻿$(document).ready(function () {
-    var rol = sessionStorage.getItem('rol');
-    if (rol !== 'Doctor') {
-        window.location.href = '/Home/Index';
-    }
-
     $('#notaEnfermeriaForm').submit(function (event) {
         event.preventDefault();
         var correo = $('#correoPaciente').val();
@@ -15,18 +10,15 @@
         var correo = $('#correoPaciente').val();
         var contenido = $('#contenido').val();
         var fechaEmision = new Date().toISOString();
-
         var notaEnfermeria = {
             correoPaciente: correo,
             contenido: contenido,
             fechaEmision: fechaEmision
         };
-
         registrarNotaEnfermeria(notaEnfermeria);
     });
 
     function buscarPaciente(correo) {
-
         $('#notaEnfermeriaContainer').show();
     }
 

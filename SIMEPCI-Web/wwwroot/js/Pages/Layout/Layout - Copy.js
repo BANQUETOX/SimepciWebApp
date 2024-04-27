@@ -142,7 +142,6 @@
                     mostrarElemento(gestionInformacion, false);
                     mostrarElemento(reportes, false);
                     mostrarElemento(registrarNotaMedica, false);
-                    mostrarElemento(registrarNotaEnfermeria, false);
                     mostrarElemento(registrarHistorialMedico, false);
                     mostrarElemento(addServiciosCita, false);
                     mostrarElemento(resultadoEnfermera, false);
